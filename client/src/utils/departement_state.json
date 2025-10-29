@@ -1,0 +1,1243 @@
+[
+  {
+    "code": "AR",
+    "codePostal": "HT4000",
+    "departement": "Artibonite",
+    "arrondissement": [
+      {
+        "codeDep": "AR",
+        "code": "DS",
+        "codePostal": "HT4400",
+        "arrondissement": "Marchand Dessalines ",
+        "commune": [
+          {
+            "codePostal": "HT4410",
+            "commune": "Marchand Dessalines ",
+            "localite": ["Marchand Dessalines (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT4420",
+            "commune": "Petite Rivière de l'Artibonite ",
+            "localite": [
+              "Petite Rivière de l'Artibonite (Centre-ville)",
+              "Savane à Roches "
+            ]
+          },
+          {
+            "codePostal": "HT4430",
+            "commune": "Grande Saline ",
+            "localite": ["Grande Saline (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT4440",
+            "commune": "Desdunes ",
+            "localite": ["Desdunes (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "AR",
+        "code": "GM",
+        "codePostal": "HT4200",
+        "arrondissement": "Gros Morne ",
+        "commune": [
+          {
+            "codePostal": "HT4210",
+            "commune": "Gros Morne ",
+            "localite": ["Gros Morne (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT4220",
+            "commune": "Terre Neuve ",
+            "localite": ["Terre Neuve (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT4230",
+            "commune": "Anse Rouge ",
+            "localite": ["Anse Rouge (Centre-ville)", "Sources Chaudes "]
+          }
+        ]
+      },
+      {
+        "codeDep": "AR",
+        "code": "GV",
+        "codePostal": "HT4100",
+        "arrondissement": "Gonaives ",
+        "commune": [
+          {
+            "codePostal": "HT4110",
+            "commune": "Gonaives ",
+            "localite": [
+              "Gonaives (Centre-ville)",
+              "Petite Rivière de Bayonais"
+            ]
+          },
+          {
+            "codePostal": "HT4120",
+            "commune": "Ennery ",
+            "localite": ["Ennery (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT4130",
+            "commune": "L'Estère ",
+            "localite": ["L'Estère (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "AR",
+        "code": "MM",
+        "codePostal": "HT4500",
+        "arrondissement": "Marmelade ",
+        "commune": [
+          {
+            "codePostal": "HT4510",
+            "commune": "Marmelade ",
+            "localite": ["Marmelade (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT4520",
+            "commune": "Saint Michel de l'Attalaye ",
+            "localite": ["Saint Michel de l'Attalaye (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "AR",
+        "code": "SM",
+        "codePostal": "HT4300",
+        "arrondissement": "Saint Marc ",
+        "commune": [
+          {
+            "codePostal": "HT4310",
+            "commune": "Saint Marc ",
+            "localite": ["Saint Marc (Centre-ville)", "Montrouis "]
+          },
+          {
+            "codePostal": "HT4320",
+            "commune": "Verrettes ",
+            "localite": [
+              "Verrettes (Centre-ville)",
+              "Désarmes ",
+              "Deschapelles ",
+              "Liancourt "
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "code": "CE",
+    "codePostal": "HT5000",
+    "departement": "Centre",
+    "arrondissement": [
+      {
+        "codeDep": "CE",
+        "code": "CS",
+        "codePostal": "HT5400",
+        "arrondissement": "Cerca-la-Source ",
+        "commune": [
+          {
+            "codePostal": "HT5410",
+            "commune": "Cerca-la-Source ",
+            "localite": [
+              "Cerca-la-Source (Centre-ville)",
+              "Saltadère ",
+              "La Mielle "
+            ]
+          },
+          {
+            "codePostal": "HT5420",
+            "commune": "Thomassique ",
+            "localite": ["Thomassique (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "CE",
+        "code": "HI",
+        "codePostal": "HT5100",
+        "arrondissement": "Hinche ",
+        "commune": [
+          {
+            "codePostal": "HT5110",
+            "commune": "Hinche ",
+            "localite": ["Hinche (Centre-ville)", "Los Palis "]
+          },
+          {
+            "codePostal": "HT5120",
+            "commune": "Maïssade ",
+            "localite": ["Maïssade (Centre-ville)", "Louverture "]
+          },
+          {
+            "codePostal": "HT5130",
+            "commune": "Thomonde ",
+            "localite": ["Thomonde (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT5140",
+            "commune": "Cerca Cavajal ",
+            "localite": ["Cerca Cavajal (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "CE",
+        "code": "LC",
+        "codePostal": "HT5300",
+        "arrondissement": "Lascahobas ",
+        "commune": [
+          {
+            "codePostal": "HT5310",
+            "commune": "Lascahobas ",
+            "localite": ["Lascahobas (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT5320",
+            "commune": "Belladères ",
+            "localite": ["Belladères (Centre-ville)", "Baptiste "]
+          },
+          {
+            "codePostal": "HT5330",
+            "commune": "Savanette ",
+            "localite": ["Savanette (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "CE",
+        "code": "MB",
+        "codePostal": "HT5200",
+        "arrondissement": "Mirebalais ",
+        "commune": [
+          {
+            "codePostal": "HT5210",
+            "commune": "Mirebalais ",
+            "localite": ["Mirebalais (Centre-ville)", "Dufailly "]
+          },
+          {
+            "codePostal": "HT5220",
+            "commune": "Saut d'Eau ",
+            "localite": ["Saut d'Eau (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT5230",
+            "commune": "Boucan Carré ",
+            "localite": ["Boucan Carré (Centre-ville)", "Péligre "]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "code": "GR",
+    "codePostal": "HT7000",
+    "departement": "Grand'Anse",
+    "arrondissement": [
+      {
+        "codeDep": "GR",
+        "code": "AH",
+        "codePostal": "HT7200",
+        "arrondissement": "Anse d’Hainault ",
+        "commune": [
+          {
+            "codePostal": "HT7210",
+            "commune": "Anse d’Hainault ",
+            "localite": ["Anse d’Hainault (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT7220",
+            "commune": "Dame-Marie ",
+            "localite": ["Dame-Marie (Centre-ville)", "lesson "]
+          },
+          {
+            "codePostal": "HT7230",
+            "commune": "Les Irois ",
+            "localite": ["Les Irois (Centre-ville)", "Carcasse "]
+          }
+        ]
+      },
+      {
+        "codeDep": "GR",
+        "code": "CL",
+        "codePostal": "HT7300",
+        "arrondissement": "Corail ",
+        "commune": [
+          {
+            "codePostal": "HT7310",
+            "commune": "Corail ",
+            "localite": ["Corail (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT7320",
+            "commune": "Roseaux ",
+            "localite": ["Roseaux (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT7330",
+            "commune": "Beaumont ",
+            "localite": ["Beaumont (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT7340",
+            "commune": "Pestel ",
+            "localite": ["Pestel (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "GR",
+        "code": "JR",
+        "codePostal": "HT7100",
+        "arrondissement": "Jérémie ",
+        "commune": [
+          {
+            "codePostal": "HT7110",
+            "commune": "Jérémie ",
+            "localite": ["Jérémie (Centre-ville)", " Léon ", " Marfranc "]
+          },
+          {
+            "codePostal": "HT7120",
+            "commune": "Abricot ",
+            "localite": ["Abricot (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT7130",
+            "commune": "Bonbon ",
+            "localite": ["Bonbon (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT7140",
+            "commune": "Moron ",
+            "localite": ["Moron (Centre-ville)", "Sources Chaudes "]
+          },
+          {
+            "codePostal": "HT7150",
+            "commune": "Chambellan ",
+            "localite": ["Chambellan (Centre-ville)"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "code": "ND",
+    "codePostal": "HT1000",
+    "departement": "Nord",
+    "arrondissement": [
+      {
+        "codeDep": "ND",
+        "code": "AN",
+        "codePostal": "HT1200",
+        "arrondissement": "Acul du Nord ",
+        "commune": [
+          {
+            "codePostal": "HT1210",
+            "commune": "Acul du Nord ",
+            "localite": ["Acul du Nord (Centre-ville)", "La Soufrière "]
+          },
+          {
+            "codePostal": "HT1220",
+            "commune": "Plaine du Nord ",
+            "localite": ["Plaine du Nord (Centre-ville)", "Robillard "]
+          },
+          {
+            "codePostal": "HT1230",
+            "commune": "Milot ",
+            "localite": ["Milot (Centre-ville)", "Carrefour des Pères "]
+          }
+        ]
+      },
+      {
+        "codeDep": "ND",
+        "code": "BG",
+        "codePostal": "HT1500",
+        "arrondissement": "Borgne ",
+        "commune": [
+          {
+            "codePostal": "HT1510",
+            "commune": "Borgne ",
+            "localite": [
+              "Borgne (Centre-ville)",
+              "Petit bourg de Borgne ",
+              "Côte de Fer et Fond "
+            ]
+          },
+          {
+            "codePostal": "HT1520",
+            "commune": "Port-Margot ",
+            "localite": ["Port-Margot (Centre-ville)", "Bayeux ", "Margot "]
+          }
+        ]
+      },
+      {
+        "codeDep": "ND",
+        "code": "CH",
+        "codePostal": "HT1100",
+        "arrondissement": "Cap-Haïtien ",
+        "commune": [
+          {
+            "codePostal": "HT1110",
+            "commune": "Cap-Haïtien ",
+            "localite": [
+              "Cap-Haïtien (Centre-ville)",
+              "Bande du Nord",
+              "Labadie",
+              "Haut du Cap",
+              "Petite Anse "
+            ]
+          },
+          {
+            "codePostal": "HT1120",
+            "commune": "Quartier Morin ",
+            "localite": ["Quartier Morin (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT1130",
+            "commune": "Limonade ",
+            "localite": ["Limonade (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "ND",
+        "code": "GR",
+        "codePostal": "HT1300",
+        "arrondissement": "Grande Rivière du Nord",
+        "commune": [
+          {
+            "codePostal": "HT1310",
+            "commune": "Grande Rivière du Nord",
+            "localite": ["Grande Rivière du Nord(Centre-ville)"]
+          },
+          {
+            "codePostal": "HT1320",
+            "commune": "Barbon ",
+            "localite": ["Barbon (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "ND",
+        "code": "LL",
+        "codePostal": "HT1600",
+        "arrondissement": "Limbé ",
+        "commune": [
+          {
+            "codePostal": "HT1610",
+            "commune": "Limbé ",
+            "localite": ["Limbé (Centre-ville)", "Camp Coq "]
+          },
+          {
+            "codePostal": "HT1620",
+            "commune": "Bas Limbé ",
+            "localite": ["Bas Limbé (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "ND",
+        "code": "PL",
+        "codePostal": "HT1700",
+        "arrondissement": "Plaisance ",
+        "commune": [
+          {
+            "codePostal": "HT1710",
+            "commune": "Plaisance ",
+            "localite": ["Plaisance (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT1720",
+            "commune": "Pilate ",
+            "localite": ["Pilate (Centre-ville)", "Ravine Trompette "]
+          }
+        ]
+      },
+      {
+        "codeDep": "ND",
+        "code": "SR",
+        "codePostal": "HT1400",
+        "arrondissement": "Saint Raphaël ",
+        "commune": [
+          {
+            "codePostal": "HT1410",
+            "commune": "Saint Raphaël ",
+            "localite": ["Saint Raphaël (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT1420",
+            "commune": "Dondon ",
+            "localite": ["Dondon (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT1430",
+            "commune": "Ranquitte ",
+            "localite": ["Ranquitte (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT1440",
+            "commune": "Pignon ",
+            "localite": ["Pignon (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT1450",
+            "commune": "La Victoire ",
+            "localite": ["La Victoire (Centre-ville)"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "code": "NE",
+    "codePostal": "HT2000",
+    "departement": "Nord-Est",
+    "arrondissement": [
+      {
+        "codeDep": "NE",
+        "code": "FL",
+        "codePostal": "HT2100",
+        "arrondissement": "Fort Liberté ",
+        "commune": [
+          {
+            "codePostal": "HT2110",
+            "commune": "Fort Liberté ",
+            "localite": [
+              "Fort Liberté (Centre-ville)",
+              "Dérac ",
+              "Acul Samedi "
+            ]
+          },
+          {
+            "codePostal": "HT2120",
+            "commune": "Ferrier ",
+            "localite": ["Ferrier (Centre-ville)", "Maribahoux "]
+          },
+          {
+            "codePostal": "HT2130",
+            "commune": "Perches ",
+            "localite": ["Perches (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "NE",
+        "code": "OU",
+        "codePostal": "HT2200",
+        "arrondissement": "Ouanaminthe ",
+        "commune": [
+          {
+            "codePostal": "HT2210",
+            "commune": "Ouanaminthe ",
+            "localite": ["Ouanaminthe (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT2220",
+            "commune": "Capotille ",
+            "localite": ["Capotille (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT2230",
+            "commune": "Mont Organisé ",
+            "localite": ["Mont Organisé (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "NE",
+        "code": "TN",
+        "codePostal": "HT2300",
+        "arrondissement": "Trou du Nord ",
+        "commune": [
+          {
+            "codePostal": "HT2310",
+            "commune": "Trou du Nord ",
+            "localite": ["Trou du Nord (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT2320",
+            "commune": "Saint Suzanne ",
+            "localite": ["Saint Suzanne (Centre-ville)", "Dupity "]
+          },
+          {
+            "codePostal": "HT2330",
+            "commune": "Terrier Rouge ",
+            "localite": [
+              "Terrier Rouge (Centre-ville)",
+              "Phaëton ",
+              "Paulette "
+            ]
+          },
+          {
+            "codePostal": "HT2340",
+            "commune": "Caracol ",
+            "localite": ["Caracol (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "NE",
+        "code": "VR",
+        "codePostal": "HT2400",
+        "arrondissement": "Vallières ",
+        "commune": [
+          {
+            "codePostal": "HT2410",
+            "commune": "Vallières ",
+            "localite": ["Vallières (Centre-ville)", "Grosse Roche "]
+          },
+          {
+            "codePostal": "HT2420",
+            "commune": "Carice ",
+            "localite": ["Carice (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT2430",
+            "commune": "Mombrun Crochu ",
+            "localite": ["Mombrun Crochu (Centre-ville)", "Bois Laurence "]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "code": "NI",
+    "codePostal": "HT7000",
+    "departement": "Nippes",
+    "arrondissement": [
+      {
+        "codeDep": "NI",
+        "code": "AV",
+        "codePostal": "HT7500",
+        "arrondissement": "Anse-à-Veau ",
+        "commune": [
+          {
+            "codePostal": "HT7510",
+            "commune": "Anse-à-Veau ",
+            "localite": ["Anse-à-Veau (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT7530",
+            "commune": "Petit Trou de Nippes ",
+            "localite": ["Petit Trou de Nippes (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT7540",
+            "commune": "L'Asile ",
+            "localite": ["L'Asile (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT7510",
+            "commune": "Arnaud",
+            "localite": ["Arnaud (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT7510",
+            "commune": "Plaisance du Sud",
+            "localite": ["Plaisance du Sud (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "NI",
+        "code": "BR",
+        "codePostal": "HT7500",
+        "arrondissement": "Baradères",
+        "commune": [
+          {
+            "codePostal": "HT7520",
+            "commune": "Baradères ",
+            "localite": ["Baradères (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT7521",
+            "commune": "Grand Boucan",
+            "localite": ["Grand Boucan (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "NI",
+        "code": "MG",
+        "codePostal": "HT7400",
+        "arrondissement": "Miragoâne ",
+        "commune": [
+          {
+            "codePostal": "HT7410",
+            "commune": "Miragoâne ",
+            "localite": ["Miragoâne (Centre-ville)", "Saint Michel du Sud "]
+          },
+          {
+            "codePostal": "HT7412",
+            "commune": "Paillant",
+            "localite": ["Paillant (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT7413",
+            "commune": "Fond des Nègres",
+            "localite": ["Fond des Nègres (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT7420",
+            "commune": "Petite Rivière de Nippes ",
+            "localite": ["Petite Rivière de Nippes (Centre-ville)"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "code": "NO",
+    "codePostal": "HT3000",
+    "departement": "Nord-Ouest",
+    "arrondissement": [
+      {
+        "codeDep": "NO",
+        "code": "MS",
+        "codePostal": "HT3300",
+        "arrondissement": "Môle Saint Nicolas ",
+        "commune": [
+          {
+            "codePostal": "HT3310",
+            "commune": "Môle Saint Nicolas ",
+            "localite": ["Môle Saint Nicolas (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT3320",
+            "commune": "Bombardopolis ",
+            "localite": ["Bombardopolis (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT3330",
+            "commune": "Baie de Henne ",
+            "localite": ["Baie de Henne (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT3340",
+            "commune": "Jean-Rabel ",
+            "localite": ["Jean-Rabel (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "NO",
+        "code": "PD",
+        "codePostal": "HT3100",
+        "arrondissement": "Port-de-Paix ",
+        "commune": [
+          {
+            "codePostal": "HT3110",
+            "commune": "Port-de-Paix ",
+            "localite": ["Port-de-Paix (Centre-ville)", "La Pointe "]
+          },
+          {
+            "codePostal": "HT3120",
+            "commune": "La Tortue ",
+            "localite": [
+              "La Tortue (Centre-ville)",
+              "Pointe des Roseaux ",
+              "Mare Rouge "
+            ]
+          },
+          {
+            "codePostal": "HT3130",
+            "commune": "Bassin Bleu ",
+            "localite": ["Bassin Bleu (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT3140",
+            "commune": "Chansolme ",
+            "localite": ["Chansolme (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "NO",
+        "code": "SL",
+        "codePostal": "HT3200",
+        "arrondissement": "Saint Louis du Nord ",
+        "commune": [
+          {
+            "codePostal": "HT3210",
+            "commune": "Saint Louis du Nord ",
+            "localite": [
+              "Saint Louis du Nord (Centre-ville)",
+              "Bonneau ",
+              "Guichard "
+            ]
+          },
+          {
+            "codePostal": "HT3220",
+            "commune": "Anse à Foleur ",
+            "localite": ["Anse à Foleur (Centre-ville)"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "code": "OU",
+    "codePostal": "HT6000",
+    "departement": "Ouest",
+    "arrondissement": [
+      {
+        "codeDep": "OU",
+        "code": "AR",
+        "codePostal": "HT6400",
+        "arrondissement": "Arcahaie ",
+        "commune": [
+          {
+            "codePostal": "HT6410",
+            "commune": "Arcahaie ",
+            "localite": ["Arcahaie (Centre-ville)", "Saintard "]
+          },
+          {
+            "codePostal": "HT6420",
+            "commune": "Cabaret",
+            "localite": ["Cabaret (Centre-ville)", "Casale"]
+          }
+        ]
+      },
+      {
+        "codeDep": "OU",
+        "code": "CB",
+        "codePostal": "HT6300",
+        "arrondissement": "Croix-des-Bouquets ",
+        "commune": [
+          {
+            "codePostal": "HT6310",
+            "commune": "Croix-des-Bouquets ",
+            "localite": [
+              "Croix-des-Bouquets (Centre-ville)",
+              "Santo / Shadda",
+              "Canaan - Corail",
+              "La Tremblay",
+              "Canaan - Jérusalem",
+              "Marin",
+              "Canaan - Village Moderne (Haut-Jérusalem) ",
+              "Bon Repos / Lilavois",
+              "Canaan - Bellevue ",
+              "Canaan - Onaville",
+              "Canaan - Blocs 3, 4 et 5",
+              "Canaan - Blocs 1 et 2",
+              "Canaan - Village la Découverte / Source Puante",
+              "Canaan - Village de la Grâce / Village des Pêcheurs",
+              "Canaan - Philadelphie"
+            ]
+          },
+          {
+            "codePostal": "HT6320",
+            "commune": "Thomazeau ",
+            "localite": ["Thomazeau (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT6330",
+            "commune": "Ganthier ",
+            "localite": [
+              "Ganthier (Centre-ville)",
+              "Fonds Parisien et Galette Chambon "
+            ]
+          },
+          {
+            "codePostal": "HT6340",
+            "commune": "Cornillon ",
+            "localite": ["Cornillon (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT6350",
+            "commune": "Fonds Verettes ",
+            "localite": ["Fonds Verettes (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "OU",
+        "code": "LG",
+        "codePostal": "HT6500",
+        "arrondissement": "La Gonâve",
+        "commune": [
+          {
+            "codePostal": "HT6510",
+            "commune": "Anse à Galets",
+            "localite": ["Anse à Galets (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT6520",
+            "commune": "Pointe à Raquette ",
+            "localite": ["Pointe à Raquette (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "OU",
+        "code": "LN",
+        "codePostal": "HT6200",
+        "arrondissement": "Léogâne ",
+        "commune": [
+          {
+            "codePostal": "HT6210",
+            "commune": "Léogâne ",
+            "localite": ["Léogâne (Centre-ville)", "Trouin ", "Orangers "]
+          },
+          {
+            "codePostal": "HT6220",
+            "commune": "Petit Goâve ",
+            "localite": ["Petit Goâve (Centre-ville)", "Vialet "]
+          },
+          {
+            "codePostal": "HT6230",
+            "commune": "Grand Goâve ",
+            "localite": ["Grand Goâve (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "OU",
+        "code": "PP",
+        "codePostal": "HT6100",
+        "arrondissement": "Port-au-Prince ",
+        "commune": [
+          {
+            "codePostal": "HT6110",
+            "commune": "Port-au-Prince ",
+            "localite": [
+              "Port-au-Prince (Centre-ville / Champ de Mars / Morne à Tuf / Portail Léogâne)",
+              "Bourdon ",
+              "Bas Peu de Choses / Lélio",
+              "Turgeau / Pacot / Déprez",
+              "Bois Verna / Rivière",
+              "Canapé-Vert",
+              "Carrefour Feuilles / Sanatorium / Fort-Mercredi",
+              "Morne de l'Hôpital ",
+              "Bolosse ",
+              "Martissant et Fontamara ",
+              "Cité l'Eternel et Cité Plus",
+              "Bel-Air et Sans-Fil",
+              "Martissant (intérieur)",
+              "Village de Dieu",
+              "Lalue et Fort-National",
+              "Martissant (littoral)",
+              "Nazon, Poupelard et Christ-Roi",
+              "Miron (Tibois / Grand Ravine / Sion)",
+              "St-Joseph et St-Martin",
+              "Croix-des-Bossales et Wharf Jérémie",
+              "Musseau"
+            ]
+          },
+          {
+            "codePostal": "HT6120",
+            "commune": "Delmas ",
+            "localite": [
+              "Sud - Delmas 2 - Delmas 28",
+              "Sud - Delmas 30 - Delmas 40 B",
+              "Sud - Delmas 42 - Delmas 60",
+              "Nord - Aviation / Cité Militaire / Delmas 3 - Delmas 15",
+              "Nord - Chancerelle",
+              "Nord - Park Industriel / Blvd Toussaint Louverture",
+              "Nord - Delmas 17 - Delmas 49",
+              "Nord - Delmas 51 - Delmas 83"
+            ]
+          },
+          {
+            "codePostal": "HT6121",
+            "commune": "Cité Soleil",
+            "localite": [
+              "La Saline, Fort-Dimanche",
+              "Cité soleil (Centre-ville)",
+              "Ménélas",
+              "Moléare",
+              "Sarthe",
+              "Sibert / Foudjy"
+            ]
+          },
+          {
+            "codePostal": "HT6123",
+            "commune": "Tabarre",
+            "localite": [
+              "Maïs Gaté ",
+              "Petite Place Cazeau",
+              "Damien, Croix-des-Missions",
+              "Cazeau (Clercine, Fleurio)",
+              "Haut Tabarre (Carr. Fleurio - Torcel)"
+            ]
+          },
+          {
+            "codePostal": "HT6130",
+            "commune": "Carrefour ",
+            "localite": [
+              "Lamentin, Brochette ",
+              "Bizoton ",
+              "Diquini, Thor ",
+              "Côte-Plage, Mahotière ",
+              "Arcachon, Warney et Mon Repos",
+              "Rivière Froide",
+              "Mariani, Merger ",
+              "Truitier"
+            ]
+          },
+          {
+            "codePostal": "HT6140",
+            "commune": "Pétion-Ville ",
+            "localite": [
+              "Pétion-Ville (Centre-ville)",
+              "Frères, Puits-Blain, Vivy Mitchel, Belvil",
+              "Pèlerin et Morne Calvaire",
+              "Tête de l'Eau et Montagne Noire",
+              "Laboule",
+              "Thomassin",
+              "Fermathe",
+              "Pernier",
+              "Morne Hercule, Nerette",
+              "Jacquet Toto",
+              "Morne Lazarre",
+              "Péguy-Ville et Meyotte",
+              "Berthé et Bois Moquette",
+              "Juvénat"
+            ]
+          },
+          {
+            "codePostal": "HT6150",
+            "commune": "Kenscoff ",
+            "localite": [
+              "Kenscoff (Centre-ville)",
+              "Fort-Jacques",
+              "Duplan (près de Fort-Jacques)",
+              "Obléon",
+              "Furcy",
+              "Haut Fermathe"
+            ]
+          },
+          {
+            "codePostal": "HT6160",
+            "commune": "Gressier ",
+            "localite": ["Gressier (Centre-ville)"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "code": "SD",
+    "codePostal": "HT8000",
+    "departement": "Sud",
+    "arrondissement": [
+      {
+        "codeDep": "SD",
+        "code": "AQ",
+        "codePostal": "HT8300",
+        "arrondissement": "Aquin ",
+        "commune": [
+          {
+            "codePostal": "HT8310",
+            "commune": "Aquin ",
+            "localite": [
+              "Aquin (Centre-ville)",
+              "Fond des Blanc ",
+              "Vieux Bourg d'Aquin ",
+              "La Colline "
+            ]
+          },
+          {
+            "codePostal": "HT8320",
+            "commune": "Saint Louis du Sud ",
+            "localite": ["Saint Louis du Sud (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT8330",
+            "commune": "Cavaillon ",
+            "localite": ["Cavaillon (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "SD",
+        "code": "CR",
+        "codePostal": "HT8500",
+        "arrondissement": "Chardonnières ",
+        "commune": [
+          {
+            "codePostal": "HT8510",
+            "commune": "Chardonnières ",
+            "localite": ["Chardonnières (Centre-ville)", "Randel "]
+          },
+          {
+            "codePostal": "HT8520",
+            "commune": "Les Anglais ",
+            "localite": ["Les Anglais (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT8530",
+            "commune": "Tiburon ",
+            "localite": ["Tiburon (Centre-ville)", "Cahonane "]
+          }
+        ]
+      },
+      {
+        "codeDep": "SD",
+        "code": "CX",
+        "codePostal": "HT8400",
+        "arrondissement": "Côteaux ",
+        "commune": [
+          {
+            "codePostal": "HT8410",
+            "commune": "Côteaux ",
+            "localite": ["Côteaux (Centre-ville)", "Damassin ", "La Côte "]
+          },
+          {
+            "codePostal": "HT8420",
+            "commune": "Port à Piment ",
+            "localite": ["Port à Piment (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT8430",
+            "commune": "Roche à Bateau ",
+            "localite": ["Roche à Bateau (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "SD",
+        "code": "CY",
+        "codePostal": "HT8100",
+        "arrondissement": "Cayes ",
+        "commune": [
+          {
+            "codePostal": "HT8110",
+            "commune": "Cayes ",
+            "localite": ["Cayes (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT8120",
+            "commune": "Torbeck ",
+            "localite": ["Torbeck (Centre-ville)", "Ferme Le Blanc ", "Ducis "]
+          },
+          {
+            "codePostal": "HT8130",
+            "commune": "Chantal ",
+            "localite": ["Chantal (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT8140",
+            "commune": "Camp Perrin ",
+            "localite": ["Camp Perrin (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT8150",
+            "commune": "Maniche ",
+            "localite": ["Maniche (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT8160",
+            "commune": "Île à Vaches ",
+            "localite": ["L'Ïle à Vaches (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "SD",
+        "code": "PS",
+        "codePostal": "HT8200",
+        "arrondissement": "Port-Salut ",
+        "commune": [
+          {
+            "codePostal": "HT8210",
+            "commune": "Port-Salut ",
+            "localite": ["Port-Salut (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT8220",
+            "commune": "Saint Jean du Sud ",
+            "localite": ["Saint Jean du Sud (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT8230",
+            "commune": "Arniquet ",
+            "localite": ["Arniquet (Centre-ville)"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "code": "SE",
+    "codePostal": "HT9000",
+    "departement": "Sud-Est",
+    "arrondissement": [
+      {
+        "codeDep": "SE",
+        "code": "BA",
+        "codePostal": "HT9300",
+        "arrondissement": "Belle-Anse ",
+        "commune": [
+          {
+            "codePostal": "HT9310",
+            "commune": "Belle-Anse ",
+            "localite": ["Belle-Anse (Centre-ville)", "Mapou "]
+          },
+          {
+            "codePostal": "HT9320",
+            "commune": "Grand Gosier ",
+            "localite": ["Grand Gosier (Centre-ville)", "Bodarie "]
+          },
+          {
+            "codePostal": "HT9330",
+            "commune": "Thiotte ",
+            "localite": ["Thiotte (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT9340",
+            "commune": "Anse à Pitre ",
+            "localite": ["Anse à Pitre (Centre-ville)", "Banane"]
+          }
+        ]
+      },
+      {
+        "codeDep": "SE",
+        "code": "BT",
+        "codePostal": "HT9200",
+        "arrondissement": "Bainet ",
+        "commune": [
+          {
+            "codePostal": "HT9210",
+            "commune": "Bainet ",
+            "localite": ["Bainet (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT9220",
+            "commune": "Côtes de Fer ",
+            "localite": ["Côtes de Fer (Centre-ville)"]
+          }
+        ]
+      },
+      {
+        "codeDep": "SE",
+        "code": "JC",
+        "codePostal": "HT9100",
+        "arrondissement": "Jacmel ",
+        "commune": [
+          {
+            "codePostal": "HT9110",
+            "commune": "Jacmel ",
+            "localite": ["Jacmel (Centre-ville)", "Marbial "]
+          },
+          {
+            "codePostal": "HT9120",
+            "commune": "Marigot ",
+            "localite": ["Marigot (Centre-ville)", "Seguin "]
+          },
+          {
+            "codePostal": "HT9130",
+            "commune": "Cayes Jacmel ",
+            "localite": ["Cayes Jacmel (Centre-ville)"]
+          },
+          {
+            "codePostal": "HT9140",
+            "commune": "La Vallée de Jacmel ",
+            "localite": ["La Vallée de Jacmel (Centre-ville)"]
+          }
+        ]
+      }
+    ]
+  }
+]

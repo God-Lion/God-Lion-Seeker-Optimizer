@@ -1,0 +1,30 @@
+[
+    {
+      "name": "dashboards",
+      "icon": "Dashboard",
+      "link": "provider/dashboard"
+    },
+    {
+      "name": "appsPages",
+      "link": "admin/Dashboard",
+      "menusection": {
+        "name": "accountManagement",
+        "menu": [
+          {
+            "name": "providers",
+            "icon": "ShieldOutlined",
+            "submenu": [
+              {
+                "name": "list",
+                "link": "admin/provider"
+              },
+              {
+                "name": "add new provider",
+                "link": "admin/provider/create"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]

@@ -1,0 +1,3 @@
+Requirement already satisfied: cryptography in e:\ai point\automated search job project\py-godlionseeker\venv\lib\site-packages (46.0.3)
+Requirement already satisfied: cffi>=2.0.0 in e:\ai point\automated search job project\py-godlionseeker\venv\lib\site-packages (from cryptography) (2.0.0)
+Requirement already satisfied: pycparser in e:\ai point\automated search job project\py-godlionseeker\venv\lib\site-packages (from cffi>=2.0.0->cryptography) (2.23)

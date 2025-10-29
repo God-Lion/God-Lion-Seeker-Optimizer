@@ -1,0 +1,36 @@
+import type { BreakpointType, ChildrenType } from '../../types'
+import type { VerticalNavProps } from '../vertical-menu/VerticalNav'
+import VerticalNav from '../vertical-menu'
+
+type VerticalNavInHorizontalProps = ChildrenType & {
+  className?: string
+  breakpoint?: BreakpointType
+  customBreakpoint?: string
+  verticalNavProps?: Pick<
+    VerticalNavProps,
+    'width' | 'backgroundColor' | 'backgroundImage' | 'customStyles'
+  >
+}
+
+const VerticalNavInHorizontal = (props: VerticalNavInHorizontalProps) => {
+  const {
+    children,
+    className,
+    breakpoint,
+    customBreakpoint,
+    verticalNavProps,
+  } = props
+
+  return (
+    <VerticalNav
+      {...verticalNavProps}
+      className={className}
+      breakpoint={breakpoint}
+      customBreakpoint={customBreakpoint}
+    >
+      {children}
+    </VerticalNav>
+  )
+}
+
+export default VerticalNavInHorizontal

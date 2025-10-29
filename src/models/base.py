@@ -1,0 +1,27 @@
+"""Base model for SQLAlchemy 2.0"""
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy import DateTime
+from datetime import datetime
+
+
+class Base(DeclarativeBase):
+    """Base class for all models"""
+    
+    pass
+
+
+class TimestampMixin:
+    """Mixin for created_at and updated_at timestamps"""
+    
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=datetime.utcnow,
+        nullable=False
+    )
+    
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=datetime.utcnow,
+        onupdate=datetime.utcnow,
+        nullable=False
+    )

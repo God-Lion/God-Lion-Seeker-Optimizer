@@ -1,0 +1,4 @@
+{
+   "pattern":"^(main|develop)$|^(feature|bugfix|hotfix|chore|experiment)\/([\\w-]+)(\/\\d+)?$",
+   "errorMsg":"Branch name format: <type>/<name>/<issue_ID>"
+}

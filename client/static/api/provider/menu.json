@@ -1,0 +1,21 @@
+[
+    {
+      "name": "dashboards",
+      "icon": "Dashboard",
+      "link": "provider/dashboard"
+    },
+    {
+      "name": "appsPages",
+      "link": "provider/dashboard",
+      "menusection": {
+        "name": "accountManagement",
+        "menu": [
+          {
+            "name": "accountInformation",
+            "icon": "ShieldOutlined",
+            "link": "provider/account/info"
+          }
+        ]
+      }
+    }
+  ]

@@ -1,0 +1,83 @@
+# Install with: pip install -r requirements.txt
+
+python-dotenv
+playwright
+selenium
+wheel
+pytest
+mysql-connector-python
+numpy
+schedule
+requests
+pandas
+PyPDF2
+beautifulsoup4
+lxml
+
+# Async & Performance
+asyncio
+aiohttp
+aiolimiter
+
+# Configuration
+pydantic
+pydantic-settings
+cryptography
+
+# Authentication & Security
+python-jose[cryptography]  # JWT tokens
+passlib[bcrypt]  # Password hashing
+bcrypt==4.0.1  # Pin bcrypt version for compatibility with passlib
+
+# Web Framework
+fastapi
+uvicorn[standard]
+python-multipart # Required for file uploads
+email-validator  # Required for EmailStr validation
+
+# Database - SQLAlchemy 2.0
+sqlalchemy[asyncio]
+aiomysql
+pymysql
+alembic
+
+# Caching (Phase 2)
+redis
+hiredis
+
+# Task Queue (Phase 2 - choose one)
+# celery
+arq
+
+# Monitoring & Logging
+prometheus-client
+structlog
+python-json-logger
+psutil
+
+# Development
+black
+ruff
+mypy
+
+# Testing
+pytest-asyncio
+pytest-cov
+httpx
+pytest-playwright
+
+
+# Additional dependencies for job matching functionality
+
+# NLP and Machine Learning
+spacy
+en-core-web-md @ https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.8.0/en_core_web_md-3.8.0-py3-none-any.whl
+scikit-learn
+nltk
+
+# CLI enhancements
+click
+tabulate
+
+reportlab
+python-docx
