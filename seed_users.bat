@@ -24,9 +24,7 @@ echo.
 REM Run the seed script
 echo [INFO] Running user seed script...
 echo.
-cd src
-python seed_users.py
-cd ..
+python src/seed_users.py
 
 echo.
 echo ========================================
