@@ -1,20 +1,21 @@
 version: '3.8'
 
 services:
-  # PostgreSQL Database
-  postgres:
-    image: postgres:15-alpine
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
     container_name: godlionseeker-db
     environment:
-      POSTGRES_DB: godlionseeker
-      POSTGRES_USER: scraper_user
-      POSTGRES_PASSWORD: scraper_password
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: godlionseeker_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mysql_data:/var/lib/mysql
     # ports:
-    #   - "5432:5432" # Disabled for security - should not be exposed externally
+    #   - "3306:3306" # Disabled for security - should not be exposed externally
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U scraper_user -d godlionseeker"]
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -46,7 +47,7 @@ services:
     container_name: godlionseeker-api
     environment:
       # Database
-      DATABASE_URL: postgresql+asyncpg://scraper_user:scraper_password@postgres:5432/godlionseeker
+      DATABASE_URL: mysql+aiomysql://root:root@mysql:3306/godlionseeker_db
       
       # Redis
       REDIS_URL: redis://redis:6379/0
@@ -74,7 +75,7 @@ services:
       - ./logs:/app/logs
       - ./data:/app/data
     depends_on:
-      postgres:
+      mysql:
         condition: service_healthy
       redis:
         condition: service_healthy
@@ -148,7 +149,7 @@ services:
     restart: unless-stopped
 
 volumes:
-  postgres_data:
+  mysql_data:
   redis_data:
   prometheus_data:
   grafana_data:
