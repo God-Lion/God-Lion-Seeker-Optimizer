@@ -113,8 +113,11 @@ export const RecentActivity: React.FC<RecentActivityProps> = ({
           </Box>
         ) : (
           <List sx={{ p: 0 }}>
-            {activities.slice(0, 8).map((activity, index) => (
-              <React.Fragment key={activity.id}>
+            {activities
+              .filter(activity => activity)
+              .slice(0, 8)
+              .map((activity, index) => (
+              <Box key={activity.id}>
                 <ListItem
                   sx={{
                     px: 0,
@@ -175,7 +178,7 @@ export const RecentActivity: React.FC<RecentActivityProps> = ({
                 {index < Math.min(activities.length, 8) - 1 && (
                   <Box sx={{ borderBottom: `1px solid ${theme.palette.divider}`, ml: 6 }} />
                 )}
-              </React.Fragment>
+              </Box>
             ))}
           </List>
         )}
