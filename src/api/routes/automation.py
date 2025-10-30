@@ -46,6 +46,9 @@ class AutomationStatusResponse(BaseModel):
     next_run: Optional[datetime] = None
 
 
+class AutomationStartRequest(BaseModel):
+    jobId: int
+
 class AutomationStartResponse(BaseModel):
     job_id: str
     status: str
@@ -193,6 +196,7 @@ async def update_config(
 
 @router.post("/start", response_model=AutomationStartResponse)
 async def start_automation(
+    request: AutomationStartRequest,
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
