@@ -477,7 +477,7 @@ This will create `nginx-selfsigned.key` and `nginx-selfsigned.crt` in the `nginx
 
 **Step 2: Create a Docker Compose Override File**
 
-Next, create a file named `docker-compose.override.yml` in the project root. This file will mount the certificate and swap the default Nginx configuration with the SSL-enabled version (`default.ssl.conf`).
+Next, create a file named `docker-compose.override.yml` in the project root. This file will mount the certificate and swap the default Nginx configuration with the SSL-enabled version (`nginx/default.ssl.conf`).
 
 ```yaml
 # docker-compose.override.yml
@@ -488,7 +488,7 @@ services:
       - ./nginx/nginx-selfsigned.crt:/etc/nginx/nginx-selfsigned.crt:ro
       - ./nginx/nginx-selfsigned.key:/etc/nginx/nginx-selfsigned.key:ro
       # Mount the SSL Nginx config over the default config
-      - ./nginx/conf.d/default.ssl.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/default.ssl.conf:/etc/nginx/conf.d/default.conf:ro
 ```
 
 This file is also git-ignored. When you run `docker-compose up`, it will automatically merge this configuration, enabling HTTPS on port 443. The application will now be accessible at `https://localhost`.
