@@ -1,5 +1,5 @@
 """FastAPI REST API for God Lion Seeker Optimizer."""
 
-from .main import app
+from src.api.main import app
 
-__all__ = ["app", "main", "routes"]
+__all__ = ["app"]

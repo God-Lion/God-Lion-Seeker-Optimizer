@@ -110,7 +110,7 @@ export const createAuthSlice: StateCreator<
 
     try {
       // Use axiosInstance which has token refresh interceptors
-      const response = await axiosInstance.get<IAuth>('/auth')
+      const response = await axiosInstance.get<IAuth>('/api/auth')
 
       if (response.status === 200 && response.data) {
         set((state) => {
