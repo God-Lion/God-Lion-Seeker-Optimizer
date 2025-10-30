@@ -47,7 +47,7 @@ export default defineConfig({
     exclude: ['@mui/x-date-pickers']
   },
   server: {
-    port: 3000,
+    port: 5000,
     open: true,
     host: true,
     proxy: {

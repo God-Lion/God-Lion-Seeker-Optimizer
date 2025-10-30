@@ -17,13 +17,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import structlog
 
-from src.api.routes import (
-    health, jobs, scraping, analysis, companies, statistics, 
+from .routes import (
+    health, jobs, scraping, analysis, companies, statistics,
     career_recommendations, sse_streaming, role_analysis,
     auth, profiles, dashboard, automation, notifications, guest, jobs_enhanced, admin
 )
-from src.config.database import get_db_session, init_db
-from src.config.settings import settings
+from ..config.database import get_db_session, init_db
+from ..config.settings import settings
 
 logger = structlog.get_logger(__name__)
 
