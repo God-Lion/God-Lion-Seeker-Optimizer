@@ -458,6 +458,20 @@ Before deploying to production:
 - [ ] Set up intrusion detection
 - [ ] Review security headers
 
+### HTTPS Configuration
+
+To enable HTTPS for local development, you need to generate a self-signed certificate. The necessary files are ignored by Git and will not be committed to the repository.
+
+**Generate Certificate:**
+
+Run the following command from the project root:
+
+```bash
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx/nginx-selfsigned.key -out nginx/nginx-selfsigned.crt -subj "/C=US/ST=CA/L=San Francisco/O=MyCompany/OU=IT/CN=localhost"
+```
+
+This will create `nginx-selfsigned.key` and `nginx-selfsigned.crt` in the `nginx` directory. The Nginx service is pre-configured to use these files when present.
+
 ---
 
 ## 🤝 Contributing

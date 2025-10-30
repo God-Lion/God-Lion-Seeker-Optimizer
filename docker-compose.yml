@@ -11,8 +11,8 @@ services:
       POSTGRES_PASSWORD: scraper_password
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+    # ports:
+    #   - "5432:5432" # Disabled for security - should not be exposed externally
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U scraper_user -d godlionseeker"]
       interval: 10s
@@ -25,8 +25,8 @@ services:
   redis:
     image: redis:7-alpine
     container_name: godlionseeker-redis
-    ports:
-      - "6379:6379"
+    # ports:
+    #  - "6379:6379" # Disabled for security - should not be exposed externally
     volumes:
       - redis_data:/data
     command: redis-server --appendonly yes
@@ -95,7 +95,7 @@ services:
       dockerfile: Dockerfile
     container_name: godlionseeker-client
     ports:
-      - "3000:80"
+      - "8080:80" # Exposed on 8080 for local dev, behind nginx in prod
     depends_on:
       - api
     healthcheck:
@@ -120,8 +120,8 @@ services:
       - '--storage.tsdb.path=/prometheus'
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
-    ports:
-      - "9090:9090"
+    # ports:
+    #  - "9090:9090" # Disabled for security - should not be exposed externally
     networks:
       - scraper-network
     restart: unless-stopped
@@ -131,14 +131,16 @@ services:
     image: grafana/grafana:latest
     container_name: godlionseeker-grafana
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      # Default password changed for security. Should be managed via secrets in a real environment.
+      - GF_SECURITY_ADMIN_PASSWORD=gr@f@n@!sS3cur3N0w
       - GF_USERS_ALLOW_SIGN_UP=false
     volumes:
       - grafana_data:/var/lib/grafana
       - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
       - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
     ports:
-      - "3000:3000"
+      # Bound to localhost to prevent external exposure
+      - "127.0.0.1:3000:3000"
     depends_on:
       - prometheus
     networks:
