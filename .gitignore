@@ -363,3 +363,6 @@ dmypy.json
 # Self-signed certificates - never commit private keys
 nginx/nginx-selfsigned.key
 nginx/nginx-selfsigned.crt
+
+# Docker override file for local development
+docker-compose.override.yml

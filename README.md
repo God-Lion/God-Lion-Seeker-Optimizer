@@ -458,19 +458,40 @@ Before deploying to production:
 - [ ] Set up intrusion detection
 - [ ] Review security headers
 
-### HTTPS Configuration
+### HTTPS Configuration (Local Development)
 
-To enable HTTPS for local development, you need to generate a self-signed certificate. The necessary files are ignored by Git and will not be committed to the repository.
+By default, the Docker Compose setup runs on HTTP. To enable HTTPS for local development, you can use a `docker-compose.override.yml` file to mount a self-signed certificate and an SSL-enabled Nginx configuration.
 
-**Generate Certificate:**
+**Step 1: Generate the Certificate**
 
-Run the following command from the project root:
+First, generate a self-signed certificate and private key. Run the following command from the project root:
 
 ```bash
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx/nginx-selfsigned.key -out nginx/nginx-selfsigned.crt -subj "/C=US/ST=CA/L=San Francisco/O=MyCompany/OU=IT/CN=localhost"
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout nginx/nginx-selfsigned.key \
+  -out nginx/nginx-selfsigned.crt \
+  -subj "/C=US/ST=CA/L=San Francisco/O=MyCompany/OU=IT/CN=localhost"
 ```
 
-This will create `nginx-selfsigned.key` and `nginx-selfsigned.crt` in the `nginx` directory. The Nginx service is pre-configured to use these files when present.
+This will create `nginx-selfsigned.key` and `nginx-selfsigned.crt` in the `nginx/` directory. These files are git-ignored and should not be committed.
+
+**Step 2: Create a Docker Compose Override File**
+
+Next, create a file named `docker-compose.override.yml` in the project root. This file will mount the certificate and swap the default Nginx configuration with the SSL-enabled version (`default.ssl.conf`).
+
+```yaml
+# docker-compose.override.yml
+services:
+  nginx:
+    volumes:
+      # Mount the SSL certificate and key
+      - ./nginx/nginx-selfsigned.crt:/etc/nginx/nginx-selfsigned.crt:ro
+      - ./nginx/nginx-selfsigned.key:/etc/nginx/nginx-selfsigned.key:ro
+      # Mount the SSL Nginx config over the default config
+      - ./nginx/conf.d/default.ssl.conf:/etc/nginx/conf.d/default.conf:ro
+```
+
+This file is also git-ignored. When you run `docker-compose up`, it will automatically merge this configuration, enabling HTTPS on port 443. The application will now be accessible at `https://localhost`.
 
 ---
 
