@@ -360,9 +360,3 @@ dmypy.json
 .pytype/
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,python,pycharm,node
-# Self-signed certificates - never commit private keys
-nginx/nginx-selfsigned.key
-nginx/nginx-selfsigned.crt
-
-# Docker override file for local development
-docker-compose.override.yml

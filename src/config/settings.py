@@ -117,6 +117,11 @@ class Settings(BaseSettings):
         """Get SQLAlchemy database URL, prioritizing DATABASE_URL env var."""
         if self.database_url:
             return self.database_url
+        if self.postgres_user and self.postgres_password:
+            return (
+                f"postgresql+asyncpg://{self.postgres_user}:{self.postgres_password}"
+                f"@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
+            )
         return (
             f"mysql+aiomysql://{self.db_user}:{self.db_password}"
             f"@{self.db_host}:{self.db_port}/{self.db_name}"
@@ -129,6 +134,11 @@ class Settings(BaseSettings):
         if self.database_url:
             # Replace async driver with sync driver
             return self.database_url.replace("asyncpg", "psycopg2").replace("aiomysql", "pymysql")
+        if self.postgres_user and self.postgres_password:
+            return (
+                f"postgresql+psycopg2://{self.postgres_user}:{self.postgres_password}"
+                f"@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
+            )
         return (
             f"mysql+pymysql://{self.db_user}:{self.db_password}"
             f"@{self.db_host}:{self.db_port}/{self.db_name}"
