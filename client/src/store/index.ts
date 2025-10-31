@@ -1,4 +1,4 @@
-import { create } from 'zustand'
+import create from 'zustand'
 import { persist, createJSONStorage, devtools } from 'zustand/middleware'
 import { immer } from 'zustand/middleware/immer'
 
@@ -31,6 +31,8 @@ export type AppStore = AuthSlice &
  * - Persistence (localStorage for auth, sessionStorage for guests)
  * - DevTools (Redux DevTools support)
  * - Immer (Immutable state updates)
+ *
+ * @see https://github.com/pmndrs/zustand
  */
 export const useAppStore = create<AppStore>()(
   devtools(
@@ -262,5 +264,3 @@ export const useTheme = () => {
     setMode,
   }
 }
-
-export default useAppStore

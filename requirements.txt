@@ -70,8 +70,8 @@ pytest-playwright
 # Additional dependencies for job matching functionality
 
 # NLP and Machine Learning
-spacy
-en-core-web-md @ https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.8.0/en_core_web_md-3.8.0-py3-none-any.whl
+spacy==3.7.2
+en-core-web-md @ https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.7.0/en_core_web_md-3.7.0-py3-none-any.whl
 scikit-learn
 nltk
 

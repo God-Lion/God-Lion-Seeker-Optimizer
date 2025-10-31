@@ -46,18 +46,18 @@ export default defineConfig({
     ],
     exclude: ['@mui/x-date-pickers']
   },
-  // server: {
-    // port: 3000,
-    // open: true,
-    // host: true,
-    // proxy: {
-    //   '/api': {
-    //     target: process.env.VITE_API_URL || 'http://localhost:8000',
-    //     changeOrigin: true,
-    //     secure: false,
-    //   },
-    // },
-  // },
+  server: {
+    port: 3000,
+    open: true,
+    host: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
    build: {
     outDir: 'build',
     chunkSizeWarningLimit: 1000,

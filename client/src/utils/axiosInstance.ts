@@ -23,7 +23,6 @@ try {
   API_CONFIG = require('src/shared/api/config').API_CONFIG
 } catch {
   API_CONFIG = {
-    baseURL: baseUrl(),
     timeout: 30000,
     withCredentials: true,
     headers: {
@@ -36,7 +35,6 @@ try {
 // Create axios instance with merged config
 const axiosInstance = axios.create({
   ...API_CONFIG,
-  baseURL: API_CONFIG.baseURL || baseUrl(),
 })
 
 // Setup token refresh interceptors from service

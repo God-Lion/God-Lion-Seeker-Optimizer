@@ -1,0 +1,6 @@
+services:
+  nginx:
+    volumes:
+      - ./nginx/nginx-selfsigned.crt:/etc/nginx/nginx-selfsigned.crt:ro
+      - ./nginx/nginx-selfsigned.key:/etc/nginx/nginx-selfsigned.key:ro
+      - ./nginx/default.ssl.conf:/etc/nginx/conf.d/default.conf:ro

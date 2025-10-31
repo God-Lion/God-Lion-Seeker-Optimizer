@@ -20,7 +20,10 @@ class Settings(BaseSettings):
     debug: bool = False
     environment: str = "development"
     
-    # Database (MySQL)
+    # Database URL (priority)
+    database_url: Optional[str] = None
+
+    # Database (MySQL fallback)
     db_host: str = "localhost"
     db_port: int = 3306
     db_user: str = "root"
@@ -110,8 +113,15 @@ class Settings(BaseSettings):
         return [email.strip() for email in self.recipient_emails.split(',')]
     
     @property
-    def database_url(self) -> str:
-        """Get SQLAlchemy database URL for async operations (MySQL)"""
+    def effective_database_url(self) -> str:
+        """Get SQLAlchemy database URL, prioritizing DATABASE_URL env var."""
+        if self.database_url:
+            return self.database_url
+        if self.postgres_user and self.postgres_password:
+            return (
+                f"postgresql+asyncpg://{self.postgres_user}:{self.postgres_password}"
+                f"@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
+            )
         return (
             f"mysql+aiomysql://{self.db_user}:{self.db_password}"
             f"@{self.db_host}:{self.db_port}/{self.db_name}"
@@ -120,7 +130,15 @@ class Settings(BaseSettings):
     
     @property
     def sync_database_url(self) -> str:
-        """Get synchronous database URL for migrations (MySQL)"""
+        """Get synchronous database URL, prioritizing DATABASE_URL env var."""
+        if self.database_url:
+            # Replace async driver with sync driver
+            return self.database_url.replace("asyncpg", "psycopg2").replace("aiomysql", "pymysql")
+        if self.postgres_user and self.postgres_password:
+            return (
+                f"postgresql+psycopg2://{self.postgres_user}:{self.postgres_password}"
+                f"@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
+            )
         return (
             f"mysql+pymysql://{self.db_user}:{self.db_password}"
             f"@{self.db_host}:{self.db_port}/{self.db_name}"

@@ -18,7 +18,7 @@ from fastapi.responses import JSONResponse
 import structlog
 
 from src.api.routes import (
-    health, jobs, scraping, analysis, companies, statistics, 
+    health, jobs, scraping, analysis, companies, statistics,
     career_recommendations, sse_streaming, role_analysis,
     auth, profiles, dashboard, automation, notifications, guest, jobs_enhanced, admin
 )

@@ -20,6 +20,11 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import OpenInNewIcon from '@mui/icons-material/OpenInNew'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useJob, useDeleteJob } from '../hooks'
+import AutomatedSubmissionButton from 'src/Modules/ApplicationSubmission/components/AutomatedSubmissionButton'
+import SubmissionStatusModal from 'src/Modules/ApplicationSubmission/components/SubmissionStatusModal'
+import { useAutomatedSubmission } from 'src/Modules/ApplicationSubmission/hooks/useAutomatedSubmission'
+import { useSubmissionStore } from 'src/Modules/ApplicationSubmission/store/useSubmissionStore'
+import { toast } from 'react-toastify'
 
 const JobDetailsPage: React.FC = (): React.ReactElement => {
   const theme = useTheme()
@@ -37,6 +42,33 @@ const JobDetailsPage: React.FC = (): React.ReactElement => {
       navigate('/jobs')
     },
   })
+
+  const {
+    isModalOpen,
+    submissionStatus,
+    openModal,
+    closeModal,
+    setSubmissionStatus,
+  } = useSubmissionStore()
+
+  const { mutate: startSubmission, isLoading: isSubmitting } = useAutomatedSubmission()
+
+  const handleSubmissionStart = () => {
+    if (!job) return;
+
+    openModal()
+    setSubmissionStatus('loading')
+    startSubmission(job.id, {
+      onSuccess: () => {
+        setSubmissionStatus('success')
+        toast.success('Application submitted successfully!')
+      },
+      onError: () => {
+        setSubmissionStatus('error')
+        toast.error('Failed to submit application.')
+      },
+    })
+  }
 
   /**
    * Handle job deletion
@@ -60,6 +92,11 @@ const JobDetailsPage: React.FC = (): React.ReactElement => {
 
   return (
     <Box>
+      <SubmissionStatusModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        submissionState={submissionStatus}
+      />
       {/* Breadcrumbs */}
       <Breadcrumbs sx={{ mb: 3 }}>
         <Link
@@ -95,6 +132,12 @@ const JobDetailsPage: React.FC = (): React.ReactElement => {
             >
               Apply on Site
             </Button>
+          )}
+          {job && (
+            <AutomatedSubmissionButton
+              onClick={handleSubmissionStart}
+              isLoading={isSubmitting}
+            />
           )}
           {job && (
             <Button
