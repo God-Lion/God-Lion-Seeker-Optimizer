@@ -35,20 +35,10 @@ const Captcha: React.FC<CaptchaProps> = ({
   onError,
   onExpire,
   theme = 'light',
-  size = 'normal'
 }) => {
-  const recaptchaRef = React.useRef<any>(null)
 
   const handleChange = (token: string | null) => {
     onVerify(token)
-  }
-
-  const handleError = () => {
-    if (onError) onError()
-  }
-
-  const handleExpire = () => {
-    if (onExpire) onExpire()
   }
 
   /**

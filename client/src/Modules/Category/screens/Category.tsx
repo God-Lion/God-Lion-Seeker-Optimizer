@@ -27,7 +27,7 @@ import RefreshIcon from '@mui/icons-material/Refresh'
 import { useCategories } from '@/shared/hooks'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { categoryService, QUERY_KEYS } from '@/shared/api'
-import { ICategory } from 'src/lib/types'
+import { ICategory } from 'src/types'
 
 const CategoryManagement = () => {
   const queryClient = useQueryClient()

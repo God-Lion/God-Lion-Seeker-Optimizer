@@ -2,24 +2,10 @@ import React from 'react'
 import { Grid, Box, Avatar, Container, Typography } from '@mui/material'
 import { Audiotrack, CloudUpload } from '@mui/icons-material'
 import { Accept, DropzoneOptions, useDropzone } from 'react-dropzone'
-import AppReactDropzone from 'src/lib/styles/AppReactDropzone'
+import AppReactDropzone from 'src/styles/AppReactDropzone'
 
 type IFile = File & {
   preview: string
-}
-
-// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-const getColor = (props: any) => {
-  if (props.isDragAccept) {
-    return '#00e676'
-  }
-  if (props.isDragReject) {
-    return '#ff1744'
-  }
-  if (props.isFocused) {
-    return '#2196f3'
-  }
-  return '#eeeeee'
 }
 
 function getType(type?: string, ext: Array<string> = []): Accept {

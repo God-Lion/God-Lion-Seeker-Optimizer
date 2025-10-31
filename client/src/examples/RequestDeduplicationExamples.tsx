@@ -16,8 +16,8 @@ import {
   Alert,
   CircularProgress,
 } from '@mui/material'
-import { useDeduplicatedRequest, useDeduplicatedMutation } from 'src/lib/hooks'
-import { getDeduplicationStats, cancelAllRequests, clearDeduplicationCache } from 'src/lib/api'
+import { useDeduplicatedRequest, useDeduplicatedMutation } from 'src/hooks'
+import { getDeduplicationStats, cancelAllRequests, clearDeduplicationCache } from 'src/utils/api_link'
 
 /**
  * Example 1: Basic Usage

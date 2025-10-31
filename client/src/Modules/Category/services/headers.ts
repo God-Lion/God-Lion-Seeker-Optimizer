@@ -3,7 +3,7 @@ import type {
   AxiosRequestConfig,
   RawAxiosRequestHeaders,
 } from 'axios'
-// import Session from 'src/lib/utils'
+// import Session from 'src/utils'
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (): AxiosRequestConfig => {

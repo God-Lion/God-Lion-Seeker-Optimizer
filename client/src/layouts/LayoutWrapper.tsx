@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react'
-import type { SystemMode } from 'src/lib/types'
+import type { SystemMode } from 'src/types'
 import { useSettings } from 'src/core/contexts/settingsContext'
 import Box from '@mui/material/Box'
 import { useLocation } from 'react-router-dom'

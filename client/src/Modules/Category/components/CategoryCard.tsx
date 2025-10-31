@@ -13,7 +13,7 @@ import {
 } from '@mui/material'
 import Grid from '@mui/material/GridLegacy'
 import { useCategories } from '@/shared/hooks'
-import { ICategory } from 'src/lib/types'
+import { ICategory } from 'src/types'
 import Banner2 from 'src/assets/images/1129.jpg'
 
 // Custom Card Component

@@ -1,5 +1,5 @@
 import React from 'react'
-import type { ThemeColor } from 'src/lib/types'
+import type { ThemeColor } from 'src/types'
 import DialogCloseButton from '../DialogCloseButton'
 import {
   Dialog,

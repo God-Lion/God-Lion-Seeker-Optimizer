@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
-import { baseUrl } from 'src/lib/api'
+import { baseUrl } from 'src/utils/api_link'
 import config from 'src/services/headers'
 import {
   IForgetPassword,
@@ -7,9 +7,9 @@ import {
   ISignup,
   IUserReponseForgetPassword,
   IUserReponse,
-} from 'src/lib/types'
+} from 'src/types'
 
-import { IResponse } from 'src/lib/types'
+import { IResponse } from 'src/types'
 axios.defaults.baseURL = baseUrl()
 axios.defaults.withCredentials = true
 

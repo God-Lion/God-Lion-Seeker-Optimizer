@@ -29,7 +29,7 @@ import { GridView } from '@mui/icons-material'
 // import themeConfig from 'src/configs/themeConfig'
 
 // Hook Imports
-// import { useSettings } from 'src/lib/hooks'
+// import { useSettings } from 'src/hooks'
 
 // Util Imports
 // import { getLocalizedUrl } from '@/utils/i18n'

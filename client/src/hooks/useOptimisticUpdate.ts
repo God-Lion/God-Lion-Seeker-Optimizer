@@ -7,12 +7,12 @@
 
 import { useState, useCallback, useEffect, useRef } from 'react'
 import { AxiosError, AxiosResponse } from 'axios'
-import axiosInstance from 'src/lib/api'
+import axiosInstance from 'src/utils/api_link'
 import {
   optimisticUpdateManager,
   OptimisticUpdate,
   OptimisticUpdateType,
-} from 'src/lib/utils'
+} from 'src/utils'
 
 export interface UseOptimisticMutationOptions<TData, TVariables> {
   /**

@@ -10,7 +10,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 import type { } from '@mui/material/themeCssVarsAugmentation' //! Do not remove this import otherwise you will get type errors while making a production build
 import type { } from '@mui/lab/themeAugmentation' //! Do not remove this import otherwise you will get type errors while making a production build
 import { useMedia } from 'react-use'
-import type { ChildrenType, Direction, SystemMode } from 'src/lib/types'
+import type { ChildrenType, Direction, SystemMode } from 'src/types'
 import ModeChanger from './ModeChanger'
 import themeConfig from 'src/configs/themeConfig'
 import { useSettings } from 'src/core/contexts/settingsContext'

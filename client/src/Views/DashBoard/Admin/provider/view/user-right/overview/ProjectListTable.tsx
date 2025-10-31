@@ -17,7 +17,7 @@ import type { ColumnDef, FilterFn } from '@tanstack/react-table'
 import type { RankingInfo } from '@tanstack/match-sorter-utils'
 import CustomAvatar from 'src/core/components/mui/Avatar'
 import tableStyles from 'src/core/styles/table.module.css'
-import { ThemeColor } from 'src/lib/types'
+import { ThemeColor } from 'src/types'
 import TextField, { TextFieldProps } from '@mui/material/TextField'
 import TablePaginationComponent from 'src/components/TablePaginationComponent'
 import {

@@ -5,7 +5,7 @@ import { lighten, styled } from '@mui/material/styles'
 import type { AvatarProps } from '@mui/material/Avatar'
 
 // Type Imports
-// import type { ThemeColor } from 'src/lib/types'
+// import type { ThemeColor } from 'src/types'
 export type ThemeColor =
   | 'primary'
   | 'secondary'

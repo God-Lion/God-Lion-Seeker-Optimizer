@@ -1,6 +1,6 @@
 import { Dialog, DialogContent } from '@mui/material'
 import DialogCloseButton from '../DialogCloseButton'
-import { PricingPlanType } from 'src/fake-db/types/pages/pricingTypes'
+import { PricingPlanType } from 'src/Views/DashBoard/Admin/provider/view/type'
 import Pricing from 'src/components/pricing'
 
 type PricingProps = {

@@ -1,4 +1,4 @@
-import type { ChildrenType, SystemMode } from 'src/lib/types'
+import type { ChildrenType, SystemMode } from 'src/types'
 import { useSettings } from 'src/core/contexts/settingsContext'
 import { blankLayoutClasses } from './utils/layoutClasses'
 import classnames from 'classnames'

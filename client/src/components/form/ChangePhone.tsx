@@ -4,7 +4,7 @@ import { Box, Grid, IconButton, TextField, InputAdornment } from '@mui/material'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { IUserReponse } from 'src/lib/types'
+import { IUserReponse } from 'src/types'
 import { FormLayout } from 'src/components/form'
 
 export default function ChangePhone({ user }: { user: IUserReponse }) {
@@ -16,7 +16,7 @@ export default function ChangePhone({ user }: { user: IUserReponse }) {
       password: '',
     },
   })
-  const onSubmit = (data: any) => {}
+  const onSubmit = () => {}
 
   return (
     <FormLayout

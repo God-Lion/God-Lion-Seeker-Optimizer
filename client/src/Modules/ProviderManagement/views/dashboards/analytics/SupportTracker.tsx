@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography'
 import { useColorScheme, useTheme } from '@mui/material/styles'
 import classnames from 'classnames'
 import type { ApexOptions } from 'apexcharts'
-import type { ThemeColor, SystemMode } from 'src/lib/types'
+import type { ThemeColor, SystemMode } from 'src/types'
 
 // Components Imports
 import OptionMenu from 'src/core/components/option-menu'
@@ -16,15 +16,15 @@ import CustomAvatar from 'src/core/components/mui/Avatar'
 import ErrorBoundary from 'src/components/ErrorBoundary'
 
 // Util Imports
-import { rgbaToHex } from 'src/lib/utils'
+import { rgbaToHex } from 'src/utils'
 import { Box } from '@mui/material'
 
 const AppReactApexCharts = React.lazy(
-  () => import('src/lib/styles/AppReactApexCharts'),
+  () => import('src/styles/AppReactApexCharts'),
 )
 
 // Styled Component Imports
-// const AppReactApexCharts = dynamic(() => import('src/libs/styles/AppReactApexCharts'))
+// const AppReactApexCharts = dynamic(() => import('src/styles/AppReactApexCharts'))
 
 type DataType = {
   title: string

@@ -1,5 +1,5 @@
 import React from 'react'
-import type { ThemeColor } from 'src/lib/types'
+import type { ThemeColor } from 'src/types'
 import CustomAvatar from 'src/core/components/mui/Avatar'
 import {
   Box,

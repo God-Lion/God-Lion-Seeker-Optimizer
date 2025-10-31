@@ -1,5 +1,5 @@
 /* eslint-disable eqeqeq */
-import { makeDataUserSuperAdmin } from 'src/lib/utils'
+import { makeDataUserSuperAdmin } from 'src/utils'
 const users = makeDataUserSuperAdmin(5)
 
 export const getData = () => {

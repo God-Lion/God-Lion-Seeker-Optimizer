@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { apiClient } from 'src/lib/api';
+import { apiClient } from 'src/utils/api_link';
 import { UsersListData, UserStatus } from '../../types';
 
 export const useUserManagement = (searchQuery?: string) => {

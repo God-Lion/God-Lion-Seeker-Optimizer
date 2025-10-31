@@ -24,7 +24,7 @@ import {
   Visibility,
 } from '@mui/icons-material'
 import StyledMenu from 'src/components/StyledMenu'
-import getRole from 'src/lib/utils'
+import getRole from 'src/utils'
 import type { IUser } from 'src/Views/type'
 
 const providerStatusObj: IUserStatusType = {

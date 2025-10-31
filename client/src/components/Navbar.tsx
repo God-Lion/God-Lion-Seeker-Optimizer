@@ -23,7 +23,7 @@ import Logo from 'src/assets/svg/Logo'
 import ModeDropdown from './layout/shared/ModeDropdown'
 import ProfileDefault from './AuthProfile'
 import AuthButtons from './AuthButtons'
-import { isObjectEmpty } from 'src/lib/utils'
+import { isObjectEmpty } from 'src/utils'
 import { useAuth } from 'src/store'
 
 export let whiteColor = '#ffffff'

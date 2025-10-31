@@ -9,15 +9,14 @@ import {
   Backdrop,
   CircularProgress,
 } from '@mui/material'
-import { IUserReponse } from 'src/lib/types'
+import { IUserReponse } from 'src/types'
 import FormLayout from './FormLayout'
 import { useMutation } from '@tanstack/react-query'
 import { updateNames } from 'src/services/app/mutation'
-import { IUpdateNames } from 'src/lib/types'
-import { useAuth } from 'src/store'
+import { IUpdateNames } from 'src/types'
+import 'src/store'
 
 export default function ChangeAccount({ user }: { user: IUserReponse }) {
-  const { refreshAuth } = useAuth()
   const [loading, setLoading] = React.useState<boolean>(false)
 
   const controlForm = useForm<IUpdateNames>({

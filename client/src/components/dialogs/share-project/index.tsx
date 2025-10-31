@@ -18,9 +18,7 @@ import React from 'react'
 
 // Component Imports
 import DialogCloseButton from '../DialogCloseButton'
-// import CustomAutocomplete from '@core/components/mui/Autocomplete'
-// import TextField from '@core/components/mui/TextField'
-import CustomAvatar from 'src/core/components/mui/Avatar'
+import 'src/core/components/mui/Avatar'
 
 // Config Imports
 import themeConfig from 'src/configs/themeConfig'
@@ -29,11 +27,6 @@ import {
   DialogTitle,
   Typography,
   DialogContent,
-  List,
-  TextField,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
   Avatar,
   IconButton,
   Button,
@@ -44,11 +37,6 @@ import {
 type ShareProjectProps = {
   open: boolean
   setOpen: (open: boolean) => void
-}
-
-type OptionsType = {
-  avatar: string
-  name: string
 }
 
 type DataType = {

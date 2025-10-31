@@ -8,10 +8,10 @@ import {
   useTheme,
 } from '@mui/material/styles'
 import type { ApexOptions } from 'apexcharts'
-// import type { SystemMode } from 'src/lib/types'
-import { rgbaToHex } from 'src/lib/utils'
+// import type { SystemMode } from 'src/types'
+import { rgbaToHex } from 'src/utils'
 const AppReactApexCharts = React.lazy(
-  () => import('src/lib/styles/AppReactApexCharts'),
+  () => import('src/styles/AppReactApexCharts'),
 )
 const series = [{ data: [32, 52, 72, 94, 116, 94, 72] }]
 

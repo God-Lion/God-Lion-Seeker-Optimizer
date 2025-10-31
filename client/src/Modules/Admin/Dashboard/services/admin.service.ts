@@ -1,4 +1,4 @@
-import { apiClient } from 'src/lib/api';
+import { apiClient } from 'src/utils/api_link';
 
 export const adminService = {
   // System Health

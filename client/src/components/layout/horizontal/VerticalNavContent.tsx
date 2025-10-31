@@ -1,5 +1,5 @@
 import PerfectScrollbar from 'react-perfect-scrollbar'
-import type { ChildrenType } from 'src/lib/types'
+import type { ChildrenType } from 'src/types'
 import NavHeader from 'src/menu/components/vertical-menu/NavHeader'
 import Logo from 'src/components/layout/shared/Logo'
 import NavCollapseIcons from 'src/menu/components/vertical-menu/NavCollapseIcons'

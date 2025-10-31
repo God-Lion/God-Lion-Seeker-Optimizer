@@ -21,7 +21,7 @@ import {
 import SearchIcon from '@mui/icons-material/Search'
 import RefreshIcon from '@mui/icons-material/Refresh'
 import { useCategories } from '@/shared/hooks'
-import { ICategory } from 'src/lib/types'
+import { ICategory } from 'src/types'
 
 const CategoryList = () => {
   const [searchTerm, setSearchTerm] = useState('')

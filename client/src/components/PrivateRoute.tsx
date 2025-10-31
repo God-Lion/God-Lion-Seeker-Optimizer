@@ -1,9 +1,9 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Backdrop, CircularProgress } from '@mui/material'
-import { isObjectEmpty } from 'src/lib/utils'
+import { isObjectEmpty } from 'src/utils'
 import { useAuth } from 'src/store'
-import { IUserReponse } from 'src/lib/types'
+import { IUserReponse } from 'src/types'
 // import { Roles } from '@shared/Roles'
 import { Roles } from 'src/utils/types'
 

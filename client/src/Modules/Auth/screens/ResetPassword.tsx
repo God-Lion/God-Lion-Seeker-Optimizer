@@ -30,7 +30,7 @@ import MAlert from 'src/components/Alert'
 import { useResetPassword, ResetPasswordRequest } from '../index'
 import { resetPasswordEmailHandle } from 'src/services/app'
 import { AxiosError, AxiosResponse } from 'axios'
-import { IUserReponseEmailResetPassword } from 'src/lib/types'
+import { IUserReponseEmailResetPassword } from 'src/types'
 
 interface ResetPasswordFormData {
   token: string

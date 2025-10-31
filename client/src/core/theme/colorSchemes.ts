@@ -1,5 +1,5 @@
 import type { Theme } from '@mui/material/styles'
-import type { Skin } from 'src/lib/types'
+import type { Skin } from 'src/types'
 
 const colorSchemes = (skin: Skin): Theme['colorSchemes'] => {
   return {

@@ -29,7 +29,7 @@ import {
   useOptimisticMutation,
   useOptimisticList,
   useOptimisticUpdates,
-} from 'src/lib/hooks'
+} from 'src/hooks'
 
 interface Todo {
   id: string | number

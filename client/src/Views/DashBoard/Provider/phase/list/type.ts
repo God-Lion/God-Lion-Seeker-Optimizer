@@ -3,7 +3,7 @@ import type {
   DensityOptions,
   DensityInstance,
 } from 'src/components/react-table/types'
-import { ThemeColor } from 'src/lib/types'
+import { ThemeColor } from 'src/types'
 import type { RankingInfo } from '@tanstack/match-sorter-utils'
 import type { FilterFn, RowData } from '@tanstack/react-table'
 import React from 'react'

@@ -2,7 +2,7 @@ import { useState, useEffect, Suspense, type ReactNode } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 import { Backdrop, CircularProgress, Alert, Box, Button } from '@mui/material'
 import { useAuth } from 'src/store'
-import { isObjectEmpty } from 'src/lib/utils'
+import { isObjectEmpty } from 'src/utils'
 import { Roles } from 'src/utils/types'
 
 interface AdminRouteProps {

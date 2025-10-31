@@ -10,8 +10,8 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
-import axiosInstance from 'src/lib/api'
-import { requestDeduplicator } from 'src/lib/utils'
+import axiosInstance from 'src/utils/api_link'
+import { requestDeduplicator } from 'src/utils'
 
 interface UseDeduplicatedRequestOptions<T> extends AxiosRequestConfig {
   /**

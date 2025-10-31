@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import { IUserReponse } from 'src/lib/types'
+import { IUserReponse } from 'src/types'
 
 export enum Roles {
   USER = 1,

@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from 'axios'
-import { baseUrl } from 'src/lib/api'
+import { baseUrl } from 'src/utils/api_link'
 
 interface TokenData {
   accessToken: string

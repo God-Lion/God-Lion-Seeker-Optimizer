@@ -12,7 +12,7 @@ import {
   Typography,
   Checkbox,
 } from '@mui/material'
-import { IUserReponse } from 'src/lib/types'
+import { IUserReponse } from 'src/types'
 
 export default function DesactivateAccount({ user }: { user: IUserReponse }) {
   const controlForm = useForm({

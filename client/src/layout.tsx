@@ -1,5 +1,5 @@
 import React from 'react'
-import type { ChildrenType } from 'src/lib/types'
+import type { ChildrenType } from 'src/types'
 // import type { Locale } from 'src/configs/i18n'
 import LayoutWrapper from 'src/layouts/LayoutWrapper'
 import PublicLayout from 'src/components/layout/PublicLayout'
@@ -26,7 +26,7 @@ import { useTranslation } from 'react-i18next'
 import { Locale } from './configs/i18n'
 
 // import { i18n } from 'src/configs/i18n'
-// import { getDictionary } from 'src/lib/utils'
+// import { getDictionary } from 'src/utils'
 // import { getMode, getSystemMode } from 'src/core/utils/serverHelpers'
 
 const Layout: React.FC<ChildrenType> = ({

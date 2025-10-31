@@ -1,4 +1,4 @@
-import { IAuth, ISession } from 'src/lib/types'
+import { IAuth, ISession } from 'src/types'
 
 export interface SessionConfig {
   timeout: number // Session timeout in milliseconds

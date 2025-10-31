@@ -6,7 +6,7 @@ import type {
   Layout,
   LayoutComponentPosition,
   LayoutComponentWidth,
-} from 'src/lib/types'
+} from 'src/types'
 
 type Navbar = {
   type: LayoutComponentPosition

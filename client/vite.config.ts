@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import tsconfigPaths from 'vite-tsconfig-paths'
 import path from 'path'
 import viteCompression from 'vite-plugin-compression'
 
@@ -8,6 +9,7 @@ import viteCompression from 'vite-plugin-compression'
 export default defineConfig({
   plugins: [
     react(),
+    tsconfigPaths(),
     // Gzip compression
     viteCompression({
       algorithm: 'gzip',
@@ -24,9 +26,6 @@ export default defineConfig({
     })
   ],
   resolve: {
-    alias: {
-      src: path.resolve(__dirname, './src'),
-    },
     dedupe: ['react', 'react-dom'],
   },
   optimizeDeps: {
