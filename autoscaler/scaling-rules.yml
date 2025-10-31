@@ -1,0 +1,15 @@
+services:
+  - name: godlionseeker_api
+    min_replicas: 3
+    max_replicas: 10
+    target_cpu_percent: 70
+    target_memory_percent: 80
+    scale_up_cooldown: 60s
+    scale_down_cooldown: 300s
+
+  - name: godlionseeker_client
+    min_replicas: 2
+    max_replicas: 5
+    target_cpu_percent: 60
+    scale_up_cooldown: 60s
+    scale_down_cooldown: 180s

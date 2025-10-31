@@ -346,6 +346,52 @@ docker-compose -f docker-compose.loadbalanced.yml logs -f
 docker-compose -f docker-compose.loadbalanced.yml down
 ```
 
+### 🐳 Docker Swarm Deployment
+
+**Best for**: Production-grade, multi-host, highly available deployments.
+
+#### Prerequisites
+- Docker Swarm cluster (1+ manager, 2+ workers)
+- Shared storage (NFS or volume driver)
+- Ports: 2377, 7946, 4789, 80, 443 open
+
+#### Quick Start
+
+1.  **Initialize Swarm** (if not already done):
+    ```bash
+    docker swarm init --advertise-addr <MANAGER-IP>
+    ```
+2.  **Create Networks**:
+    ```bash
+    docker network create --driver overlay scraper-swarm-network
+    docker network create --driver overlay db-backend-network
+    ```
+3.  **Create Secrets**:
+    ```bash
+    echo "scraper_user" | docker secret create db_username -
+    echo "scraper_password" | docker secret create db_password -
+    echo "godlionseeker" | docker secret create db_name -
+    openssl rand -base64 32 | docker secret create jwt_secret_key -
+    ```
+4.  **Deploy Stack**:
+    ```bash
+    export REGISTRY_URL=localhost:5000 # Or your private registry
+    docker stack deploy -c docker-stack.yml godlionseeker
+    ```
+5.  **Verify Deployment**:
+    ```bash
+    docker stack services godlionseeker
+    curl http://localhost/api/health
+    ```
+
+#### Monitoring
+- **Grafana**: `http://localhost:3000`
+- **Prometheus**: `http://localhost:9090`
+- **API Docs**: `http://localhost/api/docs`
+
+#### Operations
+See **[SWARM_OPERATIONS.md](./DOCS/SWARM_OPERATIONS.md)** for detailed operational procedures.
+
 ### Manual Deployment
 
 See **[LOAD_BALANCED_DEPLOYMENT.md](./LOAD_BALANCED_DEPLOYMENT.md)** for:
