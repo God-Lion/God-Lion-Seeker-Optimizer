@@ -15,7 +15,6 @@
  */
 
 import { useState, useEffect, useCallback, useRef } from 'react'
-import StorageManager from 'src/utils'
 
 interface UsePersistentFormOptions<T> {
   storage?: 'session' | 'local'

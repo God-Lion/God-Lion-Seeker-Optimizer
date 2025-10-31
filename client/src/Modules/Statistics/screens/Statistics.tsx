@@ -36,9 +36,6 @@ import Grid from 'src/components/Grid'
 import {
   BarChart,
   Bar,
-  PieChart,
-  Pie,
-  Cell,
   XAxis,
   YAxis,
   CartesianGrid,

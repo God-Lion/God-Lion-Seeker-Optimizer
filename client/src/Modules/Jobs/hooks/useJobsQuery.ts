@@ -167,7 +167,7 @@ export function useDeleteJob(
 
   return useMutation({
     mutationFn: ({ jobId }) => jobsService.deleteJob(jobId),
-    onSuccess: (data, variables) => {
+    onSuccess: (_, variables) => {
       // Remove the job from cache
       queryClient.removeQueries({
         queryKey: QUERY_KEYS.jobs.byId(variables.jobId),
@@ -195,7 +195,7 @@ export function useBulkDeleteJobs(
 
   return useMutation({
     mutationFn: ({ jobIds }) => jobsService.bulkDeleteJobs(jobIds),
-    onSuccess: (data, variables) => {
+    onSuccess: (_, variables) => {
       // Remove deleted jobs from cache
       variables.jobIds.forEach((jobId) => {
         queryClient.removeQueries({

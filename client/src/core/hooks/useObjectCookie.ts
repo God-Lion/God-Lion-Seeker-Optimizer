@@ -21,3 +21,4 @@ const useObjectCookie = <T>(
 }
 
 export default useObjectCookie
+export { useObjectCookie }

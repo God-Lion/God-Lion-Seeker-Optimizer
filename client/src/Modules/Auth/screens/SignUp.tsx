@@ -20,7 +20,6 @@ import {
   Typography,
 } from '@mui/material'
 import Grid from '@mui/material/GridLegacy'
-import { useTheme } from '@mui/material/styles'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { useForm, Controller } from 'react-hook-form'
 import Copyright from 'src/components/Copyright'
@@ -66,7 +65,6 @@ interface SignUpFormData {
 }
 
 export default function SignUp() {
-  const theme = useTheme()
   const [open, setOpen] = useState<boolean>(false)
   const [alertType, setAlertType] = useState<'error' | 'success'>('success')
   const [errorMessage, setErrorMessage] = useState<string>('')

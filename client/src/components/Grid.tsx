@@ -1,6 +1,5 @@
 import React from 'react'
-import GridLegacy from '@mui/material/GridLegacy'
-import type { GridProps as GridLegacyProps } from '@mui/material/GridLegacy'
+import type { GridProps as GridLegacyProps } from '@mui/material/Grid'
 
 // Suppress the deprecation warning for GridLegacy
 const originalWarn = console.warn
@@ -12,7 +11,7 @@ console.warn = (...args) => {
 }
 
 const Grid: React.FC<GridLegacyProps> = (props) => {
-  return <GridLegacy {...props} />
+  return <Grid {...props} />
 }
 
 export default Grid

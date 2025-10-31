@@ -42,7 +42,6 @@ interface InterviewScheduleProps {
 
 export const InterviewSchedule: React.FC<InterviewScheduleProps> = ({
   interviews,
-  loading = false,
   onViewAll,
 }) => {
   const theme = useTheme()

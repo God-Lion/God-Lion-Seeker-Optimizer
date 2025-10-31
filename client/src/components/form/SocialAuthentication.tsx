@@ -1,11 +1,10 @@
-import React from 'react'
 import { Button, Grid } from '@mui/material'
 import 'react-phone-input-2/lib/style.css'
 import { Facebook, Google } from '@mui/icons-material'
-import { IUserReponse } from 'src/types'
+// import { IUserReponse } from 'src/types'
 import { FormLayout } from 'src/components/form'
 
-export default function SocialAuthentication({ user }: { user: IUserReponse }) {
+export default function SocialAuthentication() {
   return (
     <FormLayout
       title='Social Authentication'

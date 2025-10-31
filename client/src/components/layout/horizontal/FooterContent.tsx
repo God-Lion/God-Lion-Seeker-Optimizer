@@ -1,19 +1,19 @@
 import classnames from 'classnames'
-import { useVerticalNav } from 'src/menu/contexts/verticalNavContext'
-import { useHorizontalNav } from 'src/menu/contexts/horizontalNavContext'
-import { useSettings } from 'src/core/contexts/settingsContext'
+// import { useVerticalNav } from 'src/menu/contexts/verticalNavContext'
+// import { useHorizontalNav } from 'src/menu/contexts/horizontalNavContext'
+// import { useSettings } from 'src/core/contexts/settingsContext'
 import { horizontalLayoutClasses } from 'src/layouts/utils/layoutClasses'
 
 const FooterContent = () => {
-  const { settings } = useSettings()
-  const { isBreakpointReached: isVerticalBreakpointReached } = useVerticalNav()
-  const { isBreakpointReached: isHorizontalBreakpointReached } =
-    useHorizontalNav()
+  // const { settings } = useSettings()
+  // const { isBreakpointReached: isVerticalBreakpointReached } = useVerticalNav()
+  // const { isBreakpointReached: isHorizontalBreakpointReached } =
+    // useHorizontalNav()
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-  const isBreakpointReached =
-    settings.layout === 'vertical'
-      ? isVerticalBreakpointReached
-      : isHorizontalBreakpointReached
+  // const isBreakpointReached =
+  //   settings.layout === 'vertical'
+  //     ? isVerticalBreakpointReached
+  //     : isHorizontalBreakpointReached
 
   return (
     <div

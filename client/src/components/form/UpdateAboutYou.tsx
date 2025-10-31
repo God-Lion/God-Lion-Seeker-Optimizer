@@ -1,4 +1,3 @@
-import React from 'react'
 import { useForm } from 'react-hook-form'
 import {
   Box,
@@ -22,7 +21,7 @@ export default function UpdateAboutYou() {
       address: '',
     },
   })
-  const onSubmit = (data: any) => {}
+  const onSubmit = () => {}
   return (
     <FormLayout
       title='About You'
@@ -62,7 +61,7 @@ export default function UpdateAboutYou() {
                     const file = e.target.files[0]
                     // field.onChange(file)
                     const reader = new FileReader()
-                    reader.onload = (event) => {
+                    reader.onload = () => {
                       // @ts-ignore
                       // controlForm.setValue('imageDrawing', {
                       //   // @ts-ignore

@@ -1,13 +1,12 @@
 import React from 'react'
 import { deepmerge } from '@mui/utils'
 import {
-  CssVarsProvider,
-  extendTheme,
+  ThemeProvider as MuiThemeProvider,
+  createTheme,
   lighten,
   darken,
 } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-import type { } from '@mui/material/themeCssVarsAugmentation' //! Do not remove this import otherwise you will get type errors while making a production build
 import type { } from '@mui/lab/themeAugmentation' //! Do not remove this import otherwise you will get type errors while making a production build
 import { useMedia } from 'react-use'
 import type { ChildrenType, Direction, SystemMode } from 'src/types'
@@ -35,30 +34,14 @@ const ThemeProvider: React.FC<
 
   const theme = React.useMemo(() => {
     const newColorScheme = {
-      colorSchemes: {
-        light: {
-          palette: {
-            primary: {
-              main: settings.primaryColor,
-              light: lighten(settings.primaryColor as string, 0.2),
-              dark: darken(settings.primaryColor as string, 0.1),
-            },
-          },
-        },
-        dark: {
-          palette: {
-            primary: {
-              main: settings.primaryColor,
-              light: lighten(settings.primaryColor as string, 0.2),
-              dark: darken(settings.primaryColor as string, 0.1),
-            },
-          },
+      palette: {
+        mode: currentMode,
+        primary: {
+          main: settings.primaryColor || '#7367F0',
+          light: lighten(settings.primaryColor as string, 0.2),
+          dark: darken(settings.primaryColor as string, 0.1),
         },
       },
-      // CRITICAL: Configure color scheme selector at theme level
-      cssVarPrefix: 'mui',
-      colorSchemeSelector: 'class',
-      defaultColorScheme: currentMode,
     }
 
     const coreTheme = deepmerge(
@@ -66,23 +49,17 @@ const ThemeProvider: React.FC<
       newColorScheme,
     )
 
-    return extendTheme(coreTheme)
+    return createTheme(coreTheme)
   }, [settings.primaryColor, settings.skin, currentMode, settings, direction])
 
   return (
-    <CssVarsProvider
-      theme={theme}
-      modeStorageKey={`${themeConfig.templateName
-        .toLowerCase()
-        .split(' ')
-        .join('-')}-mui-template-mode`}
-    >
+    <MuiThemeProvider theme={theme}>
       <>
         <ModeChanger />
         <CssBaseline />
         {children}
       </>
-    </CssVarsProvider>
+    </MuiThemeProvider>
   )
 }
 

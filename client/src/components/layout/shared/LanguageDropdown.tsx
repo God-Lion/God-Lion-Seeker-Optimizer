@@ -18,14 +18,14 @@ type LanguageDataType = {
   langName: string
 }
 // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-const getLocalePath = (pathName: string, locale: string): string => {
-  if (!pathName) return '/'
-  const segments = pathName.split('/')
+// const getLocalePath = (pathName: string, locale: string): string => {
+//   if (!pathName) return '/'
+//   const segments = pathName.split('/')
 
-  segments[1] = locale
+//   segments[1] = locale
 
-  return segments.join('/')
-}
+//   return segments.join('/')
+// }
 
 const languageData: Array<LanguageDataType> = [
   {
@@ -46,7 +46,7 @@ const LanguageDropdown = () => {
   const [open, setOpen] = React.useState<boolean>(false)
   const anchorRef = React.useRef<HTMLButtonElement>(null)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-  const [t, i18n] = useTranslation('common')
+  const [, i18n] = useTranslation('common')
 
   // Hooks
   const { settings } = useSettings()

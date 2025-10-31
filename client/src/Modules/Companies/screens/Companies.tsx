@@ -38,7 +38,6 @@ import BusinessIcon from '@mui/icons-material/Business'
 import RefreshIcon from '@mui/icons-material/Refresh'
 import ClearIcon from '@mui/icons-material/Clear'
 import { useCompaniesManagement, useCompany } from '../hooks'
-import { Company } from '../types'
 
 const Companies: React.FC = (): React.ReactElement => {
   const theme = useTheme()
@@ -51,7 +50,6 @@ const Companies: React.FC = (): React.ReactElement => {
     sizeFilter,
     currentPage,
     itemsPerPage,
-    viewMode,
     
     // Data
     companies,
@@ -104,7 +102,7 @@ const Companies: React.FC = (): React.ReactElement => {
     setShowDetails(false)
   }
 
-  const handlePageChange = (event: unknown, newPage: number) => {
+  const handlePageChange = (_: unknown, newPage: number) => {
     setPage(newPage + 1) // MUI uses 0-based indexing
   }
 

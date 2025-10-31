@@ -1,4 +1,3 @@
-import React from 'react'
 import MuiChip from '@mui/material/Chip'
 import { styled } from '@mui/material'
 import type { ChipProps } from '@mui/material/Chip'

@@ -1,5 +1,3 @@
-import React from 'react'
-import { handleMenu } from './services/app'
 import { IMenu } from 'src/components/layout/types'
 
 const menu: Array<IMenu> = [

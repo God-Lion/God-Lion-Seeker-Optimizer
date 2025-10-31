@@ -3,7 +3,7 @@
 import { useState, useCallback, useMemo } from 'react'
 import { ProfileData, MatchingResult, FilterOptions } from '../types'
 import { useAnalyzeResumeText } from './useCareerQuery'
-import { CareerAnalysisResponse, RoleMatchResponse } from '../types/api.types'
+import { RoleMatchResponse } from '../types/api.types'
 
 /**
  * Map backend role match to MatchingResult

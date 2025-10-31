@@ -1,4 +1,3 @@
-import React from 'react'
 import type { Theme } from '@mui/material/styles'
 
 const alerts: Theme['components'] = {

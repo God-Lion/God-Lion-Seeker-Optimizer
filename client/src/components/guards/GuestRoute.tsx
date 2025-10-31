@@ -2,7 +2,7 @@ import { useEffect, useState, Suspense, type ReactNode } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 import { Backdrop, CircularProgress } from '@mui/material'
 import { useAuth } from 'src/store'
-import { isObjectEmpty } from 'src/utils'
+import { isObjectEmpty } from 'src/utils/helper'
 
 interface GuestRouteProps {
   element: ReactNode

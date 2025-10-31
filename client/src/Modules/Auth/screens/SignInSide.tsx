@@ -46,9 +46,9 @@ export default function SignInSide() {
     msg: location.state?.data?.msg || '',
   })
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-  const _handleClickStatus = (newStatus: React.SetStateAction<IStatus>) => {
-    setStatus({ msg: '', state: '', type: '', ...newStatus, open: true })
-  }
+  // const _handleClickStatus = (newStatus: React.SetStateAction<IStatus>) => {
+  //   setStatus({ msg: '', state: '', type: '', ...newStatus, open: true })
+  // }
   const handleCloseStatus = () => {
     setStatus({ ...status, open: false })
   }
@@ -303,7 +303,7 @@ export default function SignInSide() {
               <Controller
                 name='rememberMe'
                 control={controlForm.control}
-                render={({ field, formState }) => (
+                render={({ field }) => (
                   <FormControlLabel
                     required
                     control={<Checkbox {...field} color='primary' />}

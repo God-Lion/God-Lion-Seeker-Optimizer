@@ -20,14 +20,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from 'src/store'
 import { useSignOut } from 'src/hooks'
 
-/**
- * User Menu Component
- * 
- * Displays user profile menu with:
- * - User information
- * - Navigation links (Dashboard, Settings, Profile)
- * - Sign out option
- */
+
 export const UserMenu: React.FC = () => {
   const navigate = useNavigate()
   const { user } = useAuth()

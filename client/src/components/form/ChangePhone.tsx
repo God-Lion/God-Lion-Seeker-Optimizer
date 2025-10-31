@@ -34,7 +34,7 @@ export default function ChangePhone({ user }: { user: IUserReponse }) {
             <Controller
               name='phone'
               control={controlForm.control}
-              render={({ field, formState }) => (
+              render={({ field }) => (
                 <PhoneInput
                   {...field}
                   country={'ht'}

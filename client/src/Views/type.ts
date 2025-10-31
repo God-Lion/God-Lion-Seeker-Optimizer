@@ -1,95 +1,67 @@
-export type ICategory = {
-  id: number
-  parentId?: number
-  name: 'MUSIC' | 'DRAWER'
-  image: string
-  position?: number
-  description?: string
-  isActive: boolean
-  isFeatured: boolean
-  createdAt?: string
-  updatedAt?: string
-  eddition?: Array<IEddition>
-}
+/**
+ * Shared View Types
+ * 
+ * Type definitions for various views and components
+ */
 
-export type IEddition = {
-  id: number
-  categoryId?: number
-  name: String
-  start: string
-  end: string
-  theme: string
-  subject: string
-  isActive: boolean
-  isFeatured: boolean
-  created_at?: string
-  updated_at?: string
-  meta?: IMeta
-  phase?: Array<IPhase>
-  participant?: Array<IParticipant>
-}
-
-export type IPhase = {
-  id?: number
-  name: 'Phase1' | 'Phase2' | 'Phase3'
-  createdAt?: string
-  updatedAt?: string
-}
-
-export type IProvider = {
-  id: number
-  userId: number
-  logo: string
+export interface ICategory {
+  id: string | number
   name: string
-  phone: string
-  address: string
+  description?: string
+  icon?: string
+  count?: number
+  color?: string
+  slug?: string
+}
+
+export interface IEddition {
+  id: string | number
+  name: string
+  date: string
+  description?: string
+  status?: string
+}
+
+export interface IParticipant {
+  id: string | number
+  name: string
   email: string
-  contactPersonName: string
-  contactPersonPhone: string
-  contactPersonEmail: string
-  isActive: number
-  isApproved: number
-  isSuspended: number
-  createdAt: string
-  updatedAt: string
-  owner_provider: IUser
-  category?: ICategory
+  role?: string
+  avatar?: string
 }
 
-export type IUser = {
-  id: number
-  roleId: number
-  role?: number | string
-  firstname: string
-  lastname: string
-  phone: string
-  sexe?: any
+export interface IPhase {
+  id: string | number
+  name: string
+  status: string
+  startDate?: string
+  endDate?: string
+  progress?: number
+}
+
+export interface IProvider {
+  id: string | number
+  name: string
+  type: string
+  description?: string
+  logo?: string
+  active?: boolean
+}
+
+export interface IUser {
+  id: string | number
+  firstName: string
+  lastName: string
   email: string
-  rememberMeToken?: any
-  avatarUrl: string
-  emailVerified?: any
-  emailVerifiedAt?: any
-  isEnabledProfile: number
-  isEnabledMiniPlayer: number
-  isEnabledAutoplayNext: number
-  isEnabledMentions: number
-  isActive: number
-  isTermsSign: number
-  createByUserId: number
-  createdAt: string
-  updatedAt: string
-  avatar: string
-  avatarLarge: string
-  isAdmin: boolean
-  isParticipant: boolean
-  isEmailVerified: boolean
-  meta?: IMeta
+  role: number
+  avatar?: string
+  status?: string
 }
 
-export type IMeta = {
-  delete_at?: any
-}
-
-export type IParticipant = {
-  user: IUser
-}
+// Re-export for backward compatibility
+export type { ICategory as Category }
+export type { IEddition as Eddition }
+export type { IParticipant as Participant }
+export type { IPhase as Phase }
+export type { IProvider as Provider }
+export type { IUser as User }

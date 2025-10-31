@@ -1,7 +1,7 @@
 import PhoneInput from 'react-phone-input-2'
 import { styled } from '@mui/material/styles'
 
-const PhoneInput2 = styled(PhoneInput)(({ theme, disabled }) => ({
+const PhoneInput2 = styled(PhoneInput)(({ disabled }) => ({
   fontFamily: "'Roboto', sans-serif",
   fontSize: '15px',
   position: 'relative',

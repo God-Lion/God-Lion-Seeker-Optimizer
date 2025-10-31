@@ -40,7 +40,6 @@ interface RecentActivityProps {
 
 export const RecentActivity: React.FC<RecentActivityProps> = ({
   activities,
-  loading = false,
 }) => {
   const theme = useTheme()
 

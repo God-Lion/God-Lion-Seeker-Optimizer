@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import axios, { AxiosResponse } from 'axios'
 import { baseUrl } from 'src/utils/api_link'
 import config from 'src/services/headers'
@@ -287,7 +287,6 @@ export const handleRetriveAllEdition = (query: string = '') => {
 }
 
 export const handleLongPollingEvent = (query: string = '') => {
-  const queryClient = useQueryClient()
   return useQuery({
     queryKey: ['eventData'],
     queryFn: async () => await axios.get(`event${query}`, await config()),

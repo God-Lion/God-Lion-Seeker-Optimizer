@@ -1,4 +1,3 @@
-import React from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { Box, Grid, TextField } from '@mui/material'
 import { FormLayout } from 'src/components/form'
@@ -13,7 +12,7 @@ export default function UpdateSocialLinks() {
       twitterUrl: '',
     },
   })
-  const onSubmit = (data: any) => {}
+  const onSubmit = () => {}
   return (
     <FormLayout
       title='Update Social Links'

@@ -52,3 +52,16 @@ export const FALLBACK_DATA = {
     ar: {}
   }
 }
+
+// Create axios instance
+import axios from 'axios'
+
+const apiClient = axios.create({
+  baseURL: baseApi(),
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+
+export { apiClient }
+export default apiClient

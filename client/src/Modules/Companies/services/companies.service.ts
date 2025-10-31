@@ -12,7 +12,6 @@ import {
   CreateCompanyRequest,
   UpdateCompanyRequest,
   DeleteCompanyResponse,
-  CompanyStatistics,
 } from '../types/api.types'
 
 /**

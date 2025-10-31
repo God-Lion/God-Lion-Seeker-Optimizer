@@ -20,7 +20,6 @@ import {
   CreateCompanyMutationVars,
   UpdateCompanyMutationVars,
   DeleteCompanyMutationVars,
-  GetCompanyJobsMutationVars,
 } from '../types/api.types'
 
 /**
@@ -173,7 +172,7 @@ export function useDeleteCompany(
 
   return useMutation({
     mutationFn: ({ companyId }) => companiesService.deleteCompany(companyId),
-    onSuccess: (data, variables) => {
+    onSuccess: (_, variables) => {
       // Remove the company from cache
       queryClient.removeQueries({
         queryKey: QUERY_KEYS.companies.byId(variables.companyId),

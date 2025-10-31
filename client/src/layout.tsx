@@ -1,5 +1,5 @@
 import React from 'react'
-import type { ChildrenType } from 'src/types'
+import type { ChildrenType } from 'src/core/types'
 // import type { Locale } from 'src/configs/i18n'
 import LayoutWrapper from 'src/layouts/LayoutWrapper'
 import PublicLayout from 'src/components/layout/PublicLayout'
@@ -34,7 +34,7 @@ const Layout: React.FC<ChildrenType> = ({
   //& { params: { lang: Locale } }
 }) => {
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-  const [t, i18n] = useTranslation('common')
+  const [_, i18n] = useTranslation('common')
   const dictionary = useLang(i18n.language as Locale)
   // const mode = getMode()
   // const systemMode = getSystemMode()

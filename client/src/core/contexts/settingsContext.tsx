@@ -148,7 +148,7 @@ export const useSettings = () => {
   const zustandSettings = useZustandSettings()
   
   // Wrap updateSettings to handle the updateCookie option (ignored in Zustand)
-  const updateSettings = (settings: Partial<Settings>, options?: UpdateSettingsOptions) => {
+  const updateSettings = (settings: Partial<Settings>) => {
     zustandSettings.updateSettings(settings)
   }
   

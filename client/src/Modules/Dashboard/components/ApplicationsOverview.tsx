@@ -30,7 +30,6 @@ interface ApplicationsOverviewProps {
 
 export const ApplicationsOverview: React.FC<ApplicationsOverviewProps> = ({ 
   stats, 
-  loading = false 
 }) => {
   const theme = useTheme()
 

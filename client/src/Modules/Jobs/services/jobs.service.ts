@@ -8,7 +8,6 @@ import {
   JobSearchParams,
   JobSearchQuery,
   JobSearchResponse,
-  JobDetailResponse,
   CreateJobRequest,
   UpdateJobRequest,
   DeleteJobResponse,

@@ -129,7 +129,7 @@ const EnterComponent: React.FC<{
   currentPath: string
   data: SearchData
   locale: Locale
-}> = ({ active, currentPath, data, locale }) => {
+}> = ({ active, currentPath }) => {
   const theme = useTheme()
   const location = useLocation()
   const pathname = location.pathname

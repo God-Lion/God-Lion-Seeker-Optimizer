@@ -29,7 +29,6 @@ import { IStatus, Roles } from 'src/utils/types'
 import { IAuth } from 'src/types'
 import { useLogin, LoginRequest } from '../index'
 import { useAuth } from 'src/store'
-import Logo from 'src/assets/svg/Logo'
 
 // Constants
 const ADMIN_ROLES = [

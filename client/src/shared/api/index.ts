@@ -1,12 +1,19 @@
-// src/shared/api/index.ts
-
-export { default as axiosInstance } from './axios-instance'
-export { ApiClient, apiClient, handleApiError, isApiError } from './api-client'
-export { API_CONFIG, ENDPOINTS, QUERY_KEYS } from './config'
-export { TokenManager } from './axios-instance'
-
-// Export all services
+// Shared API exports
+export * from './api-client'
+export * from './axios-instance'
+export * from './config'
 export * from './services/api.service'
 
-// Export types
-export type { ApiResponse, PaginatedResponse, ApiError } from './api-client'
+// Query keys for react-query
+export const QUERY_KEYS = {
+  CATEGORIES: 'categories',
+  CATEGORY: 'category',
+  JOBS: 'jobs',
+  JOB: 'job',
+  USERS: 'users',
+  USER: 'user',
+  PROFILE: 'profile',
+  PROFILES: 'profiles',
+  STATISTICS: 'statistics',
+  ANALYTICS: 'analytics',
+} as const

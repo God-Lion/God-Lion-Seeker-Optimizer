@@ -72,7 +72,7 @@ const ScrapeJobs: React.FC = (): React.ReactElement => {
   
   const {
     data: currentSessionData,
-    isLoading: sessionLoading,
+    // isLoading: sessionLoading,
   } = useScrapingSession(currentSessionId, {
     enabled: !!currentSessionId,
   })

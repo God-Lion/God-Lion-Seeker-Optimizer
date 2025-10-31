@@ -13,7 +13,6 @@
  */
 
 import axios from 'axios'
-import { baseUrl } from './api_link'
 import { tokenRefreshService } from 'src/services/tokenRefresh.service'
 import { setupDeduplicationInterceptor } from './deduplicationInterceptor'
 

@@ -1,8 +1,7 @@
 import type { IPerson } from 'src/components/react-table/types'
 import { Roles } from './types'
-import type { IProvider, IUser } from 'src/Views/type'
+import type { IUser } from 'src/Views/type'
 import newPerson from './genarateFakeDate/newPerson'
-import newProvider from './genarateFakeDate/newProvider'
 import newUser from './genarateFakeDate/newUser'
 import range from './genarateFakeDate/range'
 

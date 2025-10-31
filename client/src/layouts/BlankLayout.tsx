@@ -1,4 +1,4 @@
-import type { ChildrenType, SystemMode } from 'src/types'
+import type { ChildrenType, SystemMode } from 'src/core/types'
 import { useSettings } from 'src/core/contexts/settingsContext'
 import { blankLayoutClasses } from './utils/layoutClasses'
 import classnames from 'classnames'
@@ -8,7 +8,7 @@ type Props = ChildrenType & {
 }
 
 const BlankLayout = (props: Props) => {
-  const { children, systemMode } = props
+  const { children } = props
   const { settings } = useSettings()
 
   // Theme initialization is now handled by ModeChanger component

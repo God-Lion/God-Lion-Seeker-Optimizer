@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import { forwardRef } from 'react'
 
 import MuiAvatar from '@mui/material/Avatar'
 import { lighten, styled } from '@mui/material/styles'

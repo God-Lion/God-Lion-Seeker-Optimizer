@@ -1,7 +1,5 @@
-// src/shared/hooks/index.ts
-
-export { useApi, useApiEffect, useApiAll } from './useApi'
-export { useDebounce } from './useDebounce'
-
-// Export all React Query hooks
+// Shared hooks index file
+export * from './useApi'
 export * from './useAppQuery'
+export * from './useDebounce'
+export * from './useSSE'
