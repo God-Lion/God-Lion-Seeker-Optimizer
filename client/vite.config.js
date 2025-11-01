@@ -1,13 +1,12 @@
 const { defineConfig } = require('vite')
 const react = require('@vitejs/plugin-react')
-const tsconfigPaths = require('vite-tsconfig-paths')
 const viteCompression = require('vite-plugin-compression')
+const path = require('path')
 
 // https://vite.dev/config/
 module.exports = defineConfig({
   plugins: [
     react(),
-    tsconfigPaths(),
     // Gzip compression
     viteCompression({
       algorithm: 'gzip',
@@ -24,6 +23,9 @@ module.exports = defineConfig({
     })
   ],
   resolve: {
+    alias: {
+      'src': path.resolve(__dirname, './src')
+    },
     dedupe: ['react', 'react-dom'],
   },
   optimizeDeps: {
