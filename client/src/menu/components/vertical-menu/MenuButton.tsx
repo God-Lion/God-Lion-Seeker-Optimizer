@@ -66,7 +66,7 @@ const MenuButton: React.ForwardRefRenderFunction<
       return React.createElement(
         component,
         {
-          className: classnames(className),
+          className,
           ...rest,
           ref,
         },
@@ -82,7 +82,6 @@ const MenuButton: React.ForwardRefRenderFunction<
           className: classnames(className, classNameProp),
           ...rest,
           ...props,
-          ref,
         },
         children,
       )

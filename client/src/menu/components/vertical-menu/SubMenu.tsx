@@ -351,14 +351,7 @@ const SubMenu: React.ForwardRefRenderFunction<HTMLLIElement, SubMenuProps> = (
     >
       {childNodes.map((node) =>
         React.cloneElement(node, {
-          ...getItemProps({
-            onClick(event: React.MouseEvent<HTMLAnchorElement>) {
-              if (node.props.children && !Array.isArray(node.props.children)) {
-                node.props.onClick?.(event)
-                tree?.events.emit('click')
-              }
-            },
-          }),
+          ...getItemProps(),
           level: level + 1,
         }),
       )}

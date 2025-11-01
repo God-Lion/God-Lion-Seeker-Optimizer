@@ -140,12 +140,7 @@ const MenuItem: React.ForwardRefRenderFunction<HTMLLIElement, MenuItemProps> = (
         component={component}
         tabIndex={disabled ? -1 : 0}
         onClick={handleClick}
-        {...getItemProps({
-          onClick(event: React.MouseEvent<HTMLAnchorElement>) {
-            props.onClick?.(event)
-            tree?.events.emit('click')
-          },
-        })}
+        {...getItemProps()}
         {...rest}
       >
         {/* Menu Item Icon */}
