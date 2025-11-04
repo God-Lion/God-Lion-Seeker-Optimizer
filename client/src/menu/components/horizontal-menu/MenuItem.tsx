@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 import classnames from 'classnames'
 import { useUpdateEffect } from 'react-use'
 import type { CSSObject } from '@emotion/styled'
-import { useFloatingTree } from '@floating-ui/react'
+// import { useFloatingTree } from '@floating-ui/react'
 import type { ChildrenType, MenuItemElement, RootStylesType } from '../../types'
 import { HorizontalSubMenuContext } from './SubMenu'
 import MenuButton from './MenuButton'
@@ -61,7 +61,7 @@ const MenuItem: React.ForwardRefRenderFunction<HTMLLIElement, MenuItemProps> = (
   const [active, setActive] = React.useState<boolean>(false)
 
   // Hooks
-  const tree = useFloatingTree()
+  // const tree = useFloatingTree()
   const { toggleVerticalNav, isToggled } = useVerticalNav()
   const { getItemProps } = React.useContext(HorizontalSubMenuContext)
   const { menuItemStyles, renderExpandedMenuItemIcon, textTruncate } =

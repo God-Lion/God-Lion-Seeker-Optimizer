@@ -25,7 +25,6 @@ export default class Session {
   private SESSION_KEY: string = 'mascayiti_session'
   private session: Array<any> = []
   private encrypt: Encrypt = new Encrypt()
-  private static findData: boolean
 
   constructor() {
     this.fetch()
@@ -120,13 +119,20 @@ export default class Session {
     const data_session: string | null = sessionStorage.getItem(this.SESSION_KEY)
     if (data_session !== '') {
       try {
-        const data = this.encrypt.decrypt(data_session)
-        if (data.toString().length > 1) Session.findData = true
-        return data
+        const data = this.encrypt.decrypt(data_session as string)
+        if (data.toString().length > 1) return data
+        else {
+          this.save([])
+          return []
+        }
       } catch (error) {
         this.save([])
+        return []
       }
-    } else this.save([])
+    } else {
+      this.save([])
+      return []
+    }
   }
 
   /**

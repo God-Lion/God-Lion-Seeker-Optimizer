@@ -25,8 +25,8 @@
  */
 
 // Re-export from new location for backward compatibility (temporary)
-export * from './types/api.types'
-export { statisticsService as statisticsApiService } from './services/statistics.service'
+export * from './../types/api.types'
+export { statisticsService as statisticsApiService } from './statistics.service'
 
 console.warn(
   '⚠️ DEPRECATION WARNING: You are importing from "services/api.ts" which is deprecated. ' +

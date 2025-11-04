@@ -6,13 +6,13 @@ export default class Encrypt {
   dynamicValue = `${date.getDay()}/${date.getMonth()}/${date.getUTCFullYear()}`
   privateKey = `${this.dynamicValue}_mascayiti`
 
-  encrypt(data) {
+  encrypt(data: any): string {
     return encodeURIComponent(
       CryptoJS.AES.encrypt(JSON.stringify(data), this.privateKey).toString(),
     )
   }
 
-  decrypt(encryptedData) {
+  decrypt(encryptedData: string): any {
     const bytes = CryptoJS.AES.decrypt(
       decodeURIComponent(encryptedData),
       this.privateKey,

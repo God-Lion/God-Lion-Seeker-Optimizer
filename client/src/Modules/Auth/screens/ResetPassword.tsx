@@ -23,7 +23,7 @@ import {
   Paper,
   Avatar,
 } from '@mui/material'
-import Grid from '@mui/material/GridLegacy'
+import Grid from '@mui/material/Grid'
 import { useTheme } from '@mui/material/styles'
 import { Controller, useForm } from 'react-hook-form'
 import MAlert from 'src/components/Alert'

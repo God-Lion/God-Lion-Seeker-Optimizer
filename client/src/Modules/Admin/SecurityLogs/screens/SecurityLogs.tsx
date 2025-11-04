@@ -82,7 +82,7 @@ export const SecurityLogs: React.FC = () => {
       field: 'timestamp',
       headerName: 'Timestamp',
       width: 180,
-      valueFormatter: (params) => new Date(params.value).toLocaleString(),
+      valueFormatter: (value) => new Date(value).toLocaleString(),
     },
     {
       field: 'severity',

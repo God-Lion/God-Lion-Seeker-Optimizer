@@ -1,18 +1,3 @@
-/**
- * Storage Utilities
- * 
- * Provides a unified interface for managing different types of storage:
- * - localStorage: Persistent storage for authenticated users
- * - sessionStorage: Temporary storage for guest users
- * - IndexedDB: Large data storage (future implementation)
- * 
- * Features:
- * - Type-safe storage operations
- * - Automatic JSON serialization/deserialization
- * - Error handling
- * - Storage quota management
- */
-
 export enum StorageType {
   LOCAL = 'localStorage',
   SESSION = 'sessionStorage',
@@ -195,8 +180,8 @@ export const clearUserData = () => {
 export const clearAllAppData = () => {
   const keysToKeep = [STORAGE_KEYS.THEME, STORAGE_KEYS.LANGUAGE]
   const allKeys = localStorageManager.keys()
-  
-  allKeys.forEach((key) => {
+
+  allKeys.forEach((key: any) => {
     if (!keysToKeep.includes(key)) {
       localStorageManager.remove(key)
     }

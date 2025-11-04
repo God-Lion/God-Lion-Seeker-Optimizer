@@ -15,8 +15,8 @@ import { Navbar as PublicNavbar, Footer as PublicFooter } from 'src/components'
 import ScrollToTop from 'src/core/components/scroll-to-top'
 import Button from '@mui/material/Button'
 import { ArrowUpward } from '@mui/icons-material'
-// import { updateMenu } from 'src/Modules/AdminManagement/menu'
-import { updateMenu } from 'src/Modules/ProviderManagement/menu'
+import type { IMenu } from 'src/components/layout/types'
+
 // eslint-disable-next-line no-unused-vars
 import {
   // getDictionary,
@@ -28,6 +28,20 @@ import { Locale } from './configs/i18n'
 // import { i18n } from 'src/configs/i18n'
 // import { getDictionary } from 'src/utils'
 // import { getMode, getSystemMode } from 'src/core/utils/serverHelpers'
+
+// Default menu configuration
+const defaultMenu: IMenu[] = [
+  {
+    name: 'home',
+    icon: 'HomeOutlined',
+    link: '/',
+  },
+  {
+    name: 'dashboard',
+    icon: 'DashboardOutlined',
+    link: '/dashboard',
+  },
+]
 
 const Layout: React.FC<ChildrenType> = ({
   children, // params,
@@ -42,7 +56,8 @@ const Layout: React.FC<ChildrenType> = ({
   // const direction = 'ltr'
   const systemMode = 'dark'
   const mode = 'dark'
-  const menu = updateMenu()
+  // const menu = updateMenu()
+  const menu = defaultMenu
 
   return (
     <React.Fragment>

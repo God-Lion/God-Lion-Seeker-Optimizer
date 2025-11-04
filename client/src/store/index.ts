@@ -114,6 +114,8 @@ export const useGuest = () => {
   const clearGuestSession = useAppStore(state => state.clearGuestSession)
   const addGuestData = useAppStore(state => state.addGuestData)
   const getGuestData = useAppStore(state => state.getGuestData)
+  const incrementAnalysisCount = useAppStore(state => state.incrementAnalysisCount)
+  const getAnalysisCount = useAppStore(state => state.getAnalysisCount)
 
   return {
     guestSession,
@@ -122,6 +124,8 @@ export const useGuest = () => {
     clearGuestSession,
     addGuestData,
     getGuestData,
+    incrementAnalysisCount,
+    analysisCounts: getAnalysisCount(),
   }
 }
 

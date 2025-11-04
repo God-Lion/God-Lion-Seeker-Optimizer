@@ -308,7 +308,7 @@ const SubMenu: React.ForwardRefRenderFunction<HTMLLIElement, SubMenuProps> = (
       setActive(true)
 
       if (
-        openSubmenusRef?.current.findIndex((submenu) => submenu.id === id) ===
+        openSubmenusRef?.current.findIndex((submenu: OpenSubmenu) => submenu.id === id) ===
         -1
       )
         openSubmenusRef?.current.push({ level, label, active: true, id })

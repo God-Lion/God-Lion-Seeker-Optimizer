@@ -1,9 +1,10 @@
 import type { StateCreator } from 'zustand'
+import type { AppStore } from '../index'
 
 export type Mode = 'light' | 'dark' | 'system'
 export type Skin = 'default' | 'bordered'
-export type Layout = 'vertical' | 'horizontal'
-export type LayoutComponentWidth = 'full' | 'boxed'
+export type Layout = 'vertical' | 'horizontal' | 'collapsed'
+export type LayoutComponentWidth = 'full' | 'boxed' | 'compact'
 
 export interface Settings {
   mode: Mode
@@ -36,7 +37,7 @@ const defaultSettings: Settings = {
 }
 
 export const createSettingsSlice: StateCreator<
-  SettingsSlice,
+  AppStore,
   [['zustand/immer', never], ['zustand/devtools', never], ['zustand/persist', unknown]],
   [],
   SettingsSlice

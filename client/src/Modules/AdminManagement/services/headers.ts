@@ -1,7 +1,6 @@
 import type {
   AxiosHeaders,
   AxiosRequestConfig,
-  RawAxiosRequestHeaders,
 } from 'axios'
 // import Session from 'src/utils'
 

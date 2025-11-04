@@ -1,143 +1,154 @@
-const { defineConfig } = require('vite')
-const react = require('@vitejs/plugin-react')
-const viteCompression = require('vite-plugin-compression')
-const path = require('path')
-
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import viteCompression from 'vite-plugin-compression';
+import path from 'path';
 // https://vite.dev/config/
-module.exports = defineConfig({
-  plugins: [
-    react(),
-    // Gzip compression
-    viteCompression({
-      algorithm: 'gzip',
-      ext: '.gz',
-      threshold: 1024, // Only compress files larger than 1KB
-      deleteOriginFile: false, // Keep original files
-    }),
-    // Brotli compression (better compression ratio than gzip)
-    viteCompression({
-      algorithm: 'brotliCompress',
-      ext: '.br',
-      threshold: 1024, // Only compress files larger than 1KB
-      deleteOriginFile: false, // Keep original files
-    })
-  ],
-  resolve: {
-    alias: {
-      'src': path.resolve(__dirname, './src')
-    },
-    dedupe: ['react', 'react-dom'],
-  },
-  optimizeDeps: {
-    include: [
-      'react',
-      'react-dom',
-      '@mui/material',
-      '@mui/icons-material',
-      '@emotion/react',
-      '@emotion/styled',
-      'recharts',
-      'apexcharts',
-      '@tanstack/react-query',
-      '@tanstack/react-table',
-      'axios',
-      'zustand'
+export default defineConfig({
+    plugins: [
+        react(),
+        // Gzip compression
+        viteCompression({
+            algorithm: 'gzip',
+            ext: '.gz',
+            threshold: 1024,
+            deleteOriginFile: false,
+        }),
+        // Brotli compression
+        viteCompression({
+            algorithm: 'brotliCompress',
+            ext: '.br',
+            threshold: 1024,
+            deleteOriginFile: false,
+        })
     ],
-    exclude: ['@mui/x-date-pickers']
-  },
-  server: {
-    port: 3000,
-    open: true,
-    host: true,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-        secure: false,
-      },
+    resolve: {
+        alias: {
+            'src': path.resolve(__dirname, './src'),
+            '@': path.resolve(__dirname, './src')
+        },
+        dedupe: ['react', 'react-dom', '@mui/material', '@emotion/react', '@emotion/styled'],
     },
-  },
-   build: {
-    outDir: 'build',
-    chunkSizeWarningLimit: 1000,
-    sourcemap: false,
-    minify: 'esbuild',
-    target: 'es2015',
-    rollupOptions: {
-      output: {
-        manualChunks: (id) => {
-          // Stable Core - rarely updated, can be cached for long periods
-          if (id.includes('node_modules')) {
-            // React ecosystem
-            if (id.includes('react') || id.includes('react-dom') ||
-                id.includes('react-router') || id.includes('react-helmet') ||
-                id.includes('react-i18next') || id.includes('react-hook-form') ||
-                id.includes('react-use') || id.includes('react-toastify') ||
-                id.includes('react-perfect-scrollbar') || id.includes('react-confirm-alert') ||
-                id.includes('react-cropper') || id.includes('react-csv') ||
-                id.includes('react-dropzone') || id.includes('react-otp-input') ||
-                id.includes('react-syntax-highlighter') || id.includes('react-to-print') ||
-                id.includes('react-hot-toast')) {
-              return 'react-vendor'
-            }
-
-            // MUI ecosystem
-            if (id.includes('@mui') || id.includes('@emotion')) {
-              return 'mui-vendor'
-            }
-
-            // Chart libraries
-            if (id.includes('recharts') || id.includes('apexcharts') ||
-                id.includes('react-apexcharts')) {
-              return 'charts-vendor'
-            }
-
-            // Data management libraries
-            if (id.includes('@tanstack') || id.includes('axios') ||
-                id.includes('zustand') || id.includes('redux')) {
-              return 'data-vendor'
-            }
-
-            // Utility libraries
-            if (id.includes('classnames') || id.includes('clsx') ||
-                id.includes('crypto-js') || id.includes('date-fns') ||
-                id.includes('uuid') || id.includes('yup') ||
-                id.includes('lodash') || id.includes('moment') ||
-                id.includes('dayjs') || id.includes('@faker-js') ||
-                id.includes('sass') || id.includes('styled-components')) {
-              return 'utils-vendor'
-            }
-
-            // UI component libraries
-            if (id.includes('@floating-ui') || id.includes('@reactour') ||
-                id.includes('swiper') || id.includes('idb')) {
-              return 'ui-vendor'
-            }
-
-            // Everything else goes to vendor chunk
-            return 'vendor'
-          }
-        },
-        // Optimize chunk naming for better caching
-        chunkFileNames: (chunkInfo) => {
-          const facadeModuleId = chunkInfo.facadeModuleId
-          if (facadeModuleId) {
-            const fileName = facadeModuleId.split('/').pop()?.replace('.tsx', '').replace('.ts', '')
-            return `js/[name]-[hash].js`
-          }
-          return `js/[name]-[hash].js`
-        },
-        entryFileNames: 'js/[name]-[hash].js',
-        assetFileNames: (assetInfo) => {
-          const info = assetInfo.name?.split('.') || []
-          const ext = info[info.length - 1]
-          if (/\.(css)$/.test(assetInfo.name || '')) {
-            return `css/[name]-[hash].${ext}`
-          }
-          return `assets/[name]-[hash].${ext}`
+    optimizeDeps: {
+        include: [
+            'react',
+            'react-dom',
+            'react/jsx-runtime',
+            '@mui/material',
+            '@mui/material/styles',
+            '@mui/material/utils',
+            '@mui/icons-material',
+            '@emotion/react',
+            '@emotion/styled',
+            '@emotion/cache',
+            'recharts',
+            '@tanstack/react-query',
+            '@tanstack/react-table',
+            'axios',
+            'zustand',
+            '@floating-ui/react',
+            '@floating-ui/react-dom'
+        ],
+        exclude: [],
+        esbuildOptions: {
+            target: 'es2020'
         }
-      }
+    },
+    server: {
+        port: 5000,
+        open: true,
+        host: true,
+        proxy: {
+            '/api': {
+                target: 'http://localhost:8000',
+                changeOrigin: true,
+                secure: false,
+            },
+        },
+    },
+    build: {
+        outDir: 'build',
+        chunkSizeWarningLimit: 1500,
+        sourcemap: false,
+        minify: 'esbuild',
+        target: 'es2020',
+        // CRITICAL FIX: Disable CSS minification to preserve Tailwind classes
+        // Tailwind classes with !important modifier (e.g., .!collapse) break CSS minifiers
+        // The CSS will be compressed via gzip/brotli anyway (60-70% size reduction)
+        cssMinify: false,
+        commonjsOptions: {
+            include: [/node_modules/],
+            transformMixedEsModules: true
+        },
+        rollupOptions: {
+            output: {
+                manualChunks: function (id) {
+                    // Normalize path separators for consistent matching
+                    var normalizedId = id.replace(/\\/g, '/');
+                    if (normalizedId.includes('node_modules')) {
+                        // React ecosystem - keep together to avoid circular deps
+                        if (normalizedId.includes('/react/') || normalizedId.includes('/react-dom/')) {
+                            return 'react-vendor';
+                        }
+                        // Emotion must come before MUI
+                        if (normalizedId.includes('@emotion/')) {
+                            return 'emotion-vendor';
+                        }
+                        // MUI - single chunk to prevent circular dependencies
+                        if (normalizedId.includes('@mui/')) {
+                            return 'mui-vendor';
+                        }
+                        // Recharts - isolated to prevent circular deps
+                        if (normalizedId.includes('/recharts/')) {
+                            return 'recharts-vendor';
+                        }
+                        // TanStack libraries
+                        if (normalizedId.includes('@tanstack/')) {
+                            return 'data-vendor';
+                        }
+                        // Utility libraries
+                        if (normalizedId.includes('axios') ||
+                            normalizedId.includes('zustand') ||
+                            normalizedId.includes('immer') ||
+                            normalizedId.includes('classnames') ||
+                            normalizedId.includes('clsx') ||
+                            normalizedId.includes('crypto-js') ||
+                            normalizedId.includes('date-fns')) {
+                            return 'utils-vendor';
+                        }
+                        // UI/Interaction libraries - FIX: Keep floating-ui with other UI libs
+                        if (normalizedId.includes('@floating-ui') ||
+                            normalizedId.includes('@reactour') ||
+                            normalizedId.includes('kbar') ||
+                            normalizedId.includes('idb')) {
+                            return 'ui-vendor';
+                        }
+                        // React helper libraries
+                        if (normalizedId.includes('react-router') ||
+                            normalizedId.includes('react-helmet') ||
+                            normalizedId.includes('react-i18next') ||
+                            normalizedId.includes('i18next') ||
+                            normalizedId.includes('react-hook-form') ||
+                            normalizedId.includes('react-toastify') ||
+                            normalizedId.includes('react-')) {
+                            return 'react-utils-vendor';
+                        }
+                        // Default vendor chunk for remaining node_modules
+                        return 'vendor';
+                    }
+                },
+                // Better chunk naming to identify issues
+                chunkFileNames: 'js/[name]-[hash].js',
+                entryFileNames: 'js/[name]-[hash].js',
+                assetFileNames: function (assetInfo) {
+                    var _a;
+                    var info = ((_a = assetInfo.name) === null || _a === void 0 ? void 0 : _a.split('.')) || [];
+                    var ext = info[info.length - 1];
+                    if (/\.(css)$/.test(assetInfo.name || '')) {
+                        return "css/[name]-[hash].".concat(ext);
+                    }
+                    return "assets/[name]-[hash].".concat(ext);
+                }
+            }
+        }
     }
-  },
-
-})
+});

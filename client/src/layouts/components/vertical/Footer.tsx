@@ -23,7 +23,7 @@ const Footer: React.FC<
   const footerStatic = themeConfig.footer.type === 'static'
   const footerFixed = themeConfig.footer.type === 'fixed'
   const footerContentCompact = footerContentWidth === 'compact'
-  const footerContentWide = footerContentWidth === 'wide'
+  const footerContentWide = footerContentWidth === 'full'
 
   return (
     <StyledFooter

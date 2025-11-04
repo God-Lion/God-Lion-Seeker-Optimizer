@@ -1,4 +1,5 @@
 import { StateCreator } from 'zustand'
+import type { AppStore } from '../index'
 
 export interface UserPreferences {
   theme: 'light' | 'dark' | 'system'
@@ -80,7 +81,7 @@ const defaultPreferences: UserPreferences = {
 }
 
 export const createPreferencesSlice: StateCreator<
-  PreferencesSlice,
+  AppStore,
   [['zustand/immer', never], ['zustand/persist', unknown]],
   [],
   PreferencesSlice

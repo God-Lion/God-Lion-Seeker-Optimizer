@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { startAutomatedSubmission } from '../services/automationService';
-import type { AutomationStartResponse } from '../services/automationService';
+// import type { AutomationStartResponse } from '../services/automationService';
 
 export const useAutomatedSubmission = () => {
   const queryClient = useQueryClient();

@@ -19,7 +19,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import Grid from '@mui/material/GridLegacy'
+import Grid from '@mui/material/Grid'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { useForm, Controller } from 'react-hook-form'
 import Copyright from 'src/components/Copyright'

@@ -1,14 +1,8 @@
 import React from 'react'
 import { Box, Paper, Typography } from '@mui/material'
-import Grid from '@mui/material/GridLegacy'
+import Grid from '@mui/material/Grid'
 import Banner2 from 'src/assets/images/abstract_low_poly_banner_design_1301.jpg'
 
-/**
- * =============================================================================
- * BANNER COMPONENT
- * =============================================================================
- * Hero banner component for the home page with background image and title
- */
 
 interface BannerPost {
   title: string

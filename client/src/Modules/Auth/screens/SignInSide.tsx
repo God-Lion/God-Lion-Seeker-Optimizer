@@ -19,7 +19,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import Grid from '@mui/material/GridLegacy'
+import Grid from '@mui/material/Grid'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
@@ -36,7 +36,7 @@ import { Roles } from 'src/utils/types'
 export default function SignInSide() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
   const theme = useTheme()
-  const { signIn } = useAuth()
+  const { signIn, user } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
   const [status, setStatus] = React.useState<IStatus>({
@@ -204,10 +204,10 @@ export default function SignInSide() {
               noValidate
               sx={{ mt: 1 }}
               onSubmit={controlForm.handleSubmit(async (data: ILogin) => {
-                const user = await signIn(data)
+                await signIn(data)
                 const session = new Session()
                 const userSession = session.read('user')
-                const roleId = user.role ?? userSession?.role
+                const roleId = user?.role ?? userSession?.role
                 if (
                   !isObjectEmpty(userSession) &&
                   // !isObjectEmpty(res?.data) &&

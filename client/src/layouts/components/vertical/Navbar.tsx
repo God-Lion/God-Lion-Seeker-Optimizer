@@ -26,7 +26,7 @@ const Navbar: React.FC<
   const headerAttached = themeConfig.navbar.detached === false
   const headerBlur = themeConfig.navbar.blur === true
   const headerContentCompact = navbarContentWidth === 'compact'
-  const headerContentWide = navbarContentWidth === 'wide'
+  const headerContentWide = navbarContentWidth === 'full'
 
   return (
     <StyledHeader

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-export type Layout = 'vertical' | 'horizontal'
+export type Layout = 'vertical' | 'horizontal' | 'collapsed'
 
 export type Skin = 'default' | 'bordered'
 
@@ -10,7 +10,7 @@ export type SystemMode = 'light' | 'dark'
 
 export type Direction = 'ltr' | 'rtl'
 
-export type LayoutComponentWidth = 'full' | 'boxed'
+export type LayoutComponentWidth = 'full' | 'boxed' | 'compact'
 
 export type LayoutComponentPosition = 'fixed' | 'static'
 

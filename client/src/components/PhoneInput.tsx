@@ -1,7 +1,12 @@
 import PhoneInput from 'react-phone-input-2'
 import { styled } from '@mui/material/styles'
+import React from 'react'
 
-const PhoneInput2 = styled(PhoneInput)(({ disabled }) => ({
+interface PhoneInputStyledProps {
+  disabled?: boolean
+}
+
+const PhoneInput2 = styled('div')<PhoneInputStyledProps>(({ disabled }) => ({
   fontFamily: "'Roboto', sans-serif",
   fontSize: '15px',
   position: 'relative',
@@ -1314,4 +1319,14 @@ const PhoneInput2 = styled(PhoneInput)(({ disabled }) => ({
   },
 }))
 
-export default PhoneInput2
+// Wrapper component to pass through PhoneInput props
+const PhoneInputWrapper: React.FC<any> = (props) => {
+  const PhoneInputComponent = PhoneInput as any
+  return (
+    <PhoneInput2 disabled={props.disabled}>
+      <PhoneInputComponent {...props} />
+    </PhoneInput2>
+  )
+}
+
+export default PhoneInputWrapper

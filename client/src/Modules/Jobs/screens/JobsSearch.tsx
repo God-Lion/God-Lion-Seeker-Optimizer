@@ -15,7 +15,7 @@ import {
   IconButton,
   Tooltip,
 } from '@mui/material'
-import Grid from '@mui/material/GridLegacy'
+import Grid from '@mui/material/Grid'
 import { useTheme } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search'

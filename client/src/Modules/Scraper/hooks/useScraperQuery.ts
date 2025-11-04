@@ -60,9 +60,9 @@ export function useScrapingSession(
     queryFn: () => scraperService.getSessionStatus(sessionId!),
     enabled: !!sessionId,
     staleTime: 1000 * 5, // Cache for 5 seconds
-    refetchInterval: (data) => {
+    refetchInterval: (query) => {
       // Auto-refetch only if session is active
-      const status = data?.data?.status
+      const status = query.state.data?.data?.status
       return status === 'running' || status === 'pending' ? 3000 : false
     },
     ...options,

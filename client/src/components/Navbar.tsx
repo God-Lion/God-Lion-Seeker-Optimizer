@@ -172,7 +172,7 @@ export default function NavBar() {
 
   // Combine pages based on user role
   const getPages = () => {
-    if (!user || isObjectEmpty(user)) {
+    if (!user || user === null || isObjectEmpty(user)) {
       return publicPages
     }
 
@@ -384,7 +384,7 @@ export default function NavBar() {
             <Stack direction='row'>
               <SearchBar />
               <ModeDropdown />
-              {user === undefined || isObjectEmpty(user) ? (
+              {user === undefined || user === null || isObjectEmpty(user) ? (
                 <AuthButtons />
               ) : (
                 <ProfileDefault />

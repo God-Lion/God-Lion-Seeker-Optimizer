@@ -17,7 +17,7 @@ import {
   Checkbox,
   FormControlLabel,
 } from '@mui/material'
-import Grid from '@mui/material/GridLegacy'
+import Grid from '@mui/material/Grid'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { useTheme } from '@mui/material/styles'
 import { useForm, Controller } from 'react-hook-form'
@@ -83,6 +83,7 @@ export default function SignIn() {
     
     // Update Zustand store with auth data
     const authData: IAuth = {
+      ...user,
       user,
       token,
       refreshToken: refresh_token,

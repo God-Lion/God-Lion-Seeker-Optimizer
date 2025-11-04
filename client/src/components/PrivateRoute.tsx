@@ -60,9 +60,19 @@ export default function PrivateRoute({
   const location = useLocation()
   const pathname = location.pathname
   const { user } = useAuth()
-  if (typeof user == 'string' || isObjectEmpty(user)) navigate('/')
+  
+  // Early return if user is invalid
+  if (!user || typeof user === 'string' || isObjectEmpty(user)) {
+    navigate('/')
+    return null
+  }
 
   React.useEffect(() => {
+    if (!user) {
+      navigate('/')
+      return
+    }
+    
     if (!access(pathname, user)) {
       const roleId = user.role
       if (

@@ -8,7 +8,7 @@ const LayoutContent = ({ children }: ChildrenType) => {
   const { settings } = useSettings()
 
   const contentCompact = settings.contentWidth === 'compact'
-  const contentWide = settings.contentWidth === 'wide'
+  const contentWide = settings.contentWidth === 'full'
 
   return (
     <StyledMain

@@ -11,6 +11,7 @@
  */
 
 import { StateCreator } from 'zustand'
+import type { AppStore } from '../index'
 
 export interface GuestSessionData {
   sessionId: string
@@ -19,6 +20,7 @@ export interface GuestSessionData {
   jobRecommendations?: any[]
   searchHistory?: any[]
   resumeData?: any
+  analysisCount?: number
 }
 
 export interface GuestSlice {
@@ -36,6 +38,8 @@ export interface GuestSlice {
   getGuestData: <K extends keyof GuestSessionData>(
     key: K
   ) => GuestSessionData[K] | undefined
+  incrementAnalysisCount: () => void
+  getAnalysisCount: () => number
 }
 
 const GUEST_STORAGE_KEY = 'god-lion-seeker-optimizer-guest-session'
@@ -62,7 +66,7 @@ const generateSessionId = (): string => {
 }
 
 export const createGuestSlice: StateCreator<
-  GuestSlice,
+  AppStore,
   [['zustand/immer', never], ['zustand/persist', unknown]],
   [],
   GuestSlice
@@ -120,6 +124,23 @@ export const createGuestSlice: StateCreator<
   getGuestData: (key) => {
     const session = get().guestSession
     return session ? session[key] : undefined
+  },
+
+  // Increment Analysis Count
+  incrementAnalysisCount: () => {
+    set((state) => {
+      if (state.guestSession) {
+        const currentCount = state.guestSession.analysisCount || 0
+        state.guestSession.analysisCount = currentCount + 1
+        saveGuestToSession(state.guestSession)
+      }
+    })
+  },
+
+  // Get Analysis Count
+  getAnalysisCount: () => {
+    const session = get().guestSession
+    return session?.analysisCount || 0
   },
 })
 

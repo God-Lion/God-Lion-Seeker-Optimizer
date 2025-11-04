@@ -1,5 +1,5 @@
 import { Container, Paper, Typography, Box, Button, Card, CardContent, Chip, alpha } from '@mui/material'
-import Grid from '@mui/material/GridLegacy'
+import Grid from '@mui/material/Grid'
 import { useNavigate } from 'react-router-dom'
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline'
 import SearchIcon from '@mui/icons-material/Search'

@@ -9,7 +9,7 @@ import classnames from 'classnames'
 const LayoutContent: React.FC<ChildrenType> = ({ children }) => {
   const { settings } = useSettings()
   const contentCompact = settings.contentWidth === 'compact'
-  const contentWide = settings.contentWidth === 'wide'
+  const contentWide = settings.contentWidth === 'full'
 
   return (
     <StyledMain

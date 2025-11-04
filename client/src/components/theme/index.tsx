@@ -11,7 +11,6 @@ import type { } from '@mui/lab/themeAugmentation' //! Do not remove this import 
 import { useMedia } from 'react-use'
 import type { ChildrenType, Direction, SystemMode } from 'src/types'
 import ModeChanger from './ModeChanger'
-import themeConfig from 'src/configs/themeConfig'
 import { useSettings } from 'src/core/contexts/settingsContext'
 import defaultCoreTheme from 'src/core/theme'
 
