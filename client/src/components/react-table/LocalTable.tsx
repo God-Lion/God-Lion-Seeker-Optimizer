@@ -236,7 +236,7 @@ export default function LocalTable({
                   {loading &&
                     fillArray.map(() => (
                       <TableRow key={`TableRow${Math.random()}`}>
-                        {table.getHeaderGroups().map((i_) => (
+                        {table.getHeaderGroups().map((_) => (
                           <TableCell key={`${Math.random()}`}>
                             <Skeleton
                               variant='text'

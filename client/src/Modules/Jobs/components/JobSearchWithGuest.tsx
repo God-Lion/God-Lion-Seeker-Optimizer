@@ -10,12 +10,11 @@
  */
 
 import React, { useState } from 'react'
-import { Box, Alert, Button, Chip, Stack, Typography, Container } from '@mui/material'
+import { Box, Alert, Button, Stack, Typography, Container } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { GuestBanner, FeatureLockedModal } from 'src/components/common'
 import { useGuest } from 'src/store'
 import LockIcon from '@mui/icons-material/Lock'
-import WorkIcon from '@mui/icons-material/Work'
 
 interface JobSearchWithGuestProps {
   // Add your existing job search props here
@@ -36,7 +35,6 @@ interface JobSearchWithGuestProps {
  */
 export const JobSearchWithGuest: React.FC<JobSearchWithGuestProps> = ({
   jobs = [],
-  loading = false,
   onDelete,
   onEdit,
   children,

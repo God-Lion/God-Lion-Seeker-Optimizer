@@ -152,13 +152,13 @@ export const UserManagement: React.FC = () => {
       field: 'registeredAt',
       headerName: 'Registered',
       width: 150,
-      valueFormatter: (params) => new Date(params.value).toLocaleDateString(),
+      valueFormatter: (value) => new Date(value).toLocaleDateString(),
     },
     {
       field: 'lastActive',
       headerName: 'Last Active',
       width: 150,
-      valueFormatter: (params) => new Date(params.value).toLocaleDateString(),
+      valueFormatter: (value) => new Date(value).toLocaleDateString(),
     },
     {
       field: 'jobsScraped',

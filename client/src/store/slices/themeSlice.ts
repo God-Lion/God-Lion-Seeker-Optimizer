@@ -1,5 +1,5 @@
-
 import type { StateCreator } from 'zustand'
+import type { AppStore } from '../index'
 
 export type ThemeMode = 'light' | 'dark'
 
@@ -10,7 +10,7 @@ export interface ThemeSlice {
 }
 
 export const createThemeSlice: StateCreator<
-  ThemeSlice,
+  AppStore,
   [['zustand/immer', never], ['zustand/devtools', never], ['zustand/persist', unknown]],
   [],
   ThemeSlice

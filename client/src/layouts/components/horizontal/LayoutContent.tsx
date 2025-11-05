@@ -1,5 +1,5 @@
 import React from 'react'
-import type { ChildrenType } from 'src/lib/types'
+import type { ChildrenType } from 'src/types'
 import themeConfig from 'src/configs/themeConfig'
 import { useSettings } from 'src/core/contexts/settingsContext'
 import { horizontalLayoutClasses } from 'src/layouts/utils/layoutClasses'
@@ -9,7 +9,7 @@ import classnames from 'classnames'
 const LayoutContent: React.FC<ChildrenType> = ({ children }) => {
   const { settings } = useSettings()
   const contentCompact = settings.contentWidth === 'compact'
-  const contentWide = settings.contentWidth === 'wide'
+  const contentWide = settings.contentWidth === 'full'
 
   return (
     <StyledMain

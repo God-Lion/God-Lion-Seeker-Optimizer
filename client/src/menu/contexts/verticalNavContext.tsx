@@ -9,6 +9,7 @@
 
 import React from 'react'
 import { useVerticalNav as useZustandVerticalNav } from 'src/store'
+import type { VerticalMenuContextProps } from '../components/vertical-menu/Menu'
 
 export interface VerticalNavState {
   width?: number
@@ -49,9 +50,16 @@ export const useVerticalNav = (): VerticalNavContextProps => {
 /**
  * @deprecated Use `import { useVerticalNav } from 'src/store'` instead
  */
-export const useVerticalMenu = () => {
-  // Return empty object for menu-specific context (if needed)
-  return {}
+export const useVerticalMenu = (): VerticalMenuContextProps => {
+  // Import the VerticalMenuContext from Menu component
+  const { VerticalMenuContext } = require('../components/vertical-menu/Menu')
+  const context = React.useContext(VerticalMenuContext)
+  
+  if (!context) {
+    throw new Error('useVerticalMenu must be used within a VerticalMenuContext.Provider')
+  }
+  
+  return context
 }
 
 export default VerticalNavContext

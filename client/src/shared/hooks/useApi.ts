@@ -1,7 +1,7 @@
 // src/shared/hooks/useApi.ts
 
 import { useState, useCallback, useRef, useEffect } from 'react'
-import { AxiosResponse, AxiosError } from 'axios'
+import { AxiosResponse } from 'axios'
 import { ApiError, handleApiError } from '../api/api-client'
 
 interface UseApiState<T> {

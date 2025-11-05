@@ -107,7 +107,7 @@ export const AnalysisProgressMonitor: React.FC<AnalysisProgressMonitorProps> = (
               <Step key={stageInfo.key} completed={index < activeStep || isComplete}>
                 <StepLabel
                   icon={stageInfo.icon}
-                  error={error && index === activeStep}
+                  error={!!(error && index === activeStep)}
                 >
                   {stageInfo.label}
                 </StepLabel>

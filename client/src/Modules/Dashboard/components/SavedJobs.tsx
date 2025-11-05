@@ -43,7 +43,6 @@ interface SavedJobsProps {
 
 export const SavedJobs: React.FC<SavedJobsProps> = ({
   jobs,
-  loading = false,
   onToggleSave,
   onViewAll,
 }) => {

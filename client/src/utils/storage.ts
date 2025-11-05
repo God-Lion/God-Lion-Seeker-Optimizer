@@ -1,12 +1,3 @@
-/**
- * Storage Manager Utility
- * 
- * Provides unified interface for different storage mechanisms:
- * - IndexedDB for large datasets (job listings, company data)
- * - LocalStorage for user preferences (with encryption for sensitive data)
- * - SessionStorage for temporary guest data
- */
-
 import { openDB, DBSchema, IDBPDatabase } from 'idb'
 
 // IndexedDB Schema
@@ -46,7 +37,7 @@ interface AppDB extends DBSchema {
 }
 
 class StorageManager {
-  private static dbName = 'linkedin-scraper-db'
+  private static dbName = 'god-lion-seeker-optimizer--scraper-db'
   private static dbVersion = 1
   private static db: IDBPDatabase<AppDB> | null = null
 
@@ -88,7 +79,7 @@ class StorageManager {
   ): Promise<void> {
     try {
       const db = await this.initDB()
-      await db.put(storeName, {
+      await db.put(storeName as any, {
         id: key,
         data,
         timestamp: Date.now(),
@@ -108,7 +99,7 @@ class StorageManager {
   ): Promise<any | null> {
     try {
       const db = await this.initDB()
-      const result = await db.get(storeName, key)
+      const result = await db.get(storeName as any, key)
       return result?.data || null
     } catch (error) {
       console.error('IndexedDB get error:', error)
@@ -124,7 +115,7 @@ class StorageManager {
   ): Promise<any[]> {
     try {
       const db = await this.initDB()
-      const results = await db.getAll(storeName)
+      const results = await db.getAll(storeName as any)
       return results.map(r => r.data)
     } catch (error) {
       console.error('IndexedDB getAll error:', error)
@@ -141,7 +132,7 @@ class StorageManager {
   ): Promise<void> {
     try {
       const db = await this.initDB()
-      await db.delete(storeName, key)
+      await db.delete(storeName as any, key)
     } catch (error) {
       console.error('IndexedDB delete error:', error)
       throw error
@@ -156,7 +147,7 @@ class StorageManager {
   ): Promise<void> {
     try {
       const db = await this.initDB()
-      await db.clear(storeName)
+      await db.clear(storeName as any)
     } catch (error) {
       console.error('IndexedDB clear error:', error)
       throw error
@@ -269,10 +260,10 @@ class StorageManager {
   static async clearAllIndexedDB(): Promise<void> {
     try {
       const db = await this.initDB()
-      const storeNames = db.objectStoreNames
+      const storeNames: (keyof AppDB)[] = ['jobs', 'companies', 'profiles', 'applications']
       
-      for (let i = 0; i < storeNames.length; i++) {
-        await db.clear(storeNames[i] as keyof AppDB)
+      for (const storeName of storeNames) {
+        await db.clear(storeName as any)
       }
     } catch (error) {
       console.error('Clear all IndexedDB error:', error)

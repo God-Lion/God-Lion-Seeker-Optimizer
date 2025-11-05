@@ -1,9 +1,4 @@
-/**
- * State Hydration Utility
- * 
- * Handles loading and restoring state on application startup.
- * Ensures smooth transition between sessions and proper state initialization.
- */
+
 
 import { useEffect, useState } from 'react'
 import { useAppStore } from 'src/store'
@@ -92,12 +87,14 @@ export const clearStaleData = () => {
   const maxAge = 7 * 24 * 60 * 60 * 1000 // 7 days
 
   // Clear old notifications
-  const notifications = localStorageManager.get<any[]>(STORAGE_KEYS.NOTIFICATIONS, [])
-  const freshNotifications = notifications.filter((notif) => {
-    const notifDate = new Date(notif.timestamp).getTime()
-    return now - notifDate < maxAge
-  })
-  localStorageManager.set(STORAGE_KEYS.NOTIFICATIONS, freshNotifications)
+  const notifications = localStorageManager.get<any[]>(STORAGE_KEYS.NOTIFICATIONS)
+  if (notifications && Array.isArray(notifications)) {
+    const freshNotifications = notifications.filter((notif) => {
+      const notifDate = new Date(notif.timestamp).getTime()
+      return now - notifDate < maxAge
+    })
+    localStorageManager.set(STORAGE_KEYS.NOTIFICATIONS, freshNotifications)
+  }
 
   // Clear old guest sessions from sessionStorage
   const guestSession = sessionStorageManager.get<any>(STORAGE_KEYS.GUEST_SESSION)

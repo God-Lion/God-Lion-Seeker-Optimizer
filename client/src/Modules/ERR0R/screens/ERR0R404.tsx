@@ -1,12 +1,8 @@
-import React from 'react'
-// import { useRouteError } from 'react-router-dom'
 import { Container, Paper } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 export default function ERR0R404() {
   const theme = useTheme()
-  // const error = useRouteError()
-  // console.log(error)
 
   return (
     <Container

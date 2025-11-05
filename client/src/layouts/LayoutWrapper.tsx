@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react'
-import type { SystemMode } from 'src/lib/types'
+import type { SystemMode } from 'src/core/types'
 import { useSettings } from 'src/core/contexts/settingsContext'
 import Box from '@mui/material/Box'
 import { useLocation } from 'react-router-dom'
@@ -14,7 +14,6 @@ const noLayoutArray = [
 ]
 
 const LayoutWrapper = ({
-  systemMode,
   verticalLayout,
   horizontalLayout,
   noLayout,

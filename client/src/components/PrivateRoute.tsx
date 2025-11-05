@@ -1,9 +1,9 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Backdrop, CircularProgress } from '@mui/material'
-import { isObjectEmpty } from 'src/lib/utils'
+import { isObjectEmpty } from 'src/utils'
 import { useAuth } from 'src/store'
-import { IUserReponse } from 'src/lib/types'
+import { IUserReponse } from 'src/types'
 // import { Roles } from '@shared/Roles'
 import { Roles } from 'src/utils/types'
 
@@ -60,9 +60,19 @@ export default function PrivateRoute({
   const location = useLocation()
   const pathname = location.pathname
   const { user } = useAuth()
-  if (typeof user == 'string' || isObjectEmpty(user)) navigate('/')
+  
+  // Early return if user is invalid
+  if (!user || typeof user === 'string' || isObjectEmpty(user)) {
+    navigate('/')
+    return null
+  }
 
   React.useEffect(() => {
+    if (!user) {
+      navigate('/')
+      return
+    }
+    
     if (!access(pathname, user)) {
       const roleId = user.role
       if (

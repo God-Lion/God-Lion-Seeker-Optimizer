@@ -9,7 +9,6 @@ import {
   Typography,
   Chip,
   Alert,
-  IconButton,
   Stack
 } from '@mui/material'
 import {
@@ -56,7 +55,7 @@ export const ScrapingProgressMonitor: React.FC<ScrapingProgressMonitorProps> = (
     }
   }, [error, onError])
 
-  // Status color mapping
+  // Status color mapping for Chip
   const getStatusColor = () => {
     switch (status) {
       case 'completed':
@@ -72,12 +71,28 @@ export const ScrapingProgressMonitor: React.FC<ScrapingProgressMonitorProps> = (
     }
   }
 
+  // Status color mapping for LinearProgress
+  const getProgressColor = (): 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning' | 'inherit' => {
+    switch (status) {
+      case 'completed':
+        return 'success'
+      case 'failed':
+        return 'error'
+      case 'stopped':
+        return 'warning'
+      case 'running':
+        return 'info'
+      default:
+        return 'primary'
+    }
+  }
+
   // Status icon
-  const getStatusIcon = () => {
+  const getStatusIcon = (): React.ReactElement | undefined => {
     if (isComplete) return <CheckCircleIcon color="success" />
     if (isFailed) return <ErrorIcon color="error" />
     if (isStopped) return <StopIcon color="warning" />
-    return null
+    return undefined
   }
 
   return (
@@ -93,7 +108,7 @@ export const ScrapingProgressMonitor: React.FC<ScrapingProgressMonitorProps> = (
               label={status.toUpperCase()}
               color={getStatusColor()}
               size="small"
-              icon={getStatusIcon()}
+              {...(getStatusIcon() && { icon: getStatusIcon() })}
             />
           </Box>
 
@@ -124,7 +139,7 @@ export const ScrapingProgressMonitor: React.FC<ScrapingProgressMonitorProps> = (
             <LinearProgress
               variant="determinate"
               value={progress}
-              color={getStatusColor()}
+              color={getProgressColor()}
               sx={{ height: 8, borderRadius: 4 }}
             />
           </Box>

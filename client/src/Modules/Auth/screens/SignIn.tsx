@@ -17,7 +17,7 @@ import {
   Checkbox,
   FormControlLabel,
 } from '@mui/material'
-import Grid from '@mui/material/GridLegacy'
+import Grid from '@mui/material/Grid'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { useTheme } from '@mui/material/styles'
 import { useForm, Controller } from 'react-hook-form'
@@ -26,10 +26,9 @@ import MAlert from 'src/components/Alert'
 import AdaptiveLogo from 'src/components/AdaptiveLogo'
 import themeConfig from 'src/configs/themeConfig'
 import { IStatus, Roles } from 'src/utils/types'
-import { IAuth } from 'src/lib/types'
+import { IAuth } from 'src/types'
 import { useLogin, LoginRequest } from '../index'
 import { useAuth } from 'src/store'
-import Logo from 'src/assets/svg/Logo'
 
 // Constants
 const ADMIN_ROLES = [
@@ -84,6 +83,7 @@ export default function SignIn() {
     
     // Update Zustand store with auth data
     const authData: IAuth = {
+      ...user,
       user,
       token,
       refreshToken: refresh_token,

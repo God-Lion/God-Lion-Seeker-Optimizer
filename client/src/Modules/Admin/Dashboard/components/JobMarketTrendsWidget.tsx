@@ -16,10 +16,8 @@ import {
   ListItemIcon,
 } from '@mui/material';
 import {
-  Work,
   LocationOn,
   TrendingUp,
-  AttachMoney,
   Business,
   Refresh,
 } from '@mui/icons-material';

@@ -12,13 +12,13 @@ import {
   Stack,
 } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { IUserReponse } from 'src/lib/types'
+import { IUserReponse } from 'src/types'
 import { FormLayout } from 'src/components/form'
 import { updateEmail } from 'src/services/app/mutation'
 import { useMutation } from '@tanstack/react-query'
 import { useAuth } from 'src/store'
 import { AxiosError } from 'axios'
-import { IError } from 'src/lib/types'
+import { IError } from 'src/types'
 
 export default function ChangeEmail({ user }: { user: IUserReponse }) {
   const { refreshAuth } = useAuth()
@@ -64,7 +64,7 @@ export default function ChangeEmail({ user }: { user: IUserReponse }) {
       console.log('onMutate variables ', variables)
       setLoading(true)
     },
-    onError: (error: AxiosError<IError>, variables, context) => {
+    onError: (error: AxiosError<IError>) => {
       // console.log('onError ', { error, variables, context })
       controlForm.setError(
         'email',

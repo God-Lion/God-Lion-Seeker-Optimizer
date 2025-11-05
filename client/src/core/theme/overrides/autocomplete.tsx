@@ -1,6 +1,5 @@
-import React from 'react'
 import type { Theme } from '@mui/material/styles'
-import type { Skin } from 'src/lib/types'
+import type { Skin } from 'src/core/types'
 import { ExpandMore } from '@mui/icons-material'
 
 const autocomplete = (skin: Skin): Theme['components'] => ({

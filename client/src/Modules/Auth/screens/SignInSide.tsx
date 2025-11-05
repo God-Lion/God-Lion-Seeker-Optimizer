@@ -19,7 +19,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import Grid from '@mui/material/GridLegacy'
+import Grid from '@mui/material/Grid'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
@@ -28,15 +28,15 @@ import { Controller, useForm } from 'react-hook-form'
 import Copyright from 'src/components/Copyright'
 import { useAuth } from 'src/store'
 import MAlert from 'src/components/Alert'
-import { Session, isObjectEmpty } from 'src/lib/utils'
-import { ILogin } from 'src/lib/types'
+import { Session, isObjectEmpty } from 'src/utils'
+import { ILogin } from 'src/types'
 import { IStatus } from 'src/utils/types'
 import { Roles } from 'src/utils/types'
 
 export default function SignInSide() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
   const theme = useTheme()
-  const { signIn } = useAuth()
+  const { signIn, user } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
   const [status, setStatus] = React.useState<IStatus>({
@@ -46,9 +46,9 @@ export default function SignInSide() {
     msg: location.state?.data?.msg || '',
   })
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-  const _handleClickStatus = (newStatus: React.SetStateAction<IStatus>) => {
-    setStatus({ msg: '', state: '', type: '', ...newStatus, open: true })
-  }
+  // const _handleClickStatus = (newStatus: React.SetStateAction<IStatus>) => {
+  //   setStatus({ msg: '', state: '', type: '', ...newStatus, open: true })
+  // }
   const handleCloseStatus = () => {
     setStatus({ ...status, open: false })
   }
@@ -204,10 +204,10 @@ export default function SignInSide() {
               noValidate
               sx={{ mt: 1 }}
               onSubmit={controlForm.handleSubmit(async (data: ILogin) => {
-                const user = await signIn(data)
+                await signIn(data)
                 const session = new Session()
                 const userSession = session.read('user')
-                const roleId = user.role ?? userSession?.role
+                const roleId = user?.role ?? userSession?.role
                 if (
                   !isObjectEmpty(userSession) &&
                   // !isObjectEmpty(res?.data) &&
@@ -303,7 +303,7 @@ export default function SignInSide() {
               <Controller
                 name='rememberMe'
                 control={controlForm.control}
-                render={({ field, formState }) => (
+                render={({ field }) => (
                   <FormControlLabel
                     required
                     control={<Checkbox {...field} color='primary' />}

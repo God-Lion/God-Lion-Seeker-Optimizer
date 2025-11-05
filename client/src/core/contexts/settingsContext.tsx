@@ -12,7 +12,7 @@ import type { Mode, Skin, Layout, LayoutComponentWidth } from '../types'
 import { useSettings as useZustandSettings } from 'src/store'
 import themeConfig from 'src/configs/themeConfig'
 import primaryColorConfig from 'src/configs/primaryColorConfig'
-import { useObjectCookie } from 'src/lib/hooks'
+import { useObjectCookie } from 'src/hooks'
 
 export type Settings = {
   mode?: Mode
@@ -148,7 +148,7 @@ export const useSettings = () => {
   const zustandSettings = useZustandSettings()
   
   // Wrap updateSettings to handle the updateCookie option (ignored in Zustand)
-  const updateSettings = (settings: Partial<Settings>, options?: UpdateSettingsOptions) => {
+  const updateSettings = (settings: Partial<Settings>) => {
     zustandSettings.updateSettings(settings)
   }
   

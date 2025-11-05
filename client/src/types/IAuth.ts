@@ -25,10 +25,13 @@ export interface IUserReponse {
   sessions?: ISession[]
 }
 
-export interface IAuth {
-  user: IUserReponse
-  token: string
+export interface IAuth extends IUserReponse {
+  user?: IUserReponse
+  token?: string
   refreshToken?: string
+  full_name?: string
+  role: number
+  email: string
 }
 
 export interface ILogin {

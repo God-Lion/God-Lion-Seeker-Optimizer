@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import { Brightness4, Brightness7, Laptop } from '@mui/icons-material'
 import { useSettings } from 'src/core/contexts/settingsContext'
-import type { Mode } from 'src/lib/types'
+import type { Mode } from 'src/types'
 
 const ModeDropdown = () => {
   const [open, setOpen] = React.useState<boolean>(false)

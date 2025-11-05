@@ -4,11 +4,14 @@
  * Export all custom hooks for easy importing
  */
 
-export { useRouteState, useHasRouteState, useClearAllRouteStates, useRestoreRouteState } from './useRouteState'
-export { usePersistentForm } from './usePersistentForm'
-export { useTabSync } from './useTabSync'
 
 // Re-export for convenience
-export { default as useRouteState } from './useRouteState'
 export { default as usePersistentForm } from './usePersistentForm'
+export { useRouteState, useHasRouteState, useClearAllRouteStates, useRestoreRouteState } from './useRouteState'
+export { default as useSignOut } from './useSignOut'
 export { default as useTabSync } from './useTabSync'
+export { default as useDeduplicatedRequest } from './useDeduplicatedRequest'
+export { default as useOptimisticUpdate } from './useOptimisticUpdate'
+
+// Re-export useObjectCookie from core/hooks
+export { useObjectCookie } from '../core/hooks/useObjectCookie'

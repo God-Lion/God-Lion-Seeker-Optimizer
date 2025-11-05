@@ -1,7 +1,5 @@
 import {
-  Vaccines,
   TableView,
-  Dashboard,
   People,
   Class,
   ControlPointDuplicate,
@@ -26,9 +24,9 @@ const userMenu = (roleId: number) => {
   const classes = <Class style={styleIcon} />
   const controlPointDuplicate = <ControlPointDuplicate style={styleIcon} />
   const merge = <Merge style={styleIcon} />
-  const vaccines = <Vaccines style={styleIcon} />
+  // const vaccines = <Vaccines style={styleIcon} />
   const tableView = <TableView style={styleIcon} />
-  const dashboard = <Dashboard style={styleIcon} />
+  // const dashboard = <Dashboard style={styleIcon} />
   const people = <People style={styleIcon} />
 
   const menuAdmin: Array<IMenu> = [

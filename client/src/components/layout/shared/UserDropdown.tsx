@@ -25,7 +25,7 @@ import {
 } from '@mui/icons-material'
 import { useSettings } from 'src/core/contexts/settingsContext'
 import { useAuth } from 'src/store'
-import { useSignOut } from 'src/lib/hooks'
+import { useSignOut } from 'src/hooks'
 import { useNavigate } from 'react-router-dom'
 
 const BadgeContentSpan = styled('span')({

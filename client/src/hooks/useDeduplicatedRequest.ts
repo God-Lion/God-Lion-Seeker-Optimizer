@@ -10,8 +10,8 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
-import axiosInstance from 'src/lib/api'
-import { requestDeduplicator } from 'src/lib/utils'
+import axiosInstance from 'src/utils/api_link'
+import { requestDeduplicator } from 'src/utils'
 
 interface UseDeduplicatedRequestOptions<T> extends AxiosRequestConfig {
   /**
@@ -50,7 +50,7 @@ interface UseDeduplicatedRequestResult<T> {
   cancel: () => void
 }
 
-export function useDeduplicatedRequest<T = any>(
+function useDeduplicatedRequest<T = any>(
   url: string,
   options: UseDeduplicatedRequestOptions<T> = {}
 ): UseDeduplicatedRequestResult<T> {
@@ -152,7 +152,7 @@ export function useDeduplicatedRequest<T = any>(
 /**
  * Hook for making a deduplicated mutation request (POST, PUT, DELETE, etc.)
  */
-export function useDeduplicatedMutation<TData = any, TVariables = any>(
+function useDeduplicatedMutation<TData = any, TVariables = any>(
   options: Omit<UseDeduplicatedRequestOptions<TData>, 'enabled'> = {}
 ) {
   const [data, setData] = useState<TData | null>(null)
@@ -212,3 +212,6 @@ export function useDeduplicatedMutation<TData = any, TVariables = any>(
     reset,
   }
 }
+
+export default useDeduplicatedRequest
+export { useDeduplicatedMutation }

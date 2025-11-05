@@ -1,4 +1,3 @@
-import React from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import {
   Box,
@@ -12,16 +11,16 @@ import {
   Typography,
   Checkbox,
 } from '@mui/material'
-import { IUserReponse } from 'src/lib/types'
+// import { IUserReponse } from 'src/types'
 
-export default function DesactivateAccount({ user }: { user: IUserReponse }) {
+export default function DesactivateAccount() {
   const controlForm = useForm({
     defaultValues: {
       user_id: NaN,
       desactivate: false,
     },
   })
-  const onSubmit = async (data: any) => {}
+  const onSubmit = async () => {}
   return (
     <Paper
       sx={{

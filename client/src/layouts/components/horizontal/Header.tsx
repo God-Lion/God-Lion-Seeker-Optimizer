@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTheme } from '@mui/material/styles'
 import type { CSSObject } from '@emotion/styled'
-import type { ChildrenType } from 'src/lib/types'
+import type { ChildrenType } from 'src/types'
 import themeConfig from 'src/configs/themeConfig'
 import { useSettings } from 'src/core/contexts/settingsContext'
 import { horizontalLayoutClasses } from 'src/layouts/utils/layoutClasses'
@@ -21,7 +21,7 @@ const Header: React.FC<Props> = ({ children, overrideStyles }) => {
   const headerStatic = themeConfig.navbar.type === 'static'
   const headerBlur = themeConfig.navbar.blur === true
   const headerContentCompact = navbarContentWidth === 'compact'
-  const headerContentWide = navbarContentWidth === 'wide'
+  const headerContentWide = navbarContentWidth === 'full'
 
   return (
     <StyledHeader

@@ -1,4 +1,5 @@
 import { StateCreator } from 'zustand'
+import type { AppStore } from '../index'
 
 export interface Job {
   id: string
@@ -88,7 +89,7 @@ const defaultPagination: Pagination = {
 }
 
 export const createJobsSlice: StateCreator<
-  JobsSlice,
+  AppStore,
   [['zustand/immer', never], ['zustand/persist', unknown]],
   [],
   JobsSlice

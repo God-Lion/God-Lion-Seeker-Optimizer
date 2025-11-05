@@ -51,7 +51,7 @@ const JobDetailsPage: React.FC = (): React.ReactElement => {
     setSubmissionStatus,
   } = useSubmissionStore()
 
-  const { mutate: startSubmission, isLoading: isSubmitting } = useAutomatedSubmission()
+  const { mutate: startSubmission, isPending: isSubmitting } = useAutomatedSubmission()
 
   const handleSubmissionStart = () => {
     if (!job) return;

@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled, useColorScheme, useTheme } from '@mui/material/styles'
 // import type { getDictionary } from '@/utils/getDictionary'
-import type { Mode, SystemMode } from 'src/lib/types'
+import type { Mode, SystemMode } from 'src/types'
 import VerticalNav, {
   NavHeader,
   NavCollapseIcons,

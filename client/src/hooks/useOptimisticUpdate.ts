@@ -7,12 +7,12 @@
 
 import { useState, useCallback, useEffect, useRef } from 'react'
 import { AxiosError, AxiosResponse } from 'axios'
-import axiosInstance from 'src/lib/api'
+import axiosInstance from 'src/utils/api_link'
 import {
   optimisticUpdateManager,
   OptimisticUpdate,
   OptimisticUpdateType,
-} from 'src/lib/utils'
+} from 'src/utils'
 
 export interface UseOptimisticMutationOptions<TData, TVariables> {
   /**
@@ -68,7 +68,7 @@ export interface UseOptimisticMutationResult<TData, TVariables> {
 /**
  * Hook for optimistic mutations
  */
-export function useOptimisticMutation<TData = any, TVariables = any>(
+function useOptimisticMutation<TData = any, TVariables = any>(
   options: UseOptimisticMutationOptions<TData, TVariables>
 ): UseOptimisticMutationResult<TData, TVariables> {
   const [data, setData] = useState<TData | null>(null)
@@ -161,7 +161,7 @@ export function useOptimisticMutation<TData = any, TVariables = any>(
 /**
  * Hook for optimistic list updates
  */
-export function useOptimisticList<T extends { id: string | number }>(
+function useOptimisticList<T extends { id: string | number }>(
   initialData: T[] = []
 ) {
   const [items, setItems] = useState<T[]>(initialData)
@@ -224,7 +224,7 @@ export function useOptimisticList<T extends { id: string | number }>(
 /**
  * Hook to track all optimistic updates
  */
-export function useOptimisticUpdates(entityType?: string) {
+function useOptimisticUpdates(entityType?: string) {
   const [updates, setUpdates] = useState<OptimisticUpdate[]>([])
 
   useEffect(() => {
@@ -271,3 +271,6 @@ function getMethodForUpdateType(type: OptimisticUpdateType): string {
       return 'POST'
   }
 }
+
+export default useOptimisticMutation
+export { useOptimisticList, useOptimisticUpdates }

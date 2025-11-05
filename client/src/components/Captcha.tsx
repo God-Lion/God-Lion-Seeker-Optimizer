@@ -1,16 +1,3 @@
-/**
- * CAPTCHA Component
- * 
- * Wrapper component for CAPTCHA integration (Google reCAPTCHA v2/v3 or hCaptcha).
- * Shows CAPTCHA when required for security purposes.
- * 
- * To integrate:
- * 1. Install: npm install react-google-recaptcha
- * 2. Get site key from Google reCAPTCHA: https://www.google.com/recaptcha/admin
- * 3. Add site key to environment variables
- * 4. Uncomment the ReCAPTCHA component below
- */
-
 import React from 'react'
 import { Box, Typography, Alert } from '@mui/material'
 
@@ -22,33 +9,16 @@ interface CaptchaProps {
   size?: 'normal' | 'compact'
 }
 
-/**
- * For production, uncomment and use this implementation:
- * 
- * import ReCAPTCHA from 'react-google-recaptcha'
- * 
- * const RECAPTCHA_SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY || ''
- */
 
 const Captcha: React.FC<CaptchaProps> = ({
   onVerify,
-  onError,
-  onExpire,
+  // onError,
+  // onExpire,
   theme = 'light',
-  size = 'normal'
 }) => {
-  const recaptchaRef = React.useRef<any>(null)
 
   const handleChange = (token: string | null) => {
     onVerify(token)
-  }
-
-  const handleError = () => {
-    if (onError) onError()
-  }
-
-  const handleExpire = () => {
-    if (onExpire) onExpire()
   }
 
   /**

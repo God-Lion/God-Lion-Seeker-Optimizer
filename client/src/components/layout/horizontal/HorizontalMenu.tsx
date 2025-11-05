@@ -36,7 +36,7 @@ import { ChevronRight, RadioButtonUnchecked } from '@mui/icons-material'
 import { IMenu } from '../types'
 import adminmenu from 'src/Modules/AdminManagement/menu'
 
-import providermenu from 'src/Modules/ProviderManagement/menu'
+
 import Icon from 'src/components/Icon'
 
 // Menu Data Imports
@@ -275,7 +275,7 @@ const HorizontalMenu = () =>
             ),
           }}
         >
-          {[...adminmenu, ...providermenu, ...menuArray].map(renderMenu)}
+          {[...adminmenu, ...menuArray].map(renderMenu)}
           {/* 
           <SubMenu
             label={dictionary['navigation'].dashboards}

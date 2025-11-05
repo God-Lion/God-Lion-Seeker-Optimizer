@@ -9,6 +9,7 @@
 
 import React from 'react'
 import { useHorizontalNav as useZustandHorizontalNav } from 'src/store'
+import type { HorizontalMenuContextProps } from '../components/horizontal-menu/Menu'
 
 export interface HorizontalNavState {
   isBreakpointReached?: boolean
@@ -36,9 +37,16 @@ export const useHorizontalNav = (): HorizontalNavContextProps => {
 /**
  * @deprecated Use `import { useHorizontalNav } from 'src/store'` instead
  */
-export const useHorizontalMenu = () => {
-  // Return empty object for menu-specific context (if needed)
-  return {}
+export const useHorizontalMenu = (): HorizontalMenuContextProps => {
+  // Import the HorizontalMenuContext from Menu component
+  const { HorizontalMenuContext } = require('../components/horizontal-menu/Menu')
+  const context = React.useContext(HorizontalMenuContext)
+  
+  if (!context) {
+    throw new Error('useHorizontalMenu must be used within a HorizontalMenuContext.Provider')
+  }
+  
+  return context
 }
 
 export default HorizontalNavContext

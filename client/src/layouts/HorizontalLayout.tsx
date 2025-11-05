@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import type { ChildrenType } from 'src/lib/types'
+import type { ChildrenType } from 'src/types'
 import { HorizontalNavProvider } from 'src/menu/contexts/horizontalNavContext'
 import LayoutContent from './components/horizontal/LayoutContent'
 import { horizontalLayoutClasses } from './utils/layoutClasses'

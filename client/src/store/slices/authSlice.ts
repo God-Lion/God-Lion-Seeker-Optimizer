@@ -1,10 +1,11 @@
 import { StateCreator } from 'zustand'
 import axios from 'axios'
-import { baseUrl } from 'src/lib/api'
-import { IAuth, ILogin } from 'src/lib/types'
-import { IResponse } from 'src/lib/types'
-import axiosInstance from 'src/lib/api'
+import { baseUrl } from 'src/utils/api_link'
+import { IAuth, ILogin } from 'src/types'
+import { IResponse } from 'src/types'
+import axiosInstance from 'src/utils/axiosInstance'
 import { tokenRefreshService } from 'src/services/tokenRefresh.service'
+import { AppStore } from 'src/store'
 
 export interface AuthTokens {
   accessToken: string
@@ -31,7 +32,7 @@ export interface AuthSlice {
 }
 
 export const createAuthSlice: StateCreator<
-  AuthSlice,
+  AppStore,
   [['zustand/immer', never], ['zustand/persist', unknown]],
   [],
   AuthSlice

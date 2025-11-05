@@ -1,4 +1,5 @@
 import { StateCreator } from 'zustand'
+import type { AppStore } from '../index'
 
 export type NotificationType = 
   | 'success' 
@@ -41,7 +42,7 @@ const generateNotificationId = (): string => {
 }
 
 export const createNotificationSlice: StateCreator<
-  NotificationSlice,
+  AppStore,
   [['zustand/immer', never], ['zustand/persist', unknown]],
   [],
   NotificationSlice

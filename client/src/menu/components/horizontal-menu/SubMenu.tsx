@@ -137,7 +137,6 @@ const SubMenu: React.ForwardRefRenderFunction<HTMLLIElement, SubMenuProps> = (
   const [open, setOpen] = React.useState<boolean>(false)
   const [active, setActive] = React.useState<boolean>(false)
   const dir = React.useRef('ltr')
-  const listItemsRef = React.useRef<Array<HTMLButtonElement | null>>([])
   const tree = useFloatingTree()
   const nodeId = useFloatingNodeId()
   const parentId = useFloatingParentNodeId()
@@ -441,22 +440,9 @@ const SubMenu: React.ForwardRefRenderFunction<HTMLLIElement, SubMenuProps> = (
                   rootStyles={getSubMenuItemStyles('subMenuContent')}
                   style={{ ...styles }}
                 >
-                  {childNodes.map((node, index) =>
+                  {childNodes.map((node) =>
                     React.cloneElement(node, {
-                      ...getItemProps({
-                        ref(node: HTMLButtonElement) {
-                          listItemsRef.current[index] = node
-                        },
-                        onClick(event: React.MouseEvent<HTMLAnchorElement>) {
-                          if (
-                            node.props.children &&
-                            !Array.isArray(node.props.children)
-                          ) {
-                            node.props.onClick?.(event)
-                            tree?.events.emit('click')
-                          }
-                        },
-                      }),
+                      ...getItemProps(),
                       level: level + 1,
                     }),
                   )}

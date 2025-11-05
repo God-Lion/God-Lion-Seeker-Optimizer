@@ -1,7 +1,16 @@
-import type { Theme } from '@mui/material/styles'
-import type { Skin } from 'src/lib/types'
+import type { Skin } from 'src/types'
 
-const colorSchemes = (skin: Skin): Theme['colorSchemes'] => {
+// Define the color scheme structure
+type ColorScheme = {
+  palette: Record<string, any>
+}
+
+type ColorSchemes = {
+  light: ColorScheme
+  dark: ColorScheme
+}
+
+const colorSchemes = (skin: Skin): ColorSchemes => {
   return {
     light: {
       palette: {
@@ -309,7 +318,7 @@ const colorSchemes = (skin: Skin): Theme['colorSchemes'] => {
         },
       },
     },
-  } as Theme['colorSchemes']
+  }
 }
 
 export default colorSchemes

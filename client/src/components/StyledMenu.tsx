@@ -1,9 +1,9 @@
 import { styled, alpha } from '@mui/material/styles'
-import Menu from '@mui/material/Menu'
+import Menu, { MenuProps } from '@mui/material/Menu'
 
-export default styled((props) => (
+export default styled((props: MenuProps) => (
   <Menu
-    {...props}
+    elevation={0}
     anchorOrigin={{
       vertical: 'bottom',
       horizontal: 'right',
@@ -12,6 +12,7 @@ export default styled((props) => (
       vertical: 'top',
       horizontal: 'right',
     }}
+    {...props}
   />
 ))(({ theme }) => ({
   '& .MuiPaper-root': {

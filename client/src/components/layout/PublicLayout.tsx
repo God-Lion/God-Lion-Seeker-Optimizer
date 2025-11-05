@@ -2,7 +2,7 @@ import React from 'react'
 import { Box } from '@mui/material'
 import LayoutContent from 'src/layouts/components/horizontal/LayoutContent'
 import { Navbar, Footer } from 'src/components'
-import type { ChildrenType } from 'src/lib/types'
+import type { ChildrenType } from 'src/types'
 
 const PublicLayout: React.FC<
   ChildrenType & {

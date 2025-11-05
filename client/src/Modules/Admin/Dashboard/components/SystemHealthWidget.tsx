@@ -45,7 +45,7 @@ export const SystemHealthWidget: React.FC = () => {
     }
   };
 
-  const getStatusIcon = (status: string) => {
+  const getStatusIcon = (status: string): React.ReactElement | undefined => {
     switch (status) {
       case 'healthy':
         return <CheckCircle color="success" />;
@@ -54,7 +54,7 @@ export const SystemHealthWidget: React.FC = () => {
       case 'critical':
         return <Error color="error" />;
       default:
-        return null;
+        return undefined;
     }
   };
 
@@ -119,7 +119,9 @@ export const SystemHealthWidget: React.FC = () => {
           <Chip
             label={healthData?.overallStatus || 'Unknown'}
             color={getStatusColor(healthData?.overallStatus || 'default')}
-            icon={getStatusIcon(healthData?.overallStatus || 'default')}
+            {...(getStatusIcon(healthData?.overallStatus || 'default') && {
+              icon: getStatusIcon(healthData?.overallStatus || 'default'),
+            })}
             size="small"
           />
         }

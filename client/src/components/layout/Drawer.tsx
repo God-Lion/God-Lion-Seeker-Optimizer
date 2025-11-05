@@ -4,7 +4,6 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Avatar,
   Box,
   Divider,
   Drawer,
@@ -13,11 +12,8 @@ import {
   ListItemButton,
   ListItemText,
   ListItemIcon,
-  Menu,
-  MenuItem,
   Stack,
   Toolbar,
-  Tooltip,
   Typography,
   AvatarProps,
 } from '@mui/material'
@@ -25,19 +21,14 @@ import CssBaseline from '@mui/material/CssBaseline'
 import { useTheme, styled } from '@mui/material/styles'
 // import MuiAppBar from '@mui/material/AppBar'
 import {
-  AccountCircle,
   ChevronLeft,
   ExpandMore,
-  Settings,
 } from '@mui/icons-material'
 import MenuIcon from '@mui/icons-material/Menu'
 import DarkIcon from '@mui/icons-material/Brightness4'
 import LightIcon from '@mui/icons-material/Brightness7'
-import { Logout } from '@mui/icons-material'
-import { useTheme as useAppTheme, useAuth } from 'src/store'
-import Session from 'src/lib/utils'
+import { useTheme as useAppTheme } from 'src/store'
 //Ressource
-import { showPermissions } from 'src/lib/utils'
 import Logo from 'src/assets/svg/Logo'
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
 import userMenu from './DrawerMenu'
@@ -641,142 +632,142 @@ export default function DrawerSide({
 }
 
 // eslint-disable-next-line no-unused-vars
-function Profile() {
-  const { signOut } = useAuth()
-  const navigate = useNavigate()
-  const session = new Session()
-  const location = useLocation()
-  const from = location.state?.from?.pathname || '/'
-  const [anchorElUser, setAnchorElUser] = React.useState(null)
-  const handleOpenUserMenu = (event: any) =>
-    setAnchorElUser(event.currentTarget)
-  const handleCloseUserMenu = () => setAnchorElUser(null)
+// function Profile() {
+//   const { signOut } = useAuth()
+//   const navigate = useNavigate()
+//   const session = new Session()
+//   const location = useLocation()
+//   const from = location.state?.from?.pathname || '/'
+//   const [anchorElUser, setAnchorElUser] = React.useState(null)
+//   const handleOpenUserMenu = (event: any) =>
+//     setAnchorElUser(event.currentTarget)
+//   const handleCloseUserMenu = () => setAnchorElUser(null)
 
-  const settings = [
-    { icon: <AccountCircle />, name: 'Account', link: 'account' },
-    { icon: <Settings />, name: 'Setting', link: 'setting' },
-  ]
-  const sessionData = session.read('user')
-  const firstname = sessionData?.user?.firstName
-  return (
-    <Box sx={{ flexGrow: 0 }}>
-      <Box
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          marginLeft: 24,
-        }}
-      >
-        <Box
-          style={{
-            marginLeft: 12,
-          }}
-        >
-          <Tooltip title='Open settings'>
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar
-              // loading='lazy'
-              // {...stringAvatar(`${lastname} ${firstname}`)}
-              // alt={`${lastname} ${firstname}`}
-              // src={`${baseUrl()}${sessionData?.user?.media?.path}`}
-              />
-            </IconButton>
-          </Tooltip>
-        </Box>
-        <Box
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            marginLeft: 4,
-            lineHeight: 1.1,
-          }}
-        >
-          <Typography
-            // variant='h7'
-            style={{
-              fontWeight: 'bold',
-              fontSize: 14,
-              color: 'black',
-            }}
-          >
-            {firstname}
-          </Typography>
-          <Typography
-            // variant='h7'
-            style={{
-              fontSize: 12,
-              color: 'black',
-            }}
-          >
-            {showPermissions(sessionData?.user?.userTypeID)}
-          </Typography>
-        </Box>
-      </Box>
-      <Menu
-        sx={{ mt: '45px' }}
-        id='menu-appbar'
-        anchorEl={anchorElUser}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        open={Boolean(anchorElUser)}
-        onClose={handleCloseUserMenu}
-      >
-        {settings?.map((setting) => (
-          <MenuItem
-            sx={{
-              p: 0,
-            }}
-            key={setting?.link}
-            onClick={handleCloseUserMenu}
-          >
-            <ListItemButton
-              key={`${Math.random()}}`}
-              sx={{
-                '&.MuiListItemButton-root.Mui-selected': {
-                  borderRight: '8px solid #fff',
-                  zIndex: 1,
-                },
-              }}
-              onClick={() => {
-                navigate(`/${setting?.link}`)
-              }}
-            >
-              <ListItemIcon>{setting?.icon}</ListItemIcon>
-              <ListItemText
-                style={{
-                  textDecoration: 'none',
-                  color: '#000',
-                }}
-                primary={setting?.name}
-              />
-            </ListItemButton>
-          </MenuItem>
-        ))}
-        <MenuItem
-          onClick={() =>
-            signOut(() => {
-              navigate(from, { replace: true })
-              window.location.reload()
-            })
-          }
-        >
-          <ListItemIcon>
-            <Logout />
-          </ListItemIcon>
-          <ListItemText primary='signout' />
-        </MenuItem>
-      </Menu>
-    </Box>
-  )
-}
+//   const settings = [
+//     { icon: <AccountCircle />, name: 'Account', link: 'account' },
+//     { icon: <Settings />, name: 'Setting', link: 'setting' },
+//   ]
+//   const sessionData = session.read('user')
+//   const firstname = sessionData?.user?.firstName
+//   return (
+//     <Box sx={{ flexGrow: 0 }}>
+//       <Box
+//         style={{
+//           display: 'flex',
+//           alignItems: 'center',
+//           marginLeft: 24,
+//         }}
+//       >
+//         <Box
+//           style={{
+//             marginLeft: 12,
+//           }}
+//         >
+//           <Tooltip title='Open settings'>
+//             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+//               <Avatar
+//               // loading='lazy'
+//               // {...stringAvatar(`${lastname} ${firstname}`)}
+//               // alt={`${lastname} ${firstname}`}
+//               // src={`${baseUrl()}${sessionData?.user?.media?.path}`}
+//               />
+//             </IconButton>
+//           </Tooltip>
+//         </Box>
+//         <Box
+//           style={{
+//             display: 'flex',
+//             flexDirection: 'column',
+//             justifyContent: 'center',
+//             marginLeft: 4,
+//             lineHeight: 1.1,
+//           }}
+//         >
+//           <Typography
+//             // variant='h7'
+//             style={{
+//               fontWeight: 'bold',
+//               fontSize: 14,
+//               color: 'black',
+//             }}
+//           >
+//             {firstname}
+//           </Typography>
+//           <Typography
+//             // variant='h7'
+//             style={{
+//               fontSize: 12,
+//               color: 'black',
+//             }}
+//           >
+//             {showPermissions(sessionData?.user?.userTypeID)}
+//           </Typography>
+//         </Box>
+//       </Box>
+//       <Menu
+//         sx={{ mt: '45px' }}
+//         id='menu-appbar'
+//         anchorEl={anchorElUser}
+//         anchorOrigin={{
+//           vertical: 'top',
+//           horizontal: 'right',
+//         }}
+//         keepMounted
+//         transformOrigin={{
+//           vertical: 'top',
+//           horizontal: 'right',
+//         }}
+//         open={Boolean(anchorElUser)}
+//         onClose={handleCloseUserMenu}
+//       >
+//         {settings?.map((setting) => (
+//           <MenuItem
+//             sx={{
+//               p: 0,
+//             }}
+//             key={setting?.link}
+//             onClick={handleCloseUserMenu}
+//           >
+//             <ListItemButton
+//               key={`${Math.random()}}`}
+//               sx={{
+//                 '&.MuiListItemButton-root.Mui-selected': {
+//                   borderRight: '8px solid #fff',
+//                   zIndex: 1,
+//                 },
+//               }}
+//               onClick={() => {
+//                 navigate(`/${setting?.link}`)
+//               }}
+//             >
+//               <ListItemIcon>{setting?.icon}</ListItemIcon>
+//               <ListItemText
+//                 style={{
+//                   textDecoration: 'none',
+//                   color: '#000',
+//                 }}
+//                 primary={setting?.name}
+//               />
+//             </ListItemButton>
+//           </MenuItem>
+//         ))}
+//         <MenuItem
+//           onClick={() =>
+//             signOut(() => {
+//               navigate(from, { replace: true })
+//               window.location.reload()
+//             })
+//           }
+//         >
+//           <ListItemIcon>
+//             <Logout />
+//           </ListItemIcon>
+//           <ListItemText primary='signout' />
+//         </MenuItem>
+//       </Menu>
+//     </Box>
+//   )
+// }
 
 export function stringToColor(string: string) {
   let hash = 0

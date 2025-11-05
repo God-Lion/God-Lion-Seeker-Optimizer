@@ -150,7 +150,7 @@ export const ProfileCompletionWidget: React.FC<ProfileCompletionWidgetProps> = (
 
         {/* Section List */}
         <List sx={{ p: 0 }}>
-          {defaultSections.map((section, index) => (
+          {defaultSections.map((section, _) => (
             <ListItem
               key={section.id}
               sx={{

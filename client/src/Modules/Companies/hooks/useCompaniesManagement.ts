@@ -1,7 +1,7 @@
 // src/Modules/Companies/hooks/useCompaniesManagement.ts
 
 import { useState, useCallback, useMemo } from 'react'
-import { Company, CompanySearchParams } from '../types'
+import { CompanySearchParams } from '../types'
 import { useCompanies, useCompanySearch, useDeleteCompany } from './useCompaniesQuery'
 
 /**

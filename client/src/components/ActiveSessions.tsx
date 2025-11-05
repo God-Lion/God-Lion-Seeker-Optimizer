@@ -1,15 +1,7 @@
-import React from 'react'
 import { Paper, Typography } from '@mui/material'
-import { ISession, IUserReponse } from 'src/lib/types'
 import { Layout } from './form'
 
-export default function ActiveSessions({
-  user,
-  sessions,
-}: {
-  user: IUserReponse
-  sessions?: Array<ISession>
-}) {
+export default function ActiveSessions() {
   return (
     <Paper
       sx={{

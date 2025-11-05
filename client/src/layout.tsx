@@ -1,5 +1,5 @@
 import React from 'react'
-import type { ChildrenType } from 'src/lib/types'
+import type { ChildrenType } from 'src/core/types'
 // import type { Locale } from 'src/configs/i18n'
 import LayoutWrapper from 'src/layouts/LayoutWrapper'
 import PublicLayout from 'src/components/layout/PublicLayout'
@@ -15,8 +15,8 @@ import { Navbar as PublicNavbar, Footer as PublicFooter } from 'src/components'
 import ScrollToTop from 'src/core/components/scroll-to-top'
 import Button from '@mui/material/Button'
 import { ArrowUpward } from '@mui/icons-material'
-// import { updateMenu } from 'src/Modules/AdminManagement/menu'
-import { updateMenu } from 'src/Modules/ProviderManagement/menu'
+import type { IMenu } from 'src/components/layout/types'
+
 // eslint-disable-next-line no-unused-vars
 import {
   // getDictionary,
@@ -26,15 +26,29 @@ import { useTranslation } from 'react-i18next'
 import { Locale } from './configs/i18n'
 
 // import { i18n } from 'src/configs/i18n'
-// import { getDictionary } from 'src/lib/utils'
+// import { getDictionary } from 'src/utils'
 // import { getMode, getSystemMode } from 'src/core/utils/serverHelpers'
+
+// Default menu configuration
+const defaultMenu: IMenu[] = [
+  {
+    name: 'home',
+    icon: 'HomeOutlined',
+    link: '/',
+  },
+  {
+    name: 'dashboard',
+    icon: 'DashboardOutlined',
+    link: '/dashboard',
+  },
+]
 
 const Layout: React.FC<ChildrenType> = ({
   children, // params,
   //& { params: { lang: Locale } }
 }) => {
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-  const [t, i18n] = useTranslation('common')
+  const [_, i18n] = useTranslation('common')
   const dictionary = useLang(i18n.language as Locale)
   // const mode = getMode()
   // const systemMode = getSystemMode()
@@ -42,7 +56,8 @@ const Layout: React.FC<ChildrenType> = ({
   // const direction = 'ltr'
   const systemMode = 'dark'
   const mode = 'dark'
-  const menu = updateMenu()
+  // const menu = updateMenu()
+  const menu = defaultMenu
 
   return (
     <React.Fragment>

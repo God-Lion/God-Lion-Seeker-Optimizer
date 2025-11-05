@@ -1,4 +1,5 @@
 import { StateCreator } from 'zustand'
+import type { AppStore } from '../index'
 
 export interface ResumeProfile {
   id: string
@@ -37,7 +38,7 @@ export interface ProfileSlice {
 }
 
 export const createProfileSlice: StateCreator<
-  ProfileSlice,
+  AppStore,
   [['zustand/immer', never], ['zustand/persist', unknown]],
   [],
   ProfileSlice

@@ -1,7 +1,7 @@
 // import { Public_Sans } from 'next/font/google'
 import type { Theme } from '@mui/material/styles'
 import type { Settings } from 'src/core/contexts/settingsContext'
-import type { SystemMode, Skin } from 'src/lib/types'
+import type { SystemMode, Skin } from 'src/types'
 
 // Theme Options Imports
 import overrides from './overrides'

@@ -27,7 +27,7 @@ export default React.forwardRef(
   }) => {
     const [rowsPerPage, setRowsPerPage] = React.useState<number>(5)
     const [page, setPage] = React.useState<number>(0)
-    const handlePageChange = (event: unknown, newPagE: number) =>
+    const handlePageChange = (_: unknown, newPagE: number) =>
       setPage(newPagE)
     const handleRowsPerPageChange = (
       event: React.ChangeEvent<HTMLInputElement>,

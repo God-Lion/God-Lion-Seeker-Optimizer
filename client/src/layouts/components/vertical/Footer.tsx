@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTheme } from '@mui/material/styles'
-import type { ChildrenType } from 'src/lib/types'
+import type { ChildrenType } from 'src/types'
 import themeConfig from 'src/configs/themeConfig'
 import { useSettings } from 'src/core/contexts/settingsContext'
 import { verticalLayoutClasses } from 'src/layouts/utils/layoutClasses'
@@ -23,7 +23,7 @@ const Footer: React.FC<
   const footerStatic = themeConfig.footer.type === 'static'
   const footerFixed = themeConfig.footer.type === 'fixed'
   const footerContentCompact = footerContentWidth === 'compact'
-  const footerContentWide = footerContentWidth === 'wide'
+  const footerContentWide = footerContentWidth === 'full'
 
   return (
     <StyledFooter

@@ -9,7 +9,7 @@ import {
   KBarSearch,
   useKBar,
 } from 'kbar'
-import type { ChildrenType } from 'src/lib/types'
+import type { ChildrenType } from 'src/types'
 import SearchResults from './SearchResults'
 import { useVerticalNav } from 'src/menu/contexts/verticalNavContext'
 import { useSettings } from 'src/core/contexts/settingsContext'

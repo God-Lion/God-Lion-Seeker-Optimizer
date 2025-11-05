@@ -1,4 +1,4 @@
-import type { ChildrenType } from 'src/lib/types'
+import type { ChildrenType } from 'src/types'
 import { useSettings } from 'src/core/contexts/settingsContext'
 import { verticalLayoutClasses } from 'src/layouts/utils/layoutClasses'
 import StyledMain from 'src/layouts/styles/shared/StyledMain'
@@ -8,7 +8,7 @@ const LayoutContent = ({ children }: ChildrenType) => {
   const { settings } = useSettings()
 
   const contentCompact = settings.contentWidth === 'compact'
-  const contentWide = settings.contentWidth === 'wide'
+  const contentWide = settings.contentWidth === 'full'
 
   return (
     <StyledMain

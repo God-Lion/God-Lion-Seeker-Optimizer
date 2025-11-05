@@ -27,7 +27,7 @@ export const JOB_ANALYSIS_QUERY_KEYS = {
 /**
  * Hook to fetch analysis stats
  */
-export const useAnalysisStats = (options?: UseQueryOptions<AnalysisStats>) => {
+export const useAnalysisStats = (options?: Omit<UseQueryOptions<AnalysisStats>, 'queryKey' | 'queryFn'>) => {
   return useQuery({
     queryKey: JOB_ANALYSIS_QUERY_KEYS.stats,
     queryFn: async () => {
@@ -43,7 +43,7 @@ export const useAnalysisStats = (options?: UseQueryOptions<AnalysisStats>) => {
  */
 export const useRecommendedJobs = (
   params: RecommendedJobsParams = {},
-  options?: UseQueryOptions<{ data: RecommendedJob[]; total: number }>
+  options?: Omit<UseQueryOptions<{ data: RecommendedJob[]; total: number }>, 'queryKey' | 'queryFn'>
 ) => {
   const paramsKey = JSON.stringify(params)
 
@@ -62,7 +62,7 @@ export const useRecommendedJobs = (
  */
 export const useJobAnalysis = (
   jobId: number | null,
-  options?: UseQueryOptions<JobAnalysis>
+  options?: Omit<UseQueryOptions<JobAnalysis>, 'queryKey' | 'queryFn'>
 ) => {
   return useQuery({
     queryKey: jobId ? JOB_ANALYSIS_QUERY_KEYS.byJobId(jobId) : ['jobAnalysis', 'null'],
@@ -81,7 +81,7 @@ export const useJobAnalysis = (
  */
 export const useAllAnalyses = (
   params: AnalysisFilterParams = {},
-  options?: UseQueryOptions<{ data: JobAnalysis[]; total: number }>
+  options?: Omit<UseQueryOptions<{ data: JobAnalysis[]; total: number }>, 'queryKey' | 'queryFn'>
 ) => {
   const paramsKey = JSON.stringify(params)
 

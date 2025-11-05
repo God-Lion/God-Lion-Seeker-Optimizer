@@ -1,47 +1,32 @@
 import React from 'react'
-import { Grid, Box, Avatar, Container, Typography } from '@mui/material'
-import { Audiotrack, CloudUpload } from '@mui/icons-material'
-import { Accept, DropzoneOptions, useDropzone } from 'react-dropzone'
-import AppReactDropzone from 'src/lib/styles/AppReactDropzone'
+import { Grid, Box, Avatar, Container } from '@mui/material'
+import { Audiotrack } from '@mui/icons-material'
+import {  DropzoneOptions } from 'react-dropzone'
 
 type IFile = File & {
   preview: string
 }
 
-// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-const getColor = (props: any) => {
-  if (props.isDragAccept) {
-    return '#00e676'
-  }
-  if (props.isDragReject) {
-    return '#ff1744'
-  }
-  if (props.isFocused) {
-    return '#2196f3'
-  }
-  return '#eeeeee'
-}
+// function getType(type?: string, ext: Array<string> = []): Accept {
+//   switch (type) {
+//     case 'audio':
+//       return { 'audio/*': ext }
 
-function getType(type?: string, ext: Array<string> = []): Accept {
-  switch (type) {
-    case 'audio':
-      return { 'audio/*': ext }
-
-    default:
-      return {
-        'image/*': ext,
-      }
-  }
-}
+//     default:
+//       return {
+//         'image/*': ext,
+//       }
+//   }
+// }
 
 export default function Dropzone({
-  message = 'Drag & drop a file here, or click to select one',
-  Icon = CloudUpload,
+  // message = 'Drag & drop a file here, or click to select one',
+  // Icon = CloudUpload,
   type = 'image',
   preview = false,
-  onDrop,
-  options,
-  disabled,
+  // onDrop,
+  // options,
+  // disabled,
 }: {
   message?: string
   Icon?: any
@@ -51,26 +36,26 @@ export default function Dropzone({
   options?: DropzoneOptions
   disabled?: boolean
 }) {
-  const [files, setFiles] = React.useState<Array<IFile>>([])
+  const [files] = React.useState<Array<IFile>>([])
 
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: getType(type),
-    onDrop: (acceptedFiles: Array<File>) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          }),
-        ),
-      )
-      const files = acceptedFiles.filter((file) =>
-        file.type.startsWith(`${type}/`),
-      )
-      onDrop(files)
-    },
-    ...options,
-    disabled,
-  })
+  // const { getRootProps, getInputProps } = useDropzone({
+  //   accept: getType(type),
+  //   onDrop: (acceptedFiles: Array<File>) => {
+  //     setFiles(
+  //       acceptedFiles.map((file) =>
+  //         Object.assign(file, {
+  //           preview: URL.createObjectURL(file),
+  //         }),
+  //       ),
+  //     )
+  //     const files = acceptedFiles.filter((file) =>
+  //       file.type.startsWith(`${type}/`),
+  //     )
+  //     onDrop(files)
+  //   },
+  //   ...options,
+  //   disabled,
+  // })
 
   const thumbs = files.map((file: IFile) => (
     <Grid
@@ -174,7 +159,7 @@ export default function Dropzone({
         padding: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 },
       }}
     >
-      <AppReactDropzone {...getRootProps()}>
+      {/* <AppReactDropzone {...getRootProps()}>
         <input {...getInputProps()} />
         <Icon
           sx={{
@@ -183,7 +168,7 @@ export default function Dropzone({
           }}
         />
         <Typography marginTop='12px'>{message}</Typography>
-      </AppReactDropzone>
+      </AppReactDropzone> */}
       {preview && (
         <>
           {files.length === 1 ? (

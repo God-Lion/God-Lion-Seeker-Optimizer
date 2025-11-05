@@ -7,7 +7,6 @@ import {
   Chip,
   CircularProgress,
   FormControlLabel,
-  IconButton,
   Switch,
   Typography,
 } from '@mui/material'
@@ -60,16 +59,16 @@ export const columns1: Array<ColumnDef<UsersTypeWithAction, any>> = [
   // }),
   columnHelper.accessor('status', {
     header: 'Status',
-    cell: ({ getValue, row, column, table }) => {
+    cell: ({ getValue, row, column }) => {
       const initialValue = getValue()
       const [loading, setLoading] = React.useState<boolean>(false)
-      const [value, setValue] = React.useState(initialValue)
+      const [_, setValue] = React.useState(initialValue)
 
       // const onBlur = () => {
       //   table.options.meta?.updateData(row.index, column.id, value)
       // }
       const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const checked = event.target.checked
+        // const checked = event.target.checked
         console.log(
           `row ${row.original.firstName} event.target.checked ${event.target.checked}`,
         )

@@ -23,14 +23,14 @@ import {
   Paper,
   Avatar,
 } from '@mui/material'
-import Grid from '@mui/material/GridLegacy'
+import Grid from '@mui/material/Grid'
 import { useTheme } from '@mui/material/styles'
 import { Controller, useForm } from 'react-hook-form'
 import MAlert from 'src/components/Alert'
 import { useResetPassword, ResetPasswordRequest } from '../index'
 import { resetPasswordEmailHandle } from 'src/services/app'
 import { AxiosError, AxiosResponse } from 'axios'
-import { IUserReponseEmailResetPassword } from 'src/lib/types'
+import { IUserReponseEmailResetPassword } from 'src/types'
 
 interface ResetPasswordFormData {
   token: string

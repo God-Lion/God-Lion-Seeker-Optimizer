@@ -4,8 +4,11 @@ import { Box, Grid, IconButton, TextField, InputAdornment } from '@mui/material'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { IUserReponse } from 'src/lib/types'
+import { IUserReponse } from 'src/types'
 import { FormLayout } from 'src/components/form'
+
+// Type-safe wrapper for PhoneInput to fix React 19 compatibility
+const PhoneInputWrapper = PhoneInput as unknown as React.ComponentType<any>
 
 export default function ChangePhone({ user }: { user: IUserReponse }) {
   const [showPassword, setShowPassword] = React.useState<boolean>(false)
@@ -16,7 +19,7 @@ export default function ChangePhone({ user }: { user: IUserReponse }) {
       password: '',
     },
   })
-  const onSubmit = (data: any) => {}
+  const onSubmit = () => {}
 
   return (
     <FormLayout
@@ -34,8 +37,8 @@ export default function ChangePhone({ user }: { user: IUserReponse }) {
             <Controller
               name='phone'
               control={controlForm.control}
-              render={({ field, formState }) => (
-                <PhoneInput
+              render={({ field }) => (
+                <PhoneInputWrapper
                   {...field}
                   country={'ht'}
                   placeholder='Téléphone'

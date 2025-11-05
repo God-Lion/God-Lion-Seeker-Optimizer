@@ -17,8 +17,8 @@ import {
 } from '@mui/material'
 import { Settings, ColorLens, Logout } from '@mui/icons-material'
 import { useAuth } from 'src/store'
-import { useSignOut } from 'src/lib/hooks'
-import type { IUserReponse } from 'src/lib/types'
+import { useSignOut } from 'src/hooks'
+import type { IUserReponse } from 'src/types'
 
 const Profile: React.FC<{ user: IUserReponse }> = ({ user }) => (
   <Stack direction='column'>

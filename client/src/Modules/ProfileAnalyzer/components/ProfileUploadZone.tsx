@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { Box, Typography, Button, CircularProgress, Alert } from '@mui/material';
+import { Box, Typography, CircularProgress, Alert } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 interface ProfileUploadZoneProps {

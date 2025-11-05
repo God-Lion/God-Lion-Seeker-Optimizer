@@ -38,7 +38,7 @@ import classnames from 'classnames'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
 // Type Imports
-// import type { ThemeColor } from 'src/lib/types'
+// import type { ThemeColor } from 'src/types'
 // import type { CustomAvatarProps } from 'src/core/components/mui/Avatar'
 
 // Component Imports
@@ -49,7 +49,7 @@ import { Notifications } from '@mui/icons-material'
 // import themeConfig from 'src/configs/themeConfig'
 
 // Hook Imports
-// import { useSettings } from 'src/lib/hooks'
+// import { useSettings } from 'src/hooks'
 
 // Util Imports
 // import { getInitials } from '@/utils/getInitials'

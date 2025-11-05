@@ -1,11 +1,8 @@
 import React from 'react'
 import {
-  Autocomplete,
   Box,
   FormControl,
   Grid,
-  IconButton,
-  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
@@ -15,7 +12,6 @@ import {
   Tabs,
   TextField,
 } from '@mui/material'
-import SearchIcon from '@mui/icons-material/Search'
 import type { IFilter, IHandleChange, ITabsHeader } from './types'
 // import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner'
 // import DialogQRcode from '../QRcode/DialogQRcode'
@@ -59,7 +55,7 @@ export default function Toolbar({
   // ? props.setHandleChange
   // : () => {}
   //   const rest = props.rest ? props.rest : {}
-  const [value, setValue] = React.useState<number>(0)
+  const [value, _] = React.useState<number>(0)
   const onChange = (
     event:
       | object

@@ -1,39 +1,12 @@
 import React from 'react'
-// '
-
-// // MUI Imports
-// import Dialog from '@mui/material/Dialog'
-// import DialogTitle from '@mui/material/DialogTitle'
-// import DialogContent from '@mui/material/DialogContent'
-// import Button from '@mui/material/Button'
-// import IconButton from '@mui/material/IconButton'
-// import Typography from '@mui/material/Typography'
-// import Avatar from '@mui/material/Avatar'
-// import List from '@mui/material/List'
-// import ListItem from '@mui/material/ListItem'
-// import ListItemAvatar from '@mui/material/ListItemAvatar'
-// import ListItemText from '@mui/material/ListItemText'
-// import Menu from '@mui/material/Menu'
-// import MenuItem from '@mui/material/MenuItem'
-
-// Component Imports
 import DialogCloseButton from '../DialogCloseButton'
-// import CustomAutocomplete from '@core/components/mui/Autocomplete'
-// import TextField from '@core/components/mui/TextField'
-import CustomAvatar from 'src/core/components/mui/Avatar'
-
-// Config Imports
+import 'src/core/components/mui/Avatar'
 import themeConfig from 'src/configs/themeConfig'
 import {
   Dialog,
   DialogTitle,
   Typography,
   DialogContent,
-  List,
-  TextField,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
   Avatar,
   IconButton,
   Button,
@@ -44,11 +17,6 @@ import {
 type ShareProjectProps = {
   open: boolean
   setOpen: (open: boolean) => void
-}
-
-type OptionsType = {
-  avatar: string
-  name: string
 }
 
 type DataType = {
@@ -106,33 +74,6 @@ const data: DataType[] = [
     value: 'Can Edit',
     name: 'Adelaide Nichols',
     email: 'adelaide.nichols@gmail.com',
-  },
-]
-
-const autocompleteOptions: OptionsType[] = [
-  {
-    avatar: '1.png',
-    name: 'Chandler Bing',
-  },
-  {
-    avatar: '2.png',
-    name: 'Rachel Green',
-  },
-  {
-    avatar: '3.png',
-    name: 'Joey Tribbiani',
-  },
-  {
-    avatar: '4.png',
-    name: 'Pheobe Buffay',
-  },
-  {
-    avatar: '5.png',
-    name: 'Ross Geller',
-  },
-  {
-    avatar: '8.png',
-    name: 'Monica Geller',
   },
 ]
 

@@ -1,6 +1,6 @@
 import type { ChangeEvent, ReactNode } from 'react'
 import type { GridProps } from '@mui/material/Grid'
-import type { ThemeColor } from 'src/lib/types'
+import type { ThemeColor } from 'src/core/types'
 
 export type CustomInputHorizontalData = {
   value: string

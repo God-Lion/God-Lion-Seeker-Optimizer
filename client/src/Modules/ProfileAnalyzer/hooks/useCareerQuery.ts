@@ -215,7 +215,7 @@ export function useDeleteAnalysis(
   return useMutation({
     mutationFn: ({ analysisId }) =>
       careerService.deleteAnalysis(analysisId),
-    onSuccess: (data, variables) => {
+    onSuccess: (_, variables) => {
       // Remove from cache
       queryClient.removeQueries({
         queryKey: QUERY_KEYS.career.analysis(variables.analysisId),

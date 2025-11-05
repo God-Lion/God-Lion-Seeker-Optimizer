@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Box, Typography, Paper, Button, Stepper, Step, StepLabel } from '@mui/material';
+import { Container, Box, Typography, Paper, Stepper, Step, StepLabel } from '@mui/material';
 import { ProfileUploadZone } from '../components/ProfileUploadZone';
 
 interface UploadViewProps {

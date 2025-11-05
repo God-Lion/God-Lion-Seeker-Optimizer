@@ -1,13 +1,3 @@
-/**
- * Enhanced Profile Analyzer Page with Guest Mode Support
- * 
- * This page includes:
- * - Guest mode indicator
- * - Session-based storage for guests
- * - "Sign up to save" prompts
- * - Data persistence warnings
- */
-
 import React, { useState, useEffect } from 'react'
 import {
   Box,

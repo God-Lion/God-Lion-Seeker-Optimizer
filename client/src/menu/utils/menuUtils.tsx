@@ -40,7 +40,7 @@ export const confirmUrlInChildren = (
   if (isValidElement(children)) {
     const { component, href, children: subChildren } = children.props
 
-    if (component && component.props.href) {
+    if (component && typeof component !== 'string' && component.props.href) {
       return component.props.href === url
     }
 

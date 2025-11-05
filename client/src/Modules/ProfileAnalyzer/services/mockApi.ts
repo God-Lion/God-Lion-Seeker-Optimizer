@@ -3,7 +3,7 @@ import { ProfileData, JobData } from '../types';
 // Mock job data
 const mockJobs: JobData[] = [
   {
-    id: 1,
+    id: '1',
     title: 'Senior React Developer',
     company_name: 'TechCorp Inc.',
     location: 'San Francisco, CA',
@@ -16,7 +16,7 @@ const mockJobs: JobData[] = [
     posted_date: '2024-01-15',
   },
   {
-    id: 2,
+    id: '2',
     title: 'Full Stack Developer',
     company_name: 'StartupXYZ',
     location: 'Remote',
@@ -29,7 +29,7 @@ const mockJobs: JobData[] = [
     posted_date: '2024-01-14',
   },
   {
-    id: 3,
+    id: '3',
     title: 'Frontend Engineer',
     company_name: 'DesignStudio',
     location: 'New York, NY',
@@ -42,7 +42,7 @@ const mockJobs: JobData[] = [
     posted_date: '2024-01-13',
   },
   {
-    id: 4,
+    id: '4',
     title: 'Backend Developer',
     company_name: 'DataFlow Systems',
     location: 'Austin, TX',
@@ -55,7 +55,7 @@ const mockJobs: JobData[] = [
     posted_date: '2024-01-12',
   },
   {
-    id: 5,
+    id: '5',
     title: 'DevOps Engineer',
     company_name: 'CloudTech',
     location: 'Seattle, WA',
@@ -113,11 +113,11 @@ export const mockApiService = {
     return mockJobs.slice(startIndex, endIndex);
   },
 
-  async getJobById(id: number): Promise<JobData | null> {
+  async getJobById(id: string | number): Promise<JobData | null> {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 500));
 
-    return mockJobs.find(job => job.id === id) || null;
+    return mockJobs.find(job => job.id === String(id)) || null;
   },
 
   async downloadAnalysisReport(profileId: string): Promise<Blob> {

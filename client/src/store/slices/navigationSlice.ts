@@ -1,4 +1,5 @@
 import type { StateCreator } from 'zustand'
+import type { AppStore } from '../index'
 
 export interface VerticalNavState {
   width?: number
@@ -30,7 +31,7 @@ export interface NavigationSlice {
 }
 
 export const createNavigationSlice: StateCreator<
-  NavigationSlice,
+  AppStore,
   [['zustand/immer', never], ['zustand/devtools', never], ['zustand/persist', unknown]],
   [],
   NavigationSlice

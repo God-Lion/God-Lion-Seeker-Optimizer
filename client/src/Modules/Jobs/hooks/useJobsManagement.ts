@@ -1,7 +1,7 @@
 // src/Modules/JobsManagement/hooks/useJobsManagement.ts
 
 import { useState, useCallback, useMemo } from 'react'
-import { Job, JobSearchParams } from '../types'
+import { JobSearchParams } from '../types'
 import { useJobs, useJobSearch, useDeleteJob } from './useJobsQuery'
 
 /**

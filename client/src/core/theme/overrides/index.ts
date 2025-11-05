@@ -1,4 +1,4 @@
-import type { Skin } from 'src/lib/types'
+import type { Skin } from 'src/types'
 import Accordion from './accordion'
 import Alerts from './alert'
 import Autocomplete from './autocomplete'

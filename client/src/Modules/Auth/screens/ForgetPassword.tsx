@@ -13,8 +13,7 @@ import {
   Snackbar,
   Link as HLink,
 } from '@mui/material'
-import Grid from '@mui/material/GridLegacy'
-import { useTheme } from '@mui/material/styles'
+import Grid from '@mui/material/Grid'
 import { useForm, Controller } from 'react-hook-form'
 import { Copyright } from 'src/components'
 import MAlert from 'src/components/Alert'
@@ -37,7 +36,6 @@ const DEFAULT_FORM_VALUES = {
 const SUPPORT_EMAIL = 'support@example.com'
 
 export default function ForgetPassword() {
-  const theme = useTheme()
   const [open, setOpen] = useState<boolean>(false)
   const [alertType, setAlertType] = useState<'error' | 'success'>('success')
   const [errorMessage, setErrorMessage] = useState<string>('')

@@ -16,7 +16,6 @@ import {
   Alert,
 } from '@mui/material';
 import { SkillGap } from '../types';
-import SchoolIcon from '@mui/icons-material/School';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LinkIcon from '@mui/icons-material/Link';
 
