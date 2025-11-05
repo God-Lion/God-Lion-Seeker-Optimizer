@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy to Docker Swarm
 
 on:
   push:
@@ -7,10 +7,16 @@ on:
       - 'v*'
   release:
     types: [published]
+  workflow_dispatch:
+
+env:
+  REGISTRY: docker.io
+  IMAGE_API: ${{ secrets.DOCKER_USERNAME }}/godlionseeker-api
+  IMAGE_CLIENT: ${{ secrets.DOCKER_USERNAME }}/godlionseeker-client
 
 jobs:
-  deploy:
-    name: Build and Deploy
+  build-and-push:
+    name: Build and Push Docker Images
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
     
@@ -26,26 +32,53 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     
-    - name: Extract metadata
-      id: meta
+    - name: Extract metadata for API
+      id: meta-api
       uses: docker/metadata-action@v5
       with:
-        images: ${{ secrets.DOCKER_USERNAME }}/godlionseeker
+        images: ${{ env.IMAGE_API }}
         tags: |
           type=ref,event=branch
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
-          type=sha
+          type=sha,prefix={{branch}}-
+          type=raw,value=latest,enable={{is_default_branch}}
     
-    - name: Build and push Docker image
+    - name: Extract metadata for Client
+      id: meta-client
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.IMAGE_CLIENT }}
+        tags: |
+          type=ref,event=branch
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=sha,prefix={{branch}}-
+          type=raw,value=latest,enable={{is_default_branch}}
+    
+    - name: Build and push API image
       uses: docker/build-push-action@v5
       with:
         context: .
+        file: ./Dockerfile
         push: true
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
+        tags: ${{ steps.meta-api.outputs.tags }}
+        labels: ${{ steps.meta-api.outputs.labels }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
+        platforms: linux/amd64,linux/arm64
+    
+    - name: Build and push Client image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./client
+        file: ./client/Dockerfile
+        push: true
+        tags: ${{ steps.meta-client.outputs.tags }}
+        labels: ${{ steps.meta-client.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        platforms: linux/amd64,linux/arm64
     
     - name: Create Release Notes
       if: startsWith(github.ref, 'refs/tags/v')
@@ -56,13 +89,161 @@ jobs:
         prerelease: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy-swarm:
+    name: Deploy to Docker Swarm
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    if: github.ref == 'refs/heads/main'
     
-    - name: Deploy to server (Optional)
-      if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.8.0
+      with:
+        ssh-private-key: ${{ secrets.SWARM_SSH_KEY }}
+    
+    - name: Add Swarm Manager to known_hosts
       run: |
-        echo "Add deployment script here (SSH, Kubernetes, etc.)"
-        # Example: SSH to server and pull new image
-        # ssh user@server "cd /app && docker-compose pull && docker-compose up -d"
-        # Or use kubectl for Kubernetes:
-        # kubectl set image deployment/godlionseeker godlionseeker=${{ steps.meta.outputs.tags }}
-        # kubectl rollout status deployment/godlionseeker
+        mkdir -p ~/.ssh
+        ssh-keyscan -H ${{ secrets.SWARM_MANAGER_HOST }} >> ~/.ssh/known_hosts
+    
+    - name: Prepare deployment files
+      run: |
+        # Create secrets directory
+        mkdir -p secrets
+        echo "${{ secrets.MYSQL_ROOT_PASSWORD }}" > secrets/mysql_root_password.txt
+        echo "${{ secrets.MYSQL_PASSWORD }}" > secrets/mysql_password.txt
+        echo "${{ secrets.GRAFANA_ADMIN_PASSWORD }}" > secrets/grafana_admin_password.txt
+        echo "${{ secrets.POSTGRES_PASSWORD }}" > secrets/postgres_password.txt
+        echo "${{ secrets.REDIS_PASSWORD }}" > secrets/redis_password.txt
+    
+    - name: Copy files to Swarm Manager
+      run: |
+        ssh ${{ secrets.SWARM_SSH_USER }}@${{ secrets.SWARM_MANAGER_HOST }} "mkdir -p ~/godlionseeker-deploy"
+        scp -r docker-compose.swarm.yml nginx/ prometheus/ secrets/ \
+          ${{ secrets.SWARM_SSH_USER }}@${{ secrets.SWARM_MANAGER_HOST }}:~/godlionseeker-deploy/
+    
+    - name: Create Docker secrets (if not exist)
+      run: |
+        ssh ${{ secrets.SWARM_SSH_USER }}@${{ secrets.SWARM_MANAGER_HOST }} << 'EOF'
+          cd ~/godlionseeker-deploy
+          
+          # Create secrets if they don't exist
+          docker secret inspect mysql_root_password >/dev/null 2>&1 || \
+            docker secret create mysql_root_password secrets/mysql_root_password.txt
+          
+          docker secret inspect mysql_password >/dev/null 2>&1 || \
+            docker secret create mysql_password secrets/mysql_password.txt
+          
+          docker secret inspect grafana_admin_password >/dev/null 2>&1 || \
+            docker secret create grafana_admin_password secrets/grafana_admin_password.txt
+          
+          docker secret inspect postgres_password >/dev/null 2>&1 || \
+            docker secret create postgres_password secrets/postgres_password.txt
+          
+          docker secret inspect redis_password >/dev/null 2>&1 || \
+            docker secret create redis_password secrets/redis_password.txt
+          
+          # Create configs
+          docker config inspect nginx_config >/dev/null 2>&1 || \
+            docker config create nginx_config nginx/nginx.conf
+          
+          docker config inspect nginx_default_conf >/dev/null 2>&1 || \
+            docker config create nginx_default_conf nginx/conf.d/default.conf
+          
+          docker config inspect prometheus_config >/dev/null 2>&1 || \
+            docker config create prometheus_config prometheus/prometheus.yml
+          
+          # Clean up secret files
+          rm -rf secrets/
+        EOF
+    
+    - name: Deploy Stack to Swarm
+      run: |
+        ssh ${{ secrets.SWARM_SSH_USER }}@${{ secrets.SWARM_MANAGER_HOST }} << 'EOF'
+          cd ~/godlionseeker-deploy
+          
+          # Pull latest images
+          docker pull ${{ env.IMAGE_API }}:latest
+          docker pull ${{ env.IMAGE_CLIENT }}:latest
+          
+          # Deploy or update stack
+          docker stack deploy -c docker-compose.swarm.yml godlionseeker --with-registry-auth
+          
+          # Wait for services to be ready
+          echo "Waiting for services to be ready..."
+          sleep 30
+          
+          # Check service status
+          docker stack services godlionseeker
+          docker stack ps godlionseeker --no-trunc
+        EOF
+    
+    - name: Health Check
+      run: |
+        ssh ${{ secrets.SWARM_SSH_USER }}@${{ secrets.SWARM_MANAGER_HOST }} << 'EOF'
+          # Wait for all services to be running
+          MAX_ATTEMPTS=30
+          ATTEMPT=0
+          
+          while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
+            RUNNING=$(docker stack ps godlionseeker --filter "desired-state=running" --format "{{.CurrentState}}" | grep -c "Running")
+            TOTAL=$(docker stack ps godlionseeker --filter "desired-state=running" --format "{{.CurrentState}}" | wc -l)
+            
+            echo "Services running: $RUNNING/$TOTAL"
+            
+            if [ "$RUNNING" -eq "$TOTAL" ] && [ "$TOTAL" -gt 0 ]; then
+              echo "All services are running!"
+              exit 0
+            fi
+            
+            ATTEMPT=$((ATTEMPT+1))
+            sleep 10
+          done
+          
+          echo "Timeout waiting for services to be ready"
+          docker stack ps godlionseeker
+          exit 1
+        EOF
+    
+    - name: Deployment Summary
+      if: always()
+      run: |
+        ssh ${{ secrets.SWARM_SSH_USER }}@${{ secrets.SWARM_MANAGER_HOST }} << 'EOF'
+          echo "=== Deployment Summary ==="
+          echo ""
+          echo "Services:"
+          docker stack services godlionseeker
+          echo ""
+          echo "Tasks:"
+          docker stack ps godlionseeker --no-trunc
+          echo ""
+          echo "Nodes:"
+          docker node ls
+        EOF
+
+  rollback:
+    name: Rollback on Failure
+    runs-on: ubuntu-latest
+    needs: deploy-swarm
+    if: failure()
+    
+    steps:
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.8.0
+      with:
+        ssh-private-key: ${{ secrets.SWARM_SSH_KEY }}
+    
+    - name: Rollback Services
+      run: |
+        ssh ${{ secrets.SWARM_SSH_USER }}@${{ secrets.SWARM_MANAGER_HOST }} << 'EOF'
+          echo "Rolling back services..."
+          docker service update --rollback godlionseeker_api
+          docker service update --rollback godlionseeker_nginx
+          docker service update --rollback godlionseeker_client
+          
+          echo "Rollback completed"
+          docker stack ps godlionseeker
+        EOF

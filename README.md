@@ -1,592 +1,509 @@
-# 🦁 God Lion Seeker Optimizer
+# God Lion Seeker Optimizer - Deployment Suite
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.120+-green.svg)](https://fastapi.tiangolo.com/)
-[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+> Complete Docker Desktop deployment solution for Windows
 
-**AI-Powered Job Search Automation & Intelligent Application System**
+## 🎯 Quick Start (3 Steps)
 
-God Lion Seeker Optimizer is a production-ready, load-balanced job search automation platform that leverages AI and machine learning to help job seekers find, analyze, and apply to relevant positions across multiple job boards.
+1. **Start Docker Desktop** ✓
+2. **Double-click `deploy.bat`** ✓
+3. **Select option 1** ✓
 
----
-
-## 🌟 Key Features
-
-### 🔍 **Intelligent Job Scraping**
-- Multi-platform support (LinkedIn, Indeed, and more)
-- Automated job discovery with customizable search criteria
-- Smart duplicate detection and deduplication
-- Rate limiting and anti-detection mechanisms
-- Headless browser automation with Playwright
-
-### 🤖 **AI-Powered Matching**
-- NLP-based resume parsing and analysis
-- Intelligent job-to-profile matching using spaCy and scikit-learn
-- Skill extraction and gap analysis
-- Career path recommendations
-- Match score calculation with detailed explanations
-
-### 📊 **Analytics & Insights**
-- Real-time job market analytics
-- Salary trend analysis
-- Company insights and ratings
-- Application tracking and statistics
-- Interactive dashboards with visualizations
-
-### 🏗️ **Production-Ready Architecture**
-- **Load Balanced**: 3 FastAPI instances with NGINX
-- **High Availability**: Automatic failover and health checks
-- **Monitoring**: Prometheus metrics + Grafana dashboards
-- **Caching**: Redis for performance optimization
-- **Database**: PostgreSQL with connection pooling
-- **Containerized**: Full Docker Compose setup
+That's it! Your application will be running in minutes.
 
 ---
 
-## 🚀 Quick Start
+## 📦 What's Included
 
-### Option 1: Development Mode (Local)
+This deployment suite provides everything you need to run God Lion Seeker Optimizer on Docker Desktop:
 
-**Best for**: Local development and testing
+### ⚡ One-Click Deployment Scripts
+- **deploy.bat** - Interactive menu (START HERE!)
+- **deploy-simple.bat** - Quick testing deployment
+- **deploy-loadbalanced.bat** - Production deployment (3 API instances)
+- **deploy-dev.bat** - Development environment with tools
 
-```bash
-# 1. Activate virtual environment
-.\venv\Scripts\Activate
+### 🛠️ Management Tools
+- **health-check.bat** - Comprehensive diagnostics
+- **status.bat** - Service monitoring
+- **view-logs.bat** - Log viewer
+- **stop-all.bat** - Stop all services
+- **backup-database.bat** - Database backup
+- **clean-deploy.bat** - Fresh installation
 
-# 2. Start API server
-.\start_api_quick.bat
+### 📚 Documentation
+- **GETTING-STARTED.md** - Start here for first-time users
+- **DEPLOYMENT-README.md** - Complete deployment guide
+- **QUICK-REFERENCE.md** - Command reference card
+- **FILES-SUMMARY.md** - All files overview
+- **PRE-DEPLOYMENT-CHECKLIST.md** - Pre-flight checklist
 
-# 3. Access API
-# http://localhost:8000/api/docs
-```
+---
 
-### Option 2: Load Balanced Mode (Production)
+## 🚀 Deployment Options
 
-**Best for**: Production deployment with high availability
+### Option 1: Simple Deployment (Recommended for Testing)
+Perfect for quick testing and demos.
 
-```bash
-# 1. Ensure Docker is running
-docker --version
+**What you get:**
+- 1 API instance
+- PostgreSQL database
+- Redis cache
+- React client
+- Grafana monitoring
 
-# 2. Start all services (NGINX + 3 API instances + DB + Redis + Monitoring)
-.\start_loadbalanced.bat
+**Access:**
+- API: http://localhost:8000
+- Client: http://localhost:8080
+- Grafana: http://localhost:3000
 
-# 3. Access services
-# API:        http://localhost/api/docs
-# Grafana:    http://localhost:3000 (admin/admin)
-# Prometheus: http://localhost:9090
+**Start:**
+```batch
+deploy-simple.bat
 ```
 
 ---
 
-## 🏗️ Architecture
-
-### Load Balanced Deployment
-
-```
-                    ┌─────────────┐
-                    │   Clients   │
-                    └──────┬──────┘
-                           │
-                           ▼
-                    ┌─────────────┐
-                    │    NGINX    │
-                    │  Port 80/443│
-                    │Load Balancer│
-                    └──────┬──────┘
-                           │
-          ┌────────────────┼────────────────┐
-          │                │                │
-          ▼                ▼                ▼
-    ┌──────────┐    ┌──────────┐    ┌──────────┐
-    │  API-1   │    │  API-2   │    │  API-3   │
-    │ Port 8000│    │ Port 8000│    │ Port 8000│
-    └────┬─────┘    └────┬─────┘    └────┬─────┘
-         │               │               │
-         └───────────────┼───────────────┘
-                         │
-         ┌───────────────┴───────────────┐
-         │                               │
-         ▼                               ▼
-    ┌──────────┐                  ┌──────────┐
-    │PostgreSQL│                  │  Redis   │
-    │ Port 5432│                  │ Port 6379│
-    └──────────┘                  └──────────┘
-```
-
-**Features**:
-- ✅ **3 FastAPI instances** for horizontal scaling
-- ✅ **NGINX load balancer** with least connections algorithm
-- ✅ **Automatic failover** with health checks
-- ✅ **Zero-downtime deployments**
-- ✅ **Prometheus + Grafana** monitoring
-- ✅ **PostgreSQL + Redis** for data persistence
-
-See **[DEPLOYMENT_SUMMARY.md](./DEPLOYMENT_SUMMARY.md)** for complete details.
-
----
-
-## 📋 Prerequisites
-
-### Development Mode
-- Python 3.11+ (3.14 supported with limitations)
-- Virtual environment
-- MySQL 8.0+ (optional)
-- Redis (optional)
-
-### Production Mode
-- Docker 20.10+
-- Docker Compose 2.0+
-- 4GB+ RAM
-- 10GB+ disk space
-
----
-
-## 📦 Installation
-
-### 1. Clone Repository
-
-```bash
-git clone https://github.com/yourusername/God-Lion-Seeker-Optimizer.git
-cd God-Lion-Seeker-Optimizer
-```
-
-### 2. Set Up Environment
-
-```bash
-# Create virtual environment
-python -m venv venv
-
-# Activate (Windows)
-.\venv\Scripts\Activate
-
-# Activate (Linux/Mac)
-source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-### 3. Configure Environment
-
-```bash
-# Copy example environment file
-cp .env.example .env
-
-# Edit .env with your configuration
-# (Database credentials, API keys, etc.)
-```
-
-### 4. Initialize Database (Optional)
-
-```bash
-# Run database migrations
-alembic upgrade head
-
-# Seed initial data (optional)
-python seed_users.py
-```
-
----
-
-## 🎯 Usage
-
-### Development Mode
-
-```bash
-# Start API server
-.\start_api_quick.bat
-
-# Or manually
-cd src
-uvicorn api.main:app --reload --host 0.0.0.0 --port 8000
-```
-
-**Access**:
-- API Documentation: http://localhost:8000/api/docs
-- Health Check: http://localhost:8000/api/health
-
-### Production Mode
-
-```bash
-# Start entire stack
-.\start_loadbalanced.bat
-
-# Or manually
-docker-compose -f docker-compose.loadbalanced.yml up -d
-```
-
-**Access**:
-- API (Load Balanced): http://localhost/api/docs
-- Grafana Dashboards: http://localhost:3000
-- Prometheus Metrics: http://localhost:9090
-- Health Check: http://localhost/health
-
-### CLI Usage
-
-```bash
-# Run job scraper
-python run_cli.py scrape --platform linkedin --keywords "python developer"
-
-# Generate reports
-python run_cli.py report --format pdf
-
-# Manage automation
-python run_cli.py automation start
-```
-
----
-
-## 🧪 Testing
-
-### Run Tests
-
-```bash
-# Run all tests
-pytest
-
-# Run with coverage
-pytest --cov=src --cov-report=html
-
-# Run specific test file
-pytest tests/unit/test_services.py
-
-# Run integration tests
-pytest tests/integration/
-```
-
-### Current Test Coverage
-
-- **Total Tests**: 393 created
-- **Passing Tests**: 109
-- **Coverage**: ~45-50%
-- **Status**: Core functionality verified ✅
-
-See **[TEST_COVERAGE_SUMMARY.md](./TEST_COVERAGE_SUMMARY.md)** for details.
-
----
-
-## 📊 Monitoring & Observability
-
-### Prometheus Metrics
-
-Available at `/metrics` endpoint:
-- Request rate and latency
-- Database connection pool stats
-- Cache hit/miss ratios
-- Custom business metrics
-
-### Grafana Dashboards
-
-Access at http://localhost:3000 (admin/admin)
-
-**Recommended dashboards**:
-- FastAPI Performance (ID: 12708)
-- PostgreSQL Health (ID: 7362)
-- Redis Metrics (ID: 11835)
-- NGINX Stats (ID: 12708)
-
----
-
-## 🔧 Configuration
-
-### Environment Variables
-
-Key configuration options in `.env`:
-
-```bash
-# API Configuration
-API_HOST=0.0.0.0
-API_PORT=8000
-ENVIRONMENT=production
-DEBUG=false
-
-# Database
-DATABASE_URL=postgresql+asyncpg://user:pass@localhost:5432/godlionseeker
-DB_POOL_SIZE=20
-DB_MAX_OVERFLOW=40
-
-# Redis
-REDIS_URL=redis://localhost:6379/0
-
-# Authentication
-JWT_SECRET_KEY=your-secret-key
-JWT_ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=30
-
-# Scraping
-RATE_LIMIT_REQUESTS=100
-RATE_LIMIT_PERIOD=60
-```
-
-### Load Balancer Configuration
-
-Edit `nginx/nginx.conf` to customize:
-- Load balancing algorithm
+### Option 2: Load Balanced Deployment (Production Ready)
+High-availability setup with load balancing.
+
+**What you get:**
+- 3 API instances
+- NGINX load balancer
+- Automatic failover
 - Rate limiting
-- Timeouts
-- SSL/TLS settings
+- All services from Simple +
 
----
+**Access:**
+- Everything: http://localhost
+- Grafana: http://localhost:3000
 
-## 🚀 Deployment
-
-### Docker Compose (Recommended)
-
-```bash
-# Start all services
-docker-compose -f docker-compose.loadbalanced.yml up -d
-
-# View logs
-docker-compose -f docker-compose.loadbalanced.yml logs -f
-
-# Stop services
-docker-compose -f docker-compose.loadbalanced.yml down
-```
-
-### 🐳 Docker Swarm Deployment
-
-**Best for**: Production-grade, multi-host, highly available deployments.
-
-#### Prerequisites
-- Docker Swarm cluster (1+ manager, 2+ workers)
-- Shared storage (NFS or volume driver)
-- Ports: 2377, 7946, 4789, 80, 443 open
-
-#### Quick Start
-
-1.  **Initialize Swarm** (if not already done):
-    ```bash
-    docker swarm init --advertise-addr <MANAGER-IP>
-    ```
-2.  **Create Networks**:
-    ```bash
-    docker network create --driver overlay scraper-swarm-network
-    docker network create --driver overlay db-backend-network
-    ```
-3.  **Create Secrets**:
-    ```bash
-    echo "scraper_user" | docker secret create db_username -
-    echo "scraper_password" | docker secret create db_password -
-    echo "godlionseeker" | docker secret create db_name -
-    openssl rand -base64 32 | docker secret create jwt_secret_key -
-    ```
-4.  **Deploy Stack**:
-    ```bash
-    export REGISTRY_URL=localhost:5000 # Or your private registry
-    docker stack deploy -c docker-stack.yml godlionseeker
-    ```
-5.  **Verify Deployment**:
-    ```bash
-    docker stack services godlionseeker
-    curl http://localhost/api/health
-    ```
-
-#### Monitoring
-- **Grafana**: `http://localhost:3000`
-- **Prometheus**: `http://localhost:9090`
-- **API Docs**: `http://localhost/api/docs`
-
-#### Operations
-See **[SWARM_OPERATIONS.md](./DOCS/SWARM_OPERATIONS.md)** for detailed operational procedures.
-
-### Manual Deployment
-
-See **[LOAD_BALANCED_DEPLOYMENT.md](./LOAD_BALANCED_DEPLOYMENT.md)** for:
-- Scaling strategies
-- Security hardening
-- SSL/TLS setup
-- Backup procedures
-- Performance tuning
-
----
-
-## 📚 Documentation
-
-### Core Documentation
-- **[DEPLOYMENT_SUMMARY.md](./DEPLOYMENT_SUMMARY.md)** - Quick deployment overview
-- **[LOAD_BALANCED_DEPLOYMENT.md](./LOAD_BALANCED_DEPLOYMENT.md)** - Complete deployment guide
-- **[DEPLOYMENT_ARCHITECTURE.md](./DEPLOYMENT_ARCHITECTURE.md)** - Architecture details
-- **[QUICK_START_GUIDE.md](./QUICK_START_GUIDE.md)** - Quick start for development
-
-### Technical Documentation
-- **[API_DOCUMENTATION.md](./DOCS/API_DOCUMENTATION.md)** - API endpoints and usage
-- **[ARCHITECTURE.md](./DOCS/ARCHITECTURE.md)** - System architecture
-- **[DATABASE_SCHEMA.md](./DOCS/DATABASE_SCHEMA.md)** - Database design
-- **[TESTING_GUIDE.md](./DOCS/TESTING_GUIDE.md)** - Testing strategies
-
-### Additional Resources
-- **[TEST_COVERAGE_SUMMARY.md](./TEST_COVERAGE_SUMMARY.md)** - Test coverage details
-- **[PYTHON_314_COMPATIBILITY.md](./PYTHON_314_COMPATIBILITY.md)** - Python 3.14 notes
-- **[CONTRIBUTING.md](./DOCS/CONTRIBUTING.md)** - Contribution guidelines
-- **[CHANGELOG.md](./CHANGELOG.md)** - Version history
-
----
-
-## 🛠️ Development
-
-### Project Structure
-
-```
-God-Lion-Seeker-Optimizer/
-├── src/                          # Source code
-│   ├── api/                      # FastAPI application
-│   ├── automation/               # Automation workflows
-│   ├── scrapers/                 # Job board scrapers
-│   ├── services/                 # Business logic
-│   ├── models/                   # Database models
-│   └── utils/                    # Utilities
-├── tests/                        # Test suite
-│   ├── unit/                     # Unit tests
-│   └── integration/              # Integration tests
-├── nginx/                        # NGINX configuration
-│   ├── nginx.conf               # Main config
-│   └── conf.d/                  # Server configs
-├── monitoring/                   # Monitoring configs
-│   ├── prometheus.yml           # Prometheus config
-│   └── grafana/                 # Grafana dashboards
-├── docker-compose.loadbalanced.yml  # Production deployment
-├── requirements.txt             # Python dependencies
-└── README.md                    # This file
-```
-
-### Code Style
-
-```bash
-# Format code
-black src/ tests/
-
-# Lint code
-ruff check src/ tests/
-
-# Type checking
-mypy src/
-```
-
-### Pre-commit Hooks
-
-```bash
-# Install pre-commit hooks
-pre-commit install
-
-# Run manually
-pre-commit run --all-files
+**Start:**
+```batch
+deploy-loadbalanced.bat
 ```
 
 ---
 
-## 🔒 Security
+### Option 3: Development Deployment (For Developers)
+Full development environment with hot-reload.
 
-### Best Practices
+**What you get:**
+- All Simple services +
+- Hot-reload for code changes
+- PgAdmin (database UI)
+- Redis Commander
+- Mailhog (email testing)
 
-- ✅ JWT-based authentication
-- ✅ Role-based access control
-- ✅ Password hashing with bcrypt
-- ✅ Rate limiting on all endpoints
-- ✅ SQL injection prevention (SQLAlchemy ORM)
-- ✅ XSS protection headers
-- ✅ CORS configuration
+**Access:**
+- API: http://localhost:8000
+- Client: http://localhost:8080
+- PgAdmin: http://localhost:5050
+- Redis UI: http://localhost:8081
+- Mailhog: http://localhost:8025
 
-### Production Checklist
+**Start:**
+```batch
+deploy-dev.bat
+```
 
-Before deploying to production:
+---
 
+## 📋 First-Time Setup Guide
+
+### Prerequisites
+1. Install Docker Desktop from https://www.docker.com/products/docker-desktop
+2. Ensure you have:
+   - Windows 10/11
+   - 4GB+ RAM
+   - 20GB+ disk space
+
+### Step-by-Step
+
+1. **Start Docker Desktop**
+   - Open Docker Desktop
+   - Wait for green icon in system tray
+
+2. **Navigate to Project**
+   ```
+   cd "E:\AI Point\Automated search job project\God Lion Seeker Optimizer"
+   ```
+
+3. **Run Deployment Menu**
+   ```batch
+   deploy.bat
+   ```
+
+4. **Choose Deployment**
+   - Press `1` for Simple (recommended first time)
+   - Press `2` for Load Balanced (production)
+   - Press `3` for Development (coding)
+
+5. **Wait for Completion**
+   - Script will build images (~5 minutes first time)
+   - Start all services
+   - Run health checks
+
+6. **Verify Deployment**
+   ```batch
+   health-check.bat
+   ```
+
+7. **Access Your Application**
+   - Open browser
+   - Go to http://localhost:8000 (Simple/Dev)
+   - Or http://localhost (Load Balanced)
+
+---
+
+## 🎛️ Management Dashboard (deploy.bat)
+
+Run `deploy.bat` to access the interactive menu:
+
+```
+============================================================================
+         GOD LION SEEKER OPTIMIZER - DEPLOYMENT MANAGER
+============================================================================
+
+   DEPLOYMENT OPTIONS:
+   -------------------
+   1. Simple Deployment        (Single instance, quick start)
+   2. Load Balanced Deployment (3 API instances + NGINX)
+   3. Development Deployment   (With dev tools and hot-reload)
+
+   MANAGEMENT OPTIONS:
+   -------------------
+   4. Health Check (Comprehensive test)
+   5. View Service Status
+   6. View Logs
+   7. Stop All Services
+   8. Backup Database
+   9. Clean Install (Remove everything)
+
+   0. Exit
+```
+
+---
+
+## 📊 What Gets Deployed
+
+### All Deployments Include:
+- ✅ FastAPI backend application
+- ✅ React frontend application
+- ✅ PostgreSQL 15 database
+- ✅ Redis 7 cache
+- ✅ Prometheus monitoring
+- ✅ Grafana dashboards
+- ✅ Health checks
+- ✅ Automatic restarts
+- ✅ Logging
+
+### Load Balanced Adds:
+- ✅ NGINX load balancer
+- ✅ 3 API instances (scalable)
+- ✅ Automatic failover
+- ✅ Rate limiting
+- ✅ Production optimizations
+
+### Development Adds:
+- ✅ Hot-reload for code changes
+- ✅ PgAdmin database manager
+- ✅ Redis Commander
+- ✅ Mailhog email testing
+- ✅ Exposed database ports
+- ✅ Debug mode enabled
+
+---
+
+## 🔑 Default Credentials
+
+### Grafana
+```
+URL:      http://localhost:3000
+Username: admin
+Password: gr@f@n@!sS3cur3N0w
+```
+
+### PostgreSQL (Dev deployment only)
+```
+Host:     localhost:5432
+Database: godlionseeker
+Username: scraper_user
+Password: scraper_password
+```
+
+### PgAdmin (Dev deployment only)
+```
+URL:      http://localhost:5050
+Email:    admin@godlionseeker.local
+Password: admin
+```
+
+⚠️ **IMPORTANT:** Change these passwords in production!
+
+---
+
+## 🛠️ Common Tasks
+
+### Check if Everything is Working
+```batch
+health-check.bat
+```
+
+### View Service Status
+```batch
+status.bat
+```
+
+### View Logs
+```batch
+view-logs.bat
+```
+
+### Stop All Services
+```batch
+stop-all.bat
+```
+
+### Backup Database
+```batch
+backup-database.bat
+```
+Backups saved to: `backups/`
+
+### Fresh Installation
+```batch
+clean-deploy.bat
+```
+⚠️ This removes all data!
+
+### Restart a Service
+```batch
+docker-compose restart api
+```
+
+### Access Container Shell
+```batch
+docker exec -it godlionseeker-api /bin/sh
+```
+
+---
+
+## 📖 Documentation Guide
+
+Start with these documents in order:
+
+1. **PRE-DEPLOYMENT-CHECKLIST.md** - Before you begin
+2. **GETTING-STARTED.md** - Quick start guide  
+3. **DEPLOYMENT-README.md** - Complete documentation
+4. **QUICK-REFERENCE.md** - Quick command reference
+5. **FILES-SUMMARY.md** - All files explained
+
+---
+
+## 🐛 Troubleshooting
+
+### Docker Desktop Not Running
+**Error:** "Cannot connect to Docker daemon"
+
+**Fix:**
+1. Start Docker Desktop
+2. Wait for green icon
+3. Try again
+
+### Port Already in Use
+**Error:** "Port 8000 is already allocated"
+
+**Fix:**
+```batch
+stop-all.bat
+# Then deploy again
+```
+
+### Services Not Healthy
+**Error:** Health checks failing
+
+**Fix:**
+1. Wait 30-60 seconds
+2. Run `health-check.bat`
+3. Check logs: `view-logs.bat`
+4. Try: `clean-deploy.bat`
+
+### Build Failures
+**Error:** Image build failed
+
+**Fix:**
+```batch
+clean-deploy.bat
+# Then deploy again
+```
+
+### Need More Help?
+1. Run `health-check.bat` for diagnostics
+2. Check logs with `view-logs.bat`
+3. Read DEPLOYMENT-README.md
+4. Try `clean-deploy.bat` for fresh start
+
+---
+
+## 🎯 Workflow Examples
+
+### Daily Development
+```batch
+# Start development environment
+deploy-dev.bat
+
+# Make code changes (hot-reload automatic)
+
+# Check status
+status.bat
+
+# View logs if needed
+view-logs.bat
+
+# Stop when done
+stop-all.bat
+```
+
+### Production Deployment
+```batch
+# Start load balanced deployment
+deploy-loadbalanced.bat
+
+# Verify health
+health-check.bat
+
+# Monitor services
+status.bat
+
+# Backup database
+backup-database.bat
+```
+
+### Testing & Demos
+```batch
+# Quick start
+deploy-simple.bat
+
+# Verify
+health-check.bat
+
+# Access application
+# http://localhost:8000
+```
+
+---
+
+## 📈 Monitoring & Metrics
+
+### Access Grafana
+1. Go to http://localhost:3000
+2. Login with admin/gr@f@n@!sS3cur3N0w
+3. View pre-configured dashboards
+4. Monitor API performance, database, Redis
+
+### View Metrics
+- API metrics: http://localhost:9090/metrics (Simple)
+- Prometheus: http://localhost:9090 (Simple)
+
+---
+
+## 🔒 Security Best Practices
+
+### For Production:
 - [ ] Change all default passwords
 - [ ] Use environment variables for secrets
-- [ ] Enable HTTPS with SSL certificates
+- [ ] Enable HTTPS/SSL
 - [ ] Configure firewall rules
+- [ ] Limit exposed ports
 - [ ] Set up automated backups
-- [ ] Enable database encryption
-- [ ] Configure Redis authentication
-- [ ] Implement log rotation
-- [ ] Set up intrusion detection
-- [ ] Review security headers
+- [ ] Enable Docker security scanning
+- [ ] Review NGINX security settings
+- [ ] Configure monitoring alerts
+- [ ] Regular security updates
 
 ---
 
-## 🤝 Contributing
+## 🆘 Getting Help
 
-We welcome contributions! Please see **[CONTRIBUTING.md](./DOCS/CONTRIBUTING.md)** for:
-- Code of conduct
-- Development workflow
-- Pull request process
-- Coding standards
-
----
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🙏 Acknowledgments
-
-- **FastAPI** - Modern web framework
-- **spaCy** - NLP library
-- **Playwright** - Browser automation
-- **PostgreSQL** - Database
-- **Redis** - Caching
-- **NGINX** - Load balancer
-- **Prometheus & Grafana** - Monitoring
-
----
-
-## 📞 Support
-
-- **Documentation**: See `/DOCS` folder
-- **Issues**: [GitHub Issues](https://github.com/yourusername/God-Lion-Seeker-Optimizer/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/God-Lion-Seeker-Optimizer/discussions)
-
----
-
-## 🎯 Roadmap
-
-### Current Version (v1.0.0)
-- ✅ Load balanced architecture
-- ✅ 3 API instances with NGINX
-- ✅ Prometheus + Grafana monitoring
-- ✅ ~45% test coverage
-- ✅ Production-ready deployment
-
-### Upcoming Features
-- [ ] Auto-scaling based on metrics
-- [ ] Machine learning job recommendations
-- [ ] Advanced analytics dashboard
-- [ ] Mobile app integration
-- [ ] Multi-language support
-- [ ] 80%+ test coverage
-
----
-
-## 📊 Status
-
-| Component | Status | Coverage |
-|-----------|--------|----------|
-| **API Server** | ✅ Running | 100% |
-| **Load Balancer** | ✅ Configured | 100% |
-| **Database** | ✅ Ready | 100% |
-| **Cache** | ✅ Ready | 100% |
-| **Monitoring** | ✅ Active | 100% |
-| **Tests** | ✅ Passing | 45% |
-| **Documentation** | ✅ Complete | 100% |
-
----
-
-**Ready to get started?**
-
-```bash
-# Development
-.\start_api_quick.bat
-
-# Production
-.\start_loadbalanced.bat
+### Quick Diagnostics
+```batch
+health-check.bat
 ```
 
-For detailed instructions, see **[DEPLOYMENT_SUMMARY.md](./DEPLOYMENT_SUMMARY.md)**
+### Detailed Status
+```batch
+status.bat
+```
+
+### View All Logs
+```batch
+view-logs.bat
+```
+
+### Check Documentation
+- GETTING-STARTED.md
+- DEPLOYMENT-README.md
+- QUICK-REFERENCE.md
 
 ---
 
-Made with ❤️ by the God Lion Seeker team
+## 📦 Project Structure
+
+```
+God Lion Seeker Optimizer/
+├── deploy.bat                      ⭐ START HERE
+├── deploy-simple.bat               🚀 Quick deployment
+├── deploy-loadbalanced.bat         🏭 Production deployment
+├── deploy-dev.bat                  💻 Development deployment
+├── health-check.bat                ✓ Diagnostics
+├── status.bat                      📊 Status monitor
+├── view-logs.bat                   📜 Log viewer
+├── stop-all.bat                    ⏹️ Stop services
+├── backup-database.bat             💾 Backup tool
+├── clean-deploy.bat                🧹 Fresh start
+├── GETTING-STARTED.md              📖 Quick start
+├── DEPLOYMENT-README.md            📚 Full docs
+├── QUICK-REFERENCE.md              📋 Commands
+├── FILES-SUMMARY.md                📝 File list
+├── PRE-DEPLOYMENT-CHECKLIST.md     ✅ Checklist
+├── docker-compose.yml              🐳 Simple config
+├── docker-compose.loadbalanced.yml 🐳 Load balanced config
+├── docker-compose.override.yml     🐳 Dev overrides
+└── backups/                        💾 Database backups
+```
+
+---
+
+## ✨ Features
+
+- ✅ One-click deployment
+- ✅ Interactive menu system
+- ✅ Comprehensive health checks
+- ✅ Automatic database backups
+- ✅ Hot-reload for development
+- ✅ Load balancing for production
+- ✅ Complete monitoring stack
+- ✅ Detailed logging
+- ✅ Easy troubleshooting
+- ✅ Full documentation
+
+---
+
+## 🎉 You're Ready!
+
+Everything is set up and ready to go. Just run:
+
+```batch
+deploy.bat
+```
+
+Select your deployment option and you're live!
+
+**Need help?** Read GETTING-STARTED.md
+
+**Happy deploying! 🚀**
+
+---
+
+*Last updated: November 2025*
+*For Docker Desktop on Windows 10/11*

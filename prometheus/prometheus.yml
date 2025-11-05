@@ -1,0 +1,143 @@
+# Prometheus Configuration for Docker Swarm Monitoring
+
+global:
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'godlionseeker-swarm'
+    environment: 'production'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          # - 'alertmanager:9093'
+
+# Rules and alerts
+rule_files:
+  # - "alerts/*.yml"
+
+# Scrape configurations
+scrape_configs:
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          service: 'prometheus'
+
+  # Docker Engine metrics (requires experimental features enabled)
+  - job_name: 'docker-engine'
+    static_configs:
+      - targets: ['host.docker.internal:9323']
+        labels:
+          service: 'docker-engine'
+    metric_relabel_configs:
+      - source_labels: [__name__]
+        regex: 'engine_.*'
+        action: keep
+
+  # Node Exporter - Host metrics (runs on all nodes)
+  - job_name: 'node-exporter'
+    dns_sd_configs:
+      - names:
+          - 'tasks.godlionseeker_node-exporter'
+        type: 'A'
+        port: 9100
+    relabel_configs:
+      - source_labels: [__meta_dns_name]
+        target_label: node
+      - source_labels: [__address__]
+        target_label: instance
+
+  # cAdvisor - Container metrics (runs on all nodes)
+  - job_name: 'cadvisor'
+    dns_sd_configs:
+      - names:
+          - 'tasks.godlionseeker_cadvisor'
+        type: 'A'
+        port: 8080
+    relabel_configs:
+      - source_labels: [__meta_dns_name]
+        target_label: node
+      - source_labels: [__address__]
+        target_label: instance
+    metric_relabel_configs:
+      - source_labels: [__name__]
+        regex: 'container_.*'
+        action: keep
+
+  # API Service metrics
+  - job_name: 'api'
+    dns_sd_configs:
+      - names:
+          - 'tasks.godlionseeker_api'
+        type: 'A'
+        port: 9090
+    relabel_configs:
+      - source_labels: [__meta_dns_name]
+        target_label: service
+        replacement: 'api'
+      - source_labels: [__address__]
+        target_label: instance
+    metrics_path: '/metrics'
+
+  # Nginx metrics (requires nginx-prometheus-exporter sidecar)
+  - job_name: 'nginx'
+    dns_sd_configs:
+      - names:
+          - 'tasks.godlionseeker_nginx'
+        type: 'A'
+        port: 9113
+    relabel_configs:
+      - source_labels: [__meta_dns_name]
+        target_label: service
+        replacement: 'nginx'
+      - source_labels: [__address__]
+        target_label: instance
+
+  # PostgreSQL metrics (requires postgres_exporter)
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres-exporter:9187']
+        labels:
+          service: 'postgres'
+
+  # Redis metrics (requires redis_exporter)
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-exporter:9121']
+        labels:
+          service: 'redis'
+
+  # Grafana metrics
+  - job_name: 'grafana'
+    dns_sd_configs:
+      - names:
+          - 'tasks.godlionseeker_grafana'
+        type: 'A'
+        port: 3000
+    metrics_path: '/metrics'
+    relabel_configs:
+      - source_labels: [__meta_dns_name]
+        target_label: service
+        replacement: 'grafana'
+
+# Remote write configuration (optional - for long-term storage)
+# remote_write:
+#   - url: 'http://thanos-receive:19291/api/v1/receive'
+#     queue_config:
+#       capacity: 10000
+#       max_shards: 5
+#       min_shards: 1
+#       max_samples_per_send: 5000
+#       batch_send_deadline: 5s
+#       min_backoff: 30ms
+#       max_backoff: 100ms
+
+# Remote read configuration (optional)
+# remote_read:
+#   - url: 'http://thanos-query:9090/api/v1/read'
+#     read_recent: true

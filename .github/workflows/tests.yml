@@ -181,10 +181,34 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
     
-    - name: Build Docker Image
+    - name: Build API Docker Image
       run: |
-        docker build -t godlionseeker:test .
+        docker build -t godlionseeker-api:test -f Dockerfile .
     
-    - name: Test Docker Image
+    - name: Build Client Docker Image
       run: |
-        docker run --rm godlionseeker:test python -c "import src; print('Import successful')"
+        docker build -t godlionseeker-client:test -f client/Dockerfile ./client
+    
+    - name: Test API Docker Image
+      run: |
+        docker run --rm godlionseeker-api:test python -c "import src; print('Import successful')"
+    
+    - name: Test Client Docker Image
+      run: |
+        docker run --rm -d --name test-client godlionseeker-client:test
+        sleep 5
+        docker logs test-client
+        docker stop test-client
+    
+    - name: Scan Images for Vulnerabilities
+      run: |
+        # Install Trivy
+        wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+        echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
+        sudo apt-get update
+        sudo apt-get install trivy
+        
+        # Scan images
+        trivy image --severity HIGH,CRITICAL godlionseeker-api:test
+        trivy image --severity HIGH,CRITICAL godlionseeker-client:test
+      continue-on-error: true

@@ -55,6 +55,8 @@ services:
       DB_MAX_OVERFLOW: 40
       LOG_LEVEL: INFO
       INSTANCE_ID: api-1
+      # Enable graceful shutdown
+      GRACEFUL_TIMEOUT: 30
     volumes:
       - ./src:/app/src
       - ./logs:/app/logs
@@ -93,6 +95,7 @@ services:
       DB_MAX_OVERFLOW: 40
       LOG_LEVEL: INFO
       INSTANCE_ID: api-2
+      GRACEFUL_TIMEOUT: 30
     volumes:
       - ./src:/app/src
       - ./logs:/app/logs
@@ -131,6 +134,7 @@ services:
       DB_MAX_OVERFLOW: 40
       LOG_LEVEL: INFO
       INSTANCE_ID: api-3
+      GRACEFUL_TIMEOUT: 30
     volumes:
       - ./src:/app/src
       - ./logs:/app/logs

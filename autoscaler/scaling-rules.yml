@@ -1,4 +1,5 @@
 services:
+  # API Service - Autoscaling rules
   - name: godlionseeker_api
     min_replicas: 3
     max_replicas: 10
@@ -6,10 +7,132 @@ services:
     target_memory_percent: 80
     scale_up_cooldown: 60s
     scale_down_cooldown: 300s
+    scale_up_threshold: 2  # Number of consecutive checks before scaling up
+    scale_down_threshold: 5  # Number of consecutive checks before scaling down
+    metrics:
+      - type: cpu
+        target: 70
+        period: 60s
+      - type: memory
+        target: 80
+        period: 60s
+      - type: request_rate
+        target: 1000  # requests per second per replica
+        period: 30s
 
+  # Client Service - Autoscaling rules
   - name: godlionseeker_client
     min_replicas: 2
     max_replicas: 5
     target_cpu_percent: 60
+    target_memory_percent: 70
     scale_up_cooldown: 60s
     scale_down_cooldown: 180s
+    scale_up_threshold: 2
+    scale_down_threshold: 3
+    metrics:
+      - type: cpu
+        target: 60
+        period: 60s
+      - type: memory
+        target: 70
+        period: 60s
+
+  # Nginx Service - Fixed replicas (global mode)
+  - name: godlionseeker_nginx
+    min_replicas: 1
+    max_replicas: 1
+    mode: global
+    enabled: false  # Autoscaling disabled for global services
+
+# Global autoscaling configuration
+global:
+  check_interval: 30s
+  metric_window: 5m
+  scale_precision: 1  # Scale by 1 replica at a time
+  
+  # Prometheus endpoint for metrics
+  prometheus:
+    url: http://prometheus:9090
+    enabled: true
+  
+  # Docker Swarm API
+  swarm:
+    endpoint: unix:///var/run/docker.sock
+    enabled: true
+  
+  # Notification settings
+  notifications:
+    webhook_url: ""  # Optional: Slack/Discord webhook for scaling events
+    enabled: false
+
+# Custom scaling rules based on business metrics
+custom_rules:
+  # Scale based on job queue depth
+  - name: job_queue_depth
+    service: godlionseeker_api
+    metric: job_queue_size
+    operator: greater_than
+    threshold: 100
+    action: scale_up
+    replicas: 2
+    cooldown: 120s
+  
+  # Scale based on response time
+  - name: high_response_time
+    service: godlionseeker_api
+    metric: http_request_duration_seconds_p95
+    operator: greater_than
+    threshold: 2.0  # seconds
+    action: scale_up
+    replicas: 1
+    cooldown: 60s
+  
+  # Scale down during off-peak hours
+  - name: off_peak_hours
+    service: godlionseeker_api
+    schedule: "0 0 * * *"  # Midnight daily
+    action: scale_to
+    replicas: 3
+    enabled: true
+  
+  # Scale up during peak hours
+  - name: peak_hours
+    service: godlionseeker_api
+    schedule: "0 8 * * 1-5"  # 8 AM on weekdays
+    action: scale_to
+    replicas: 5
+    enabled: true
+
+# Health check configuration
+health_checks:
+  enabled: true
+  interval: 30s
+  timeout: 10s
+  unhealthy_threshold: 3
+  healthy_threshold: 2
+  
+  # Actions on unhealthy services
+  on_unhealthy:
+    - restart_task
+    - notify
+    - scale_up  # Add more replicas if issues persist
+
+# Resource constraints
+resource_limits:
+  # Prevent scaling if cluster resources are low
+  min_cluster_cpu_percent: 20
+  min_cluster_memory_percent: 20
+  max_cluster_cpu_percent: 90
+  max_cluster_memory_percent: 90
+
+# Logging and monitoring
+logging:
+  level: info
+  format: json
+  output: /var/log/autoscaler/autoscaler.log
+  
+monitoring:
+  enabled: true
+  metrics_port: 9101
+  metrics_path: /metrics

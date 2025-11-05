@@ -31,8 +31,12 @@ COPY --from=builder /app/build /usr/share/nginx/html
 EXPOSE 80
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=10s --start-period=20s --retries=3 \
     CMD wget --quiet --tries=1 --spider http://localhost/ || exit 1
+
+# Add nginx configuration for better performance
+RUN echo 'worker_processes auto;' > /etc/nginx/nginx.conf.d/performance.conf && \
+    echo 'worker_rlimit_nofile 65535;' >> /etc/nginx/nginx.conf.d/performance.conf
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]

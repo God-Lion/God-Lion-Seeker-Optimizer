@@ -67,8 +67,19 @@ services:
       
       # Logging
       LOG_LEVEL: INFO
+      
+      # Performance tuning
+      WORKERS: 4
+      WORKER_CLASS: uvicorn.workers.UvicornWorker
+      GRACEFUL_TIMEOUT: 30
+      KEEPALIVE: 65
+      
+      # Monitoring
+      ENABLE_METRICS: "true"
+      METRICS_PORT: 9090
     ports:
       - "8000:8000"
+      - "9090:9090"  # Metrics port
     volumes:
       - ./src:/app/src
       - ./logs:/app/logs
