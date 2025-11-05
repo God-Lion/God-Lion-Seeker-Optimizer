@@ -11,16 +11,7 @@ except ImportError:
     JOB_MATCHING_AVAILABLE = False
     JobMatchingService = None
 
-try:
-    from models import Job
-    MODELS_AVAILABLE = True
-except ImportError:
-    MODELS_AVAILABLE = False
-    
-    class Job:
-        def __init__(self, **kwargs):
-            for key, value in kwargs.items():
-                setattr(self, key, value)
+from src.models.job import Job
 
 
 @pytest.mark.skipif(not JOB_MATCHING_AVAILABLE, reason="JobMatchingService not available")
@@ -373,5 +364,3 @@ class TestJobScrapingService:
         assert len(job_ids) == len(set(job_ids))
 
 
-if __name__ == "__main__":
-    pytest.main([__file__, "-v"])

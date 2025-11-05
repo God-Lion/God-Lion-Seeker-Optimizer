@@ -37,8 +37,8 @@ email-validator  # Required for EmailStr validation
 
 # Database - SQLAlchemy 2.0
 sqlalchemy[asyncio]
-aiomysql
-pymysql
+psycopg2-binary
+asyncpg
 alembic
 
 # Caching (Phase 2)
@@ -81,3 +81,7 @@ tabulate
 
 reportlab
 python-docx
+
+# MFA / 2FA
+pyotp
+qrcode[pil]

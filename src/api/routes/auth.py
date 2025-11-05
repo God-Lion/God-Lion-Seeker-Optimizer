@@ -6,6 +6,10 @@ from datetime import datetime, timedelta
 from typing import Optional
 import secrets
 import hashlib
+import pyotp
+import qrcode
+import io
+from starlette.responses import StreamingResponse
 
 from fastapi import APIRouter, Depends, HTTPException, status, BackgroundTasks
 from fastapi.security import HTTPBearer
@@ -66,8 +70,23 @@ class MessageResponse(BaseModel):
     message: str
     success: bool = True
 
+class MfaSetupResponse(BaseModel):
+    qr_code: str
+    recovery_codes: list[str]
+
+class MfaVerifyRequest(BaseModel):
+    code: str
+
 
 # Helper Functions
+def generate_qr_code(otp_uri: str) -> io.BytesIO:
+    """Generate a QR code image from an OTP URI"""
+    img = qrcode.make(otp_uri)
+    buf = io.BytesIO()
+    img.save(buf)
+    buf.seek(0)
+    return buf
+
 def hash_password(password: str) -> str:
     """Hash a password using bcrypt"""
     # Bcrypt has a 72 byte limit, truncate if necessary
@@ -314,6 +333,10 @@ async def login(
     user.last_login = datetime.utcnow()
     user.last_activity = datetime.utcnow()
     await db.commit()
+
+    # If MFA is enabled, return a response indicating that MFA is required
+    if user.mfa_enabled:
+        return {"mfa_required": True}
     
     # Create tokens
     access_token = create_access_token(user.id)
@@ -592,3 +615,84 @@ async def get_session(current_user: User = Depends(get_current_user), db: AsyncS
         },
         "session_expiry": (datetime.utcnow() + timedelta(minutes=settings.jwt_access_token_expire_minutes)).isoformat()
     }
+
+@router.post("/mfa/setup", response_model=MfaSetupResponse)
+async def mfa_setup(current_user: User = Depends(get_current_active_user), db: AsyncSession = Depends(get_db)):
+    """
+    Set up MFA for the current user.
+
+    - Generates a new MFA secret and recovery codes.
+    - Returns a QR code and recovery codes.
+    """
+    if current_user.mfa_enabled:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="MFA is already enabled for this account."
+        )
+
+    # Generate a new MFA secret
+    mfa_secret = pyotp.random_base32()
+    current_user.mfa_secret = mfa_secret
+
+    # Generate recovery codes
+    recovery_codes = [secrets.token_hex(8) for _ in range(10)]
+    current_user.mfa_recovery_codes = recovery_codes
+
+    await db.commit()
+
+    # Generate OTP URI for the QR code
+    otp_uri = pyotp.totp.TOTP(mfa_secret).provisioning_uri(
+        name=current_user.email,
+        issuer_name=settings.app_name
+    )
+
+    # Generate and return the QR code
+    qr_code = generate_qr_code(otp_uri)
+    return StreamingResponse(qr_code, media_type="image/png")
+
+@router.post("/mfa/verify", response_model=MessageResponse)
+async def mfa_verify(request: MfaVerifyRequest, current_user: User = Depends(get_current_active_user), db: AsyncSession = Depends(get_db)):
+    """
+    Verify the MFA code and enable MFA for the user.
+
+    - Verifies the TOTP code.
+    - Enables MFA for the user.
+    """
+    if not current_user.mfa_secret:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="MFA is not set up for this account."
+        )
+
+    totp = pyotp.TOTP(current_user.mfa_secret)
+    if not totp.verify(request.code):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid MFA code."
+        )
+
+    current_user.mfa_enabled = True
+    await db.commit()
+
+    return MessageResponse(message="MFA enabled successfully.")
+
+@router.post("/mfa/disable", response_model=MessageResponse)
+async def mfa_disable(current_user: User = Depends(get_current_active_user), db: AsyncSession = Depends(get_db)):
+    """
+    Disable MFA for the current user.
+
+    - Disables MFA.
+    - Clears the MFA secret and recovery codes.
+    """
+    if not current_user.mfa_enabled:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="MFA is not enabled for this account."
+        )
+
+    current_user.mfa_enabled = False
+    current_user.mfa_secret = None
+    current_user.mfa_recovery_codes = None
+    await db.commit()
+
+    return MessageResponse(message="MFA disabled successfully.")

@@ -79,7 +79,8 @@ services:
       - "8000:8000"
       - "9090:9090"  # Metrics port
     volumes:
-      - ./src:/app/src
+      - ./src:/app/src:rw
+      - ./tests:/app/tests:rw
       - ./logs:/app/logs
       - ./data:/app/data
     depends_on:
@@ -98,24 +99,24 @@ services:
     restart: unless-stopped
 
   # React Client Application
-  client:
-    build:
-      context: ./client
-      dockerfile: Dockerfile
-    container_name: godlionseeker-client
-    ports:
-      - "8080:80" # Exposed on 8080 for local dev, behind nginx in prod
-    depends_on:
-      - api
-    healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 20s
-    networks:
-      - scraper-network
-    restart: unless-stopped
+  # client:
+  #   build:
+  #     context: ./client
+  #     dockerfile: Dockerfile
+  #   container_name: godlionseeker-client
+  #   ports:
+  #     - "8080:80" # Exposed on 8080 for local dev, behind nginx in prod
+  #   depends_on:
+  #     - api
+  #   healthcheck:
+  #     test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #     start_period: 20s
+  #   networks:
+  #     - scraper-network
+  #   restart: unless-stopped
 
   # Prometheus (Optional - for monitoring)
   prometheus:

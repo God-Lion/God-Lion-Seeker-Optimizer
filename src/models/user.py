@@ -48,6 +48,9 @@ class User(Base, TimestampMixin):
     google_id = Column(String(255), unique=True, index=True)
     
     # Session management
+    mfa_secret = Column(String(255), nullable=True)
+    mfa_enabled = Column(Boolean, default=False)
+    mfa_recovery_codes = Column(JSON, nullable=True)
     last_login = Column(DateTime)
     last_activity = Column(DateTime)
     failed_login_attempts = Column(Integer, default=0)
