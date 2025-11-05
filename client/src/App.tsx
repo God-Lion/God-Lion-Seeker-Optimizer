@@ -22,6 +22,7 @@ const JobAnalysisRoutes = React.lazy(() => import('src/Modules/JobAnalysis/route
 
 // Admin Module (only loaded for admin users)
 const AdminRoutes = React.lazy(() => import('src/Modules/AdminManagement/routes/Admin'))
+const UserManagementRoutes = React.lazy(() => import('src/Modules/UserManagement/routes/routes'))
 
 // Error & Utility Modules
 const ERR0RRoutes = React.lazy(() => import('src/Modules/ERR0R/routes/routes'))
@@ -143,6 +144,13 @@ const App: React.FC = (): React.ReactElement => {
         <AdminRoute element={
           <SuspenseWrapper>
             <AdminRoutes />
+          </SuspenseWrapper>
+        } />
+      } />
+      <Route path='user-management/*' element={
+        <AuthRoute element={
+          <SuspenseWrapper>
+            <UserManagementRoutes />
           </SuspenseWrapper>
         } />
       } />
