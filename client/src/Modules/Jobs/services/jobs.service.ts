@@ -114,6 +114,72 @@ class JobsService {
 
     return apiClient.getWithFallback<JobSearchResponse>(url, fallbackData)
   }
+
+  /**
+   * Save/bookmark a job
+   */
+  async saveJob(jobId: number): Promise<AxiosResponse<{ message: string }>> {
+    return apiClient.post<{ message: string }>(ENDPOINTS.jobs.save(jobId), {})
+  }
+
+  /**
+   * Remove a job from saved/bookmarked jobs
+   */
+  async unsaveJob(jobId: number): Promise<AxiosResponse<{ message: string }>> {
+    return apiClient.delete<{ message: string }>(ENDPOINTS.jobs.unsave(jobId))
+  }
+
+  /**
+   * Get all saved/bookmarked jobs
+   */
+  async getSavedJobs(params: { skip?: number; limit?: number } = {}): Promise<AxiosResponse<JobSearchResponse>> {
+    const searchParams = new URLSearchParams()
+    if (params.skip !== undefined) searchParams.append('skip', String(params.skip))
+    if (params.limit !== undefined) searchParams.append('limit', String(params.limit))
+
+    const queryString = searchParams.toString()
+    const url = queryString ? `${ENDPOINTS.jobs.saved}?${queryString}` : ENDPOINTS.jobs.saved
+
+    return apiClient.get<JobSearchResponse>(url)
+  }
+
+  /**
+   * Apply to a job
+   */
+  async applyToJob(jobId: number, data?: { cover_letter?: string; resume_profile_id?: number }): Promise<AxiosResponse<{ message: string; application_id: number }>> {
+    return apiClient.post<{ message: string; application_id: number }>(
+      ENDPOINTS.jobs.apply(jobId),
+      data || {}
+    )
+  }
+
+  /**
+   * Get user's job applications
+   */
+  async getApplications(params: { skip?: number; limit?: number; status?: string } = {}): Promise<AxiosResponse<any>> {
+    const searchParams = new URLSearchParams()
+    if (params.skip !== undefined) searchParams.append('skip', String(params.skip))
+    if (params.limit !== undefined) searchParams.append('limit', String(params.limit))
+    if (params.status) searchParams.append('status', params.status)
+
+    const queryString = searchParams.toString()
+    const url = queryString ? `${ENDPOINTS.jobs.applications}?${queryString}` : ENDPOINTS.jobs.applications
+
+    return apiClient.get<any>(url)
+  }
+
+  /**
+   * Update application status
+   */
+  async updateApplicationStatus(
+    applicationId: number,
+    status: string
+  ): Promise<AxiosResponse<{ message: string }>> {
+    return apiClient.put<{ message: string }>(
+      ENDPOINTS.jobs.updateApplicationStatus(applicationId),
+      { status }
+    )
+  }
 }
 
 // Export singleton instance

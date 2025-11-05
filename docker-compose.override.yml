@@ -1,20 +1,7 @@
 # Docker Compose Override for Development/Testing
-# This file provides SSL/TLS configuration and additional development settings
+# This file provides additional development settings and tools
 
 services:
-  nginx:
-    volumes:
-      # SSL certificates for HTTPS (self-signed for development)
-      - ./nginx/nginx-selfsigned.crt:/etc/nginx/certs/nginx-selfsigned.crt:ro
-      - ./nginx/nginx-selfsigned.key:/etc/nginx/certs/nginx-selfsigned.key:ro
-      # SSL configuration
-      - ./nginx/ssl.conf:/etc/nginx/conf.d/ssl.conf:ro
-    ports:
-      # Add HTTPS port
-      - "443:443"
-    environment:
-      - NGINX_ENABLE_SSL=true
-
   # Development-specific API configuration
   api:
     environment:
@@ -68,13 +55,14 @@ services:
       - redis
     restart: unless-stopped
 
-  # Mailhog for email testing (development only)
-  mailhog:
-    image: mailhog/mailhog:latest
-    container_name: godlionseeker-mailhog
+  # MailDev for email testing (development only)
+  maildev:
+    image: maildev/maildev:latest
+    container_name: godlionseeker-maildev
     ports:
-      - "1025:1025"  # SMTP
-      - "8025:8025"  # Web UI
+      - "1025:1025"  # SMTP server
+      - "1080:1080"  # Web UI
     networks:
       - scraper-network
     restart: unless-stopped
+    command: --hide-extensions STARTTLS
