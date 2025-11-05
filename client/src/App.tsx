@@ -19,6 +19,8 @@ const ScraperRoutes = React.lazy(() => import('src/Modules/Scraper/routes/routes
 const StatisticsRoutes = React.lazy(() => import('src/Modules/Statistics/routes/routes'))
 const CompaniesRoutes = React.lazy(() => import('src/Modules/Companies/routes/routes'))
 const JobAnalysisRoutes = React.lazy(() => import('src/Modules/JobAnalysis/routes/routes'))
+const ProfileManagementRoutes = React.lazy(() => import('src/Modules/ProfileManagement/routes/routes'))
+const AutomationRoutes = React.lazy(() => import('src/Modules/Automation/routes'))
 
 // Admin Module (only loaded for admin users)
 const AdminRoutes = React.lazy(() => import('src/Modules/AdminManagement/routes/Admin'))
@@ -135,6 +137,20 @@ const App: React.FC = (): React.ReactElement => {
         <AuthRoute element={
           <SuspenseWrapper>
             <JobAnalysisRoutes />
+          </SuspenseWrapper>
+        } />
+      } />
+      <Route path='profile-management/*' element={
+        <AuthRoute element={
+          <SuspenseWrapper>
+            <ProfileManagementRoutes />
+          </SuspenseWrapper>
+        } />
+      } />
+      <Route path='automation/*' element={
+        <AuthRoute element={
+          <SuspenseWrapper>
+            <AutomationRoutes />
           </SuspenseWrapper>
         } />
       } />
