@@ -81,60 +81,10 @@ export default defineConfig({
         },
         rollupOptions: {
             output: {
-                manualChunks: function (id) {
-                    // Normalize path separators for consistent matching
-                    var normalizedId = id.replace(/\\/g, '/');
-                    if (normalizedId.includes('node_modules')) {
-                        // React ecosystem - keep together to avoid circular deps
-                        if (normalizedId.includes('/react/') || normalizedId.includes('/react-dom/')) {
-                            return 'react-vendor';
-                        }
-                        // Emotion must come before MUI
-                        if (normalizedId.includes('@emotion/')) {
-                            return 'emotion-vendor';
-                        }
-                        // MUI - single chunk to prevent circular dependencies
-                        if (normalizedId.includes('@mui/')) {
-                            return 'mui-vendor';
-                        }
-                        // Recharts - isolated to prevent circular deps
-                        if (normalizedId.includes('/recharts/')) {
-                            return 'recharts-vendor';
-                        }
-                        // TanStack libraries
-                        if (normalizedId.includes('@tanstack/')) {
-                            return 'data-vendor';
-                        }
-                        // Utility libraries
-                        if (normalizedId.includes('axios') ||
-                            normalizedId.includes('zustand') ||
-                            normalizedId.includes('immer') ||
-                            normalizedId.includes('classnames') ||
-                            normalizedId.includes('clsx') ||
-                            normalizedId.includes('crypto-js') ||
-                            normalizedId.includes('date-fns')) {
-                            return 'utils-vendor';
-                        }
-                        // UI/Interaction libraries - FIX: Keep floating-ui with other UI libs
-                        if (normalizedId.includes('@floating-ui') ||
-                            normalizedId.includes('@reactour') ||
-                            normalizedId.includes('kbar') ||
-                            normalizedId.includes('idb')) {
-                            return 'ui-vendor';
-                        }
-                        // React helper libraries
-                        if (normalizedId.includes('react-router') ||
-                            normalizedId.includes('react-helmet') ||
-                            normalizedId.includes('react-i18next') ||
-                            normalizedId.includes('i18next') ||
-                            normalizedId.includes('react-hook-form') ||
-                            normalizedId.includes('react-toastify') ||
-                            normalizedId.includes('react-')) {
-                            return 'react-utils-vendor';
-                        }
-                        // Default vendor chunk for remaining node_modules
-                        return 'vendor';
-                    }
+                manualChunks: {
+                    'react-vendor': ['react', 'react-dom'],
+                    'utils-vendor': ['zustand', 'axios', 'crypto-js', 'classnames'],
+                    // Make sure React is loaded before utils
                 },
                 // Better chunk naming to identify issues
                 chunkFileNames: 'js/[name]-[hash].js',
