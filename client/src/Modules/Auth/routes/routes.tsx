@@ -6,6 +6,7 @@ import SignInV2 from '../screens/SignInSide'
 import SignOut from '../screens/SignOut'
 import ForgetPassword from '../screens/ForgetPassword'
 import VerificationEmail from '../screens/VerificationEmail'
+import EmailVerification from '../screens/EmailVerification'
 import ResetPassword from '../screens/ResetPassword'
 
 const AuthRoutes: React.FC<RoutesProps> = ({
@@ -29,6 +30,7 @@ const AuthRoutes: React.FC<RoutesProps> = ({
       <Route path='forgetpassword' element={<ForgetPassword />} />
       
       {/* Email Verification Routes - /auth/verification/email and /auth/verification/email/:email */}
+      <Route path='verification-email' element={<EmailVerification />} />
       <Route path='verification/email' element={<VerificationEmail />} />
       <Route path='verification/email/:email' element={<VerificationEmail />} />
       
