@@ -152,6 +152,7 @@ export default function NavBar() {
   const publicPages = [
     { name: 'Home', link: '' },
     { name: 'Profile Analyzer', link: 'profile-analyzer' },
+    { name: 'My CVs', link: 'profile/my-cvs' },
     { name: 'Jobs', link: 'jobs' },
     { name: 'Scraper', link: 'scraper' },
     { name: 'Statistics', link: 'statistics' },

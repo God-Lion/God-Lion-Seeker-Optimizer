@@ -9,6 +9,7 @@ import { Route, Routes } from 'react-router-dom'
 import FeatureComparison from '../screens/FeatureComparison'
 import PrivacyPolicy from '../screens/PrivacyPolicy'
 import TermsOfService from '../screens/TermsOfService'
+import ContactUs from '../screens/ContactUs'
 
 const CommonRoutes: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const CommonRoutes: React.FC = () => {
       <Route path="/features" element={<FeatureComparison />} />
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/terms-of-service" element={<TermsOfService />} />
+      <Route path="/contact" element={<ContactUs />} />
     </Routes>
   )
 }
