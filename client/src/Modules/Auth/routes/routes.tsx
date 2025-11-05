@@ -9,6 +9,7 @@ import VerificationEmail from '../screens/VerificationEmail'
 import EmailVerification from '../screens/EmailVerification'
 import AccountVerification from '../screens/AccountVerification'
 import OtpVerification from '../screens/OtpVerification'
+import SetNewPassword from '../screens/SetNewPassword'
 import ResetPassword from '../screens/ResetPassword'
 
 const AuthRoutes: React.FC<RoutesProps> = ({
@@ -35,6 +36,7 @@ const AuthRoutes: React.FC<RoutesProps> = ({
       <Route path='verification-email' element={<EmailVerification />} />
       <Route path='account-verification' element={<AccountVerification />} />
       <Route path='otp-verification' element={<OtpVerification />} />
+      <Route path='set-new-password' element={<SetNewPassword />} />
       <Route path='verification/email' element={<VerificationEmail />} />
       <Route path='verification/email/:email' element={<VerificationEmail />} />
       
