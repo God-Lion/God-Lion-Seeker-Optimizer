@@ -34,7 +34,7 @@ import verticalMenuItemStyles from 'src/core/styles/vertical/menuItemStyles'
 import verticalMenuSectionStyles from 'src/core/styles/vertical/menuSectionStyles'
 import { ChevronRight, RadioButtonUnchecked } from '@mui/icons-material'
 import { IMenu } from '../types'
-import adminmenu from 'src/Modules/AdminManagement/menu'
+import adminmenu from 'src/Modules/Admin/menu'
 
 
 import Icon from 'src/components/Icon'

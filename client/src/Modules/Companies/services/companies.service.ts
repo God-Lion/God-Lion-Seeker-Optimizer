@@ -1,7 +1,7 @@
 // src/Modules/Companies/services/companies.service.ts
 
-import { apiClient } from '../../../shared/api/api-client'
-import { ENDPOINTS } from '../../../shared/api/config'
+import { apiClient } from 'src/services/api/api-client'
+import { ENDPOINTS } from 'src/services/api/config'
 import { AxiosResponse } from 'axios'
 import {
   Company,

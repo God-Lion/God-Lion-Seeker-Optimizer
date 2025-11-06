@@ -11,7 +11,9 @@ import {
   Paper,
   Typography,
 } from '@mui/material'
-import { handleValidateUser } from '../../../services/app/index'
+import { useQuery } from '@tanstack/react-query'
+import { authService } from 'src/services/api/api.service'
+import { QUERY_KEYS } from 'src/services/api'
 import { IStatus } from 'src/utils/types'
 
 export default function Validate() {
@@ -19,11 +21,14 @@ export default function Validate() {
   const navigate = useNavigate()
   const {
     data: validateUserData,
-    // error: errorvalidateUser,
     isLoading: _isLoadingValidateUser,
     isSuccess: isSuccessValidateUser,
     isError: isErrorValidateUser,
-  } = handleValidateUser(id ?? '', token ?? '')
+  } = useQuery({
+    queryKey: QUERY_KEYS.validateUser(id ?? '', token ?? ''),
+    queryFn: () => authService.validateUser(id ?? '', token ?? ''),
+    enabled: !!id && !!token,
+  })
   const validateUser = validateUserData?.data
   const [loading, _setLoading] = React.useState(false)
   const [status, setStatus] = React.useState<IStatus>({

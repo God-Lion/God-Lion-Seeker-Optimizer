@@ -27,7 +27,6 @@ const Banner: React.FC = () => {
       sx={{
         position: 'relative',
         backgroundColor: 'grey.800',
-        color: '#fff',
         mb: 4,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
@@ -51,7 +50,7 @@ const Banner: React.FC = () => {
           bottom: 0,
           right: 0,
           left: 0,
-          backgroundColor: 'rgba(0,0,0,.5)',
+          backgroundColor: (theme) => theme.palette.mode === 'light' ? 'rgba(0,0,0,.6)' : 'rgba(0,0,0,.5)',
           borderRadius: 2,
         }}
       />
@@ -69,13 +68,12 @@ const Banner: React.FC = () => {
             <Typography
               component='h1'
               variant='h3'
-              color='inherit'
               gutterBottom
-              sx={{ fontWeight: 600 }}
+              sx={{ fontWeight: 600, color: '#fff' }}
             >
               {bannerContent.title}
             </Typography>
-            <Typography variant='h5' color='inherit' paragraph>
+            <Typography variant='h5' paragraph sx={{ color: '#fff' }}>
               {bannerContent.description}
             </Typography>
             {/* Optional: Add link/CTA button here */}

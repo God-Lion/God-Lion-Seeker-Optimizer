@@ -12,7 +12,7 @@ import {
 import { IUserReponse } from 'src/types'
 import FormLayout from './FormLayout'
 import { useMutation } from '@tanstack/react-query'
-import { updateNames } from 'src/services/app/mutation'
+import { userService } from 'src/shared/api/services/api.service'
 import { IUpdateNames } from 'src/types'
 import 'src/store'
 
@@ -66,7 +66,7 @@ export default function ChangeAccount({ user }: { user: IUserReponse }) {
       else controlForm.clearErrors('lastname')
       console.log(body)
 
-      return await updateNames(body)
+      return await userService.updateNames(body)
     },
     onMutate: (variables) => {
       console.log('onMutate variables ', variables)

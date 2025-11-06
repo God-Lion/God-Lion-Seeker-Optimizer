@@ -20,7 +20,7 @@ import structlog
 from src.api.routes import (
     health, jobs, scraping, analysis, companies, statistics,
     career_recommendations, sse_streaming, role_analysis,
-    auth, profiles, dashboard, automation, notifications, guest, jobs_enhanced, admin
+    auth, profiles, dashboard, automation, notifications, guest, jobs_enhanced, admin, rbac_admin
 )
 from src.config.database import get_db_session, init_db
 from src.config.settings import settings
@@ -132,6 +132,7 @@ app.include_router(sse_streaming.router, prefix="/api", tags=["Server-Sent Event
 
 # Admin
 app.include_router(admin.router, tags=["Admin"])
+app.include_router(rbac_admin.router, tags=["Admin - RBAC"])
 
 
 if __name__ == "__main__":

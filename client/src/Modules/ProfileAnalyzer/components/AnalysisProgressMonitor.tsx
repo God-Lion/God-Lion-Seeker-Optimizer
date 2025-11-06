@@ -21,7 +21,7 @@ import {
   Analytics as AnalyticsIcon,
   EmojiEvents as EmojiEventsIcon
 } from '@mui/icons-material'
-import { useAnalysisProgress } from '../../../shared/hooks/useSSE'
+import { useAnalysisProgress } from 'src/services/hooks/useSSE'
 
 interface AnalysisProgressMonitorProps {
   analysisId: number

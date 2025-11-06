@@ -1,17 +1,13 @@
 import { StateCreator } from 'zustand'
 import axios from 'axios'
-import { baseUrl } from 'src/utils/api_link'
 import { IAuth, ILogin } from 'src/types'
 import { IResponse } from 'src/types'
-import axiosInstance from 'src/utils/axiosInstance'
-import { tokenRefreshService } from 'src/services/tokenRefresh.service'
+import axiosInstance from 'src/services/api/axios-instance'
+import { API_CONFIG } from 'src/services/api/config'
+import { secureTokenManager, TokenData as AuthTokens } from 'src/services/secureTokenManager'
 import { AppStore } from 'src/store'
 
-export interface AuthTokens {
-  accessToken: string
-  refreshToken: string
-  expiresAt: number
-}
+export type { AuthTokens }
 
 export interface AuthSlice {
   user: IAuth | null
@@ -53,7 +49,7 @@ export const createAuthSlice: StateCreator<
 
     try {
       const response = await axios.post<IResponse>(
-        `${baseUrl()}signin`,
+        `${API_CONFIG.baseURL}/signin`,
         credentials,
         { withCredentials: true }
       )
@@ -75,7 +71,7 @@ export const createAuthSlice: StateCreator<
   // Sign Out
   signOut: async (callback?: (status: number) => void) => {
     try {
-      const response = await axios.get(`${baseUrl()}signout`, {
+      const response = await axios.get(`${API_CONFIG.baseURL}/signout`, {
         withCredentials: true,
       })
 
@@ -86,15 +82,18 @@ export const createAuthSlice: StateCreator<
         state.error = null
       })
 
+      secureTokenManager.clearTokens()
+
       if (callback) callback(response.status)
     } catch (error) {
       console.error('Sign out error:', error)
-      // Clear state anyway
       set((state) => {
         state.user = null
         state.isAuthenticated = false
         state.tokens = null
       })
+
+      secureTokenManager.clearTokens()
     } finally {
       set((state) => {
         state.isLoading = false
@@ -134,17 +133,40 @@ export const createAuthSlice: StateCreator<
   // Refresh Token (get new access token using refresh token)
   refreshToken: async () => {
     try {
-      const newToken = await tokenRefreshService.manualRefresh()
+      const tokens = secureTokenManager.getTokens()
       
-      // Update tokens in state
-      const tokens = tokenRefreshService['getStoredTokens']()
-      if (tokens) {
-        set((state) => {
-          state.tokens = tokens
-        })
+      if (!tokens || !tokens.refreshToken) {
+        throw new Error('No refresh token available')
       }
+
+      interface RefreshResponse {
+        access_token: string
+        refresh_token: string
+        expires_in: number
+      }
+
+      const response = await axios.post<RefreshResponse>(
+        `${API_CONFIG.baseURL}/refresh-token`,
+        { refresh_token: tokens.refreshToken },
+        { withCredentials: true }
+      )
+
+      const { access_token, refresh_token, expires_in } = response.data
+      const expiresAt = Date.now() + expires_in * 1000
+
+      const newTokens: AuthTokens = {
+        accessToken: access_token,
+        refreshToken: refresh_token,
+        expiresAt,
+      }
+
+      secureTokenManager.setTokens(newTokens)
       
-      return newToken
+      set((state) => {
+        state.tokens = newTokens
+      })
+      
+      return access_token
     } catch (error: any) {
       set((state) => {
         state.user = null
@@ -152,6 +174,7 @@ export const createAuthSlice: StateCreator<
         state.tokens = null
         state.error = 'Token refresh failed'
       })
+      secureTokenManager.clearTokens()
       throw error
     }
   },
@@ -186,6 +209,12 @@ export const createAuthSlice: StateCreator<
     set((state) => {
       state.tokens = tokens
     })
+    
+    if (tokens) {
+      secureTokenManager.setTokens(tokens)
+    } else {
+      secureTokenManager.clearTokens()
+    }
   },
 
   // Set Loading

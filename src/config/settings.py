@@ -102,6 +102,18 @@ class Settings(BaseSettings):
     max_login_attempts: int = 3
     account_lockout_duration_minutes: int = 30
     
+    # Encryption
+    encryption_key: Optional[str] = None
+    file_encryption_key: Optional[str] = None
+    encryption_enabled: bool = True
+    
+    # Redis Security
+    redis_use_tls: bool = False
+    redis_ssl_cert_reqs: str = "required"
+    redis_ssl_ca_certs: Optional[str] = None
+    redis_ssl_certfile: Optional[str] = None
+    redis_ssl_keyfile: Optional[str] = None
+    
     # Frontend URL (for email links)
     frontend_url: str = "http://localhost:3000"
     

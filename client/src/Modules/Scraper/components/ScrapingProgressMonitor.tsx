@@ -17,7 +17,7 @@ import {
   Stop as StopIcon,
   Refresh as RefreshIcon
 } from '@mui/icons-material'
-import { useScrapingProgress } from '../../../shared/hooks/useSSE'
+import { useScrapingProgress } from 'src/services/hooks/useSSE'
 
 interface ScrapingProgressMonitorProps {
   sessionId: number

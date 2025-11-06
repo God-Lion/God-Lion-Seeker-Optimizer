@@ -69,7 +69,7 @@ const Providers: React.FC<
     direction: Direction
   }
 > = ({ children, direction }) => {
-  const systemMode = 'dark'
+  const systemMode = themeConfig.mode === 'system' ? 'dark' : themeConfig.mode
 
   const routerFutureConfig = useMemo(
     () => ({

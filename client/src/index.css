@@ -5,6 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #FFFFFF;
+}
+
+[data-mui-color-scheme='dark'] body {
+  background-color: #1A1A1A;
 }
 
 code {
@@ -21,4 +26,9 @@ code {
 html {
   font-family: sans-serif;
   line-height: 1.15;
+  background-color: #FFFFFF;
+}
+
+[data-mui-color-scheme='dark'] html {
+  background-color: #1A1A1A;
 }

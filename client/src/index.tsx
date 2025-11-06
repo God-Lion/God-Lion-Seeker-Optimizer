@@ -31,6 +31,26 @@ const direction = 'ltr'
 //     return false
 // }
 
+if (import.meta.env.PROD) {
+  // Disable console in production
+  console.log = () => {}
+  console.warn = () => {}
+  console.error = () => {}
+  
+  // Detect DevTools (better method)
+  const devtools = /./
+  devtools.toString = function() {
+    this.opened = true
+  }
+  
+  setInterval(() => {
+    if ((devtools as any).opened) {
+      // Alert or log security event
+      window.location.href = '/security-warning'
+    }
+  }, 1000)
+}
+
 root.render(
   <Providers direction={direction}>
     <Layout>

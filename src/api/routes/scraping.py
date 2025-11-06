@@ -14,6 +14,9 @@ import structlog
 from src.config.database import get_db_session
 from src.services.job_scraping_service import JobScrapingService
 from src.repositories.scraping_session_repository import ScrapingSessionRepository
+from src.auth.dependencies import require_permission, get_current_active_user
+from src.models.permission import PermissionType
+from src.models.user import User
 
 logger = structlog.get_logger(__name__)
 router = APIRouter()
@@ -78,6 +81,7 @@ async def start_scraping(
     request: ScrapeRequest,
     background_tasks: BackgroundTasks,
     db: AsyncSession = Depends(get_db_session),
+    current_user: User = Depends(require_permission(PermissionType.SCRAPER_START)),
 ) -> dict[str, Any]:
     """
     Start a new scraping job.
@@ -171,6 +175,7 @@ async def get_session_status(
 async def stop_session(
     session_id: int,
     db: AsyncSession = Depends(get_db_session),
+    current_user: User = Depends(require_permission(PermissionType.SCRAPER_STOP)),
 ) -> dict[str, Any]:
     """Stop a running scraping session."""
     try:
@@ -218,6 +223,7 @@ async def list_sessions(
     skip: int = 0,
     limit: int = 20,
     db: AsyncSession = Depends(get_db_session),
+    current_user: User = Depends(get_current_active_user),
 ) -> dict[str, Any]:
     """List all scraping sessions."""
     try:

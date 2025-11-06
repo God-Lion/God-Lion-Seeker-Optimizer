@@ -15,7 +15,7 @@ import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import 'react-phone-input-2/lib/style.css'
 import { useForm, Controller } from 'react-hook-form'
-import { resetPassword } from '../../services/app/index'
+import { authService } from 'src/shared/api/services/api.service'
 
 export default function ResetPasswordForm({
   handleClose,
@@ -38,27 +38,23 @@ export default function ResetPasswordForm({
 
   const onSubmit = async (data) => {
     if (data?.username) {
-      const response = await resetPassword(data)
-      if (response?.status === 200) {
+      try {
+        const response = await authService.resetPassword(data)
+        if (response?.status === 200) {
+          handleClickStatus({
+            type: 'success',
+            state: 'modify',
+            msg: 'Le mot de passe a été réinitialisé',
+          })
+          handleClose()
+        }
+      } catch (error) {
         handleClickStatus({
-          type: 'success',
+          type: 'error',
           state: 'modify',
-          msg: 'Le mot de passe a été réinitialisé',
+          msg: 'La modification du mot de passe a échoué',
         })
-        handleClose()
       }
-      if (response?.status >= 400)
-        handleClickStatus({
-          type: 'error',
-          state: 'modify',
-          msg: 'La modification du mot de passe a échoué',
-        })
-      if (response?.response?.status >= 400)
-        handleClickStatus({
-          type: 'error',
-          state: 'modify',
-          msg: 'La modification du mot de passe a échoué',
-        })
     }
     handleClose()
   }

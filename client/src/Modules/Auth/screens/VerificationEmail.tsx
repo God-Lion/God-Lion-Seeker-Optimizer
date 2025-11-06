@@ -13,7 +13,7 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { AxiosError, AxiosResponse } from 'axios'
-import { verificationEmailHandle } from 'src/services/app'
+import { authService } from 'src/services/api/api.service'
 import MAlert from 'src/components/Alert'
 
 export default function VerificationEmail() {
@@ -31,7 +31,7 @@ export default function VerificationEmail() {
     async function fetchData() {
       try {
         setLoading(true)
-        const response: AxiosResponse = await verificationEmailHandle(
+        const response: AxiosResponse = await authService.verifyEmail(
           email || '',
           signature ?? '',
         )

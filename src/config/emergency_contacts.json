@@ -1,0 +1,148 @@
+{
+  "emergency_contacts": [
+    {
+      "role": "Database Administrator",
+      "name": "DBA Team",
+      "email": "dba@company.com",
+      "phone": "+1-XXX-XXX-XXXX",
+      "priority": 1,
+      "responsibilities": [
+        "Database restore",
+        "Point-in-time recovery",
+        "Data integrity verification",
+        "Transaction log management"
+      ]
+    },
+    {
+      "role": "System Administrator",
+      "name": "SysAdmin Team",
+      "email": "sysadmin@company.com",
+      "phone": "+1-XXX-XXX-XXXX",
+      "priority": 2,
+      "responsibilities": [
+        "Server infrastructure",
+        "Service management",
+        "Full system restore",
+        "Cloud infrastructure"
+      ]
+    },
+    {
+      "role": "Security Team",
+      "name": "Security Team",
+      "email": "security@company.com",
+      "phone": "+1-XXX-XXX-XXXX",
+      "priority": 3,
+      "responsibilities": [
+        "Security incidents",
+        "Ransomware response",
+        "Data breach handling",
+        "Access control"
+      ]
+    },
+    {
+      "role": "Development Lead",
+      "name": "Dev Lead",
+      "email": "dev-lead@company.com",
+      "phone": "+1-XXX-XXX-XXXX",
+      "priority": 4,
+      "responsibilities": [
+        "Application issues",
+        "Configuration problems",
+        "Code-related incidents",
+        "API issues"
+      ]
+    },
+    {
+      "role": "Cloud Infrastructure",
+      "name": "Cloud Team",
+      "email": "cloud@company.com",
+      "phone": "+1-XXX-XXX-XXXX",
+      "priority": 5,
+      "responsibilities": [
+        "AWS/Azure issues",
+        "Cloud storage",
+        "Network connectivity",
+        "DNS management"
+      ]
+    },
+    {
+      "role": "Management Escalation",
+      "name": "CTO / VP Engineering",
+      "email": "cto@company.com",
+      "phone": "+1-XXX-XXX-XXXX",
+      "priority": 6,
+      "responsibilities": [
+        "Major incident escalation",
+        "Business decisions",
+        "Customer communication",
+        "Budget approval"
+      ]
+    }
+  ],
+  "escalation_procedures": {
+    "initial_detection": "Automated monitoring alerts",
+    "response_time_minutes": 15,
+    "escalation_levels": [
+      {
+        "level": 1,
+        "contact": "System Administrator",
+        "trigger": "Any critical alert",
+        "response_time_minutes": 15
+      },
+      {
+        "level": 2,
+        "contact": "Database Administrator",
+        "trigger": "Database-related issues",
+        "response_time_minutes": 30
+      },
+      {
+        "level": 3,
+        "contact": "Security Team",
+        "trigger": "Security incidents, data breaches",
+        "response_time_minutes": 30
+      },
+      {
+        "level": 4,
+        "contact": "Management",
+        "trigger": "Major outage (>2 hours), data loss, security breach",
+        "response_time_minutes": 60
+      }
+    ]
+  },
+  "communication_channels": {
+    "primary": "Email",
+    "secondary": "Phone/SMS",
+    "emergency_hotline": "+1-XXX-XXX-XXXX",
+    "status_page": "https://status.example.com",
+    "incident_chat": "Slack #incidents"
+  },
+  "disaster_types": {
+    "server_failure": {
+      "contacts": ["System Administrator", "Database Administrator"],
+      "estimated_recovery_hours": 3
+    },
+    "database_corruption": {
+      "contacts": ["Database Administrator", "System Administrator"],
+      "estimated_recovery_hours": 2
+    },
+    "ransomware": {
+      "contacts": ["Security Team", "System Administrator", "Management"],
+      "estimated_recovery_hours": 6,
+      "special_procedures": "Do not pay ransom. Contact law enforcement."
+    },
+    "data_deletion": {
+      "contacts": ["Database Administrator"],
+      "estimated_recovery_hours": 1
+    },
+    "cloud_outage": {
+      "contacts": ["Cloud Infrastructure", "System Administrator"],
+      "estimated_recovery_hours": 3
+    }
+  },
+  "after_hours_support": {
+    "enabled": true,
+    "on_call_rotation": true,
+    "pagerduty_enabled": false,
+    "emergency_procedure": "Call emergency hotline, which will page on-call engineer"
+  }
+}

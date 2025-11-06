@@ -11,7 +11,7 @@ import {
   RecommendedJobsParams,
   AnalysisFilterParams,
 } from '../types'
-import { handleApiError } from '../../../shared/api/api-client'
+import { handleApiError } from 'src/services/api/api-client'
 
 /**
  * Query Keys for Job Analysis

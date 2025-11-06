@@ -310,11 +310,16 @@ export default function Home() {
                 p: 5,
                 borderRadius: 3,
                 height: '100%',
-                background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
-                color: 'white',
+                background: (theme) => theme.palette.mode === 'light' 
+                  ? 'background.paper'
+                  : `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+                border: (theme) => theme.palette.mode === 'light' ? '1px solid' : 'none',
+                borderColor: 'divider',
                 position: 'relative',
                 overflow: 'hidden',
-                boxShadow: (theme) => `0 20px 60px ${alpha(theme.palette.primary.main, 0.3)}`,
+                boxShadow: (theme) => theme.palette.mode === 'light'
+                  ? 'none'
+                  : `0 20px 60px ${alpha(theme.palette.primary.main, 0.3)}`,
               }}
             >
               {/* Decorative Elements */}
@@ -326,7 +331,9 @@ export default function Home() {
                   width: 200,
                   height: 200,
                   borderRadius: '50%',
-                  bgcolor: 'rgba(255,255,255,0.1)',
+                  bgcolor: (theme) => theme.palette.mode === 'light'
+                    ? alpha(theme.palette.primary.main, 0.08)
+                    : 'rgba(255,255,255,0.1)',
                 }}
               />
               <Box
@@ -337,12 +344,22 @@ export default function Home() {
                   width: 150,
                   height: 150,
                   borderRadius: '50%',
-                  bgcolor: 'rgba(255,255,255,0.08)',
+                  bgcolor: (theme) => theme.palette.mode === 'light'
+                    ? alpha(theme.palette.secondary.main, 0.06)
+                    : 'rgba(255,255,255,0.08)',
                 }}
               />
 
               <Box sx={{ position: 'relative', zIndex: 1 }}>
-                <Typography variant='h5' gutterBottom sx={{ fontWeight: 700, mb: 4 }}>
+                <Typography 
+                  variant='h5' 
+                  gutterBottom 
+                  sx={{ 
+                    fontWeight: 700, 
+                    mb: 4,
+                    color: (theme) => theme.palette.mode === 'light' ? 'text.primary' : 'white',
+                  }}
+                >
                   Platform Statistics
                 </Typography>
 
@@ -357,7 +374,11 @@ export default function Home() {
                     sx={{
                       mb: 4,
                       pb: index < 2 ? 4 : 0,
-                      borderBottom: index < 2 ? '1px solid rgba(255,255,255,0.2)' : 'none',
+                      borderBottom: (theme) => index < 2 
+                        ? theme.palette.mode === 'light'
+                          ? `1px solid ${theme.palette.divider}`
+                          : '1px solid rgba(255,255,255,0.2)'
+                        : 'none',
                     }}
                   >
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1 }}>
@@ -369,16 +390,33 @@ export default function Home() {
                           width: 36,
                           height: 36,
                           borderRadius: '10px',
-                          bgcolor: 'rgba(255,255,255,0.2)',
+                          bgcolor: (theme) => theme.palette.mode === 'light'
+                            ? alpha(theme.palette.primary.main, 0.15)
+                            : 'rgba(255,255,255,0.2)',
+                          color: (theme) => theme.palette.mode === 'light' ? 'primary.main' : 'white',
                         }}
                       >
                         {stat.icon}
                       </Box>
-                      <Typography variant='h3' sx={{ fontWeight: 800, letterSpacing: '-1px' }}>
+                      <Typography 
+                        variant='h3' 
+                        sx={{ 
+                          fontWeight: 800, 
+                          letterSpacing: '-1px',
+                          color: (theme) => theme.palette.mode === 'light' ? 'text.primary' : 'white',
+                        }}
+                      >
                         {stat.number}
                       </Typography>
                     </Box>
-                    <Typography variant='body1' sx={{ opacity: 0.95, fontWeight: 500 }}>
+                    <Typography 
+                      variant='body1' 
+                      sx={{ 
+                        opacity: 0.95, 
+                        fontWeight: 500,
+                        color: (theme) => theme.palette.mode === 'light' ? 'text.secondary' : 'white',
+                      }}
+                    >
                       {stat.label}
                     </Typography>
                   </Box>
@@ -389,14 +427,29 @@ export default function Home() {
                     mt: 4,
                     p: 3,
                     borderRadius: 2,
-                    bgcolor: 'rgba(255,255,255,0.15)',
+                    bgcolor: (theme) => theme.palette.mode === 'light'
+                      ? alpha(theme.palette.primary.main, 0.08)
+                      : 'rgba(255,255,255,0.15)',
                     backdropFilter: 'blur(10px)',
                   }}
                 >
-                  <Typography variant='body2' sx={{ fontWeight: 500, mb: 1 }}>
+                  <Typography 
+                    variant='body2' 
+                    sx={{ 
+                      fontWeight: 500, 
+                      mb: 1,
+                      color: (theme) => theme.palette.mode === 'light' ? 'text.primary' : 'white',
+                    }}
+                  >
                     🚀 Updated in real-time
                   </Typography>
-                  <Typography variant='caption' sx={{ opacity: 0.9 }}>
+                  <Typography 
+                    variant='caption' 
+                    sx={{ 
+                      opacity: 0.9,
+                      color: (theme) => theme.palette.mode === 'light' ? 'text.secondary' : 'white',
+                    }}
+                  >
                     Our platform continuously monitors and updates job listings to ensure you never miss an opportunity
                   </Typography>
                 </Box>

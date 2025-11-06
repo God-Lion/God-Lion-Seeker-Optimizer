@@ -2,13 +2,6 @@ import React from 'react';
 import { RoutesProps, Routes, Route } from 'react-router-dom';
 import { CandidateProfilePage } from '../screens';
 
-/**
- * =============================================================================
- * CANDIDATE PROFILE ANALYZER MODULE ROUTES
- * =============================================================================
- * Handles all candidate profile analysis and job matching routes
- */
-
 const CandidateProfileAnalyzerRoutes: React.FC<RoutesProps> = ({
   location,
 }): React.ReactElement | null => {

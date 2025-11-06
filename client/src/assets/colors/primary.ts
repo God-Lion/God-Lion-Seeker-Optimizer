@@ -1,10 +1,10 @@
 const primary = {
-  100: '#30cd9f',
-  200: '#55d3a9',
-  300: '#70d9b4',
-  400: '#88dfbe',
-  500: '#9de5c9',
-  600: '#b2ead3',
+  100: '#D4AF37',
+  200: '#DCBB4D',
+  300: '#E0C55B',
+  400: '#E5CF69',
+  500: '#EAD977',
+  600: '#EFE385',
 }
 
 export default primary

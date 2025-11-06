@@ -9,6 +9,7 @@ import colorSchemes from './colorSchemes'
 import spacing from './spacing'
 import shadows from './shadows'
 import customShadows from './customShadows'
+import themeConfig from 'src/configs/themeConfig'
 // import typography from './typography'
 
 // const public_sans = Public_Sans({
@@ -26,16 +27,7 @@ const theme = (
     components: overrides(settings.skin as Skin),
     colorSchemes: colorSchemes(settings.skin as Skin),
     ...spacing,
-    shape: {
-      borderRadius: 6,
-      customBorderRadius: {
-        xs: 2,
-        sm: 4,
-        md: 6,
-        lg: 8,
-        xl: 10,
-      },
-    },
+    shape: themeConfig.shape,
     shadows: shadows(mode),
     // typography: typography(public_sans.style.fontFamily),
     customShadows: customShadows(mode),

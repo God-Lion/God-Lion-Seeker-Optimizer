@@ -15,6 +15,13 @@ from .user import (
     Notification,
     SystemMetric,
 )
+from .permission import (
+    Permission,
+    PermissionType,
+    RolePermission,
+    AuditLog,
+    UserPermission,
+)
 
 __all__ = [
     "Base",
@@ -35,4 +42,9 @@ __all__ = [
     "SecurityLog",
     "Notification",
     "SystemMetric",
+    "Permission",
+    "PermissionType",
+    "RolePermission",
+    "AuditLog",
+    "UserPermission",
 ]

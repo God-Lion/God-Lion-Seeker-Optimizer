@@ -14,7 +14,7 @@ import {
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { IUserReponse } from 'src/types'
 import { FormLayout } from 'src/components/form'
-import { updateEmail } from 'src/services/app/mutation'
+import { userService } from 'src/shared/api/services/api.service'
 import { useMutation } from '@tanstack/react-query'
 import { useAuth } from 'src/store'
 import { AxiosError } from 'axios'
@@ -58,7 +58,7 @@ export default function ChangeEmail({ user }: { user: IUserReponse }) {
         )
       else controlForm.clearErrors('email')
 
-      return await updateEmail(body)
+      return await userService.updateEmail(body)
     },
     onMutate: (variables) => {
       console.log('onMutate variables ', variables)

@@ -16,9 +16,9 @@ import {
   CircularProgress,
 } from '@mui/material'
 import { Settings, ColorLens, Logout } from '@mui/icons-material'
-import { useAuth } from 'src/store'
-import { useSignOut } from 'src/hooks'
-import type { IUserReponse } from 'src/types'
+import { useAuth } from '../store'
+import { useSignOut } from '../services/hooks'
+import type { IUserReponse } from '../types'
 
 const Profile: React.FC<{ user: IUserReponse }> = ({ user }) => (
   <Stack direction='column'>

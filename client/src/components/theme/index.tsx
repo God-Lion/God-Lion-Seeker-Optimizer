@@ -1,17 +1,14 @@
 import React from 'react'
-import { deepmerge } from '@mui/utils'
 import {
   ThemeProvider as MuiThemeProvider,
   createTheme,
-  lighten,
-  darken,
 } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-import type { } from '@mui/lab/themeAugmentation' //! Do not remove this import otherwise you will get type errors while making a production build
+import type { } from '@mui/lab/themeAugmentation'
 import { useMedia } from 'react-use'
 import type { ChildrenType, Direction, SystemMode } from 'src/types'
 import ModeChanger from './ModeChanger'
-import { useSettings } from 'src/core/contexts/settingsContext'
+import { useSettings } from 'src/store'
 import defaultCoreTheme from 'src/core/theme'
 
 const ThemeProvider: React.FC<
@@ -32,24 +29,20 @@ const ThemeProvider: React.FC<
   }
 
   const theme = React.useMemo(() => {
-    const newColorScheme = {
+    const coreThemeConfig = defaultCoreTheme(settings, currentMode, direction)
+    
+    const modeScheme = coreThemeConfig.colorSchemes?.[currentMode]?.palette || {}
+    
+    const themeWithPalette = {
+      ...coreThemeConfig,
       palette: {
         mode: currentMode,
-        primary: {
-          main: settings.primaryColor || '#7367F0',
-          light: lighten(settings.primaryColor as string, 0.2),
-          dark: darken(settings.primaryColor as string, 0.1),
-        },
+        ...modeScheme,
       },
     }
-
-    const coreTheme = deepmerge(
-      defaultCoreTheme(settings, currentMode, direction),
-      newColorScheme,
-    )
-
-    return createTheme(coreTheme)
-  }, [settings.primaryColor, settings.skin, currentMode, settings, direction])
+    
+    return createTheme(themeWithPalette)
+  }, [settings, currentMode, direction])
 
   return (
     <MuiThemeProvider theme={theme}>

@@ -36,11 +36,24 @@ target_metadata = Base.metadata
 
 # Override sqlalchemy.url to use synchronous driver for Alembic
 # Alembic doesn't support async drivers
-# Build PostgreSQL URL from environment variables
+# Build database URL from environment variables
 load_dotenv()
 database_url = os.getenv("DATABASE_URL")
-if database_url and "asyncpg" in database_url:
-    database_url = database_url.replace("asyncpg", "psycopg2")
+
+# If DATABASE_URL is not set, construct it from individual DB variables
+if not database_url:
+    db_host = os.getenv("DB_HOST", "localhost")
+    db_user = os.getenv("DB_USER", "root")
+    db_password = os.getenv("DB_PASSWORD", "")
+    db_name = os.getenv("DB_NAME", "godlionseeker_db")
+    database_url = f"mysql+pymysql://{db_user}:{db_password}@{db_host}/{db_name}"
+else:
+    # Replace asyncpg with psycopg2 for PostgreSQL or asyncmy with pymysql for MySQL
+    if "asyncpg" in database_url:
+        database_url = database_url.replace("asyncpg", "psycopg2")
+    elif "asyncmy" in database_url or "aiomysql" in database_url:
+        database_url = database_url.replace("asyncmy", "pymysql").replace("aiomysql", "pymysql")
+
 config.set_main_option("sqlalchemy.url", database_url)
 
 

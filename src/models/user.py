@@ -9,7 +9,9 @@ from .base import Base, TimestampMixin
 class UserRole(PyEnum):
     """User role enumeration"""
     GUEST = "guest"
-    USER = "user"
+    BASIC_USER = "basic_user"
+    PREMIUM_USER = "premium_user"
+    MANAGER = "manager"
     ADMIN = "admin"
     SUPERADMIN = "superadmin"
 
@@ -37,7 +39,7 @@ class User(Base, TimestampMixin):
     bio = Column(Text)
     
     # Authentication
-    role = Column(Enum(UserRole), default=UserRole.USER, nullable=False)
+    role = Column(Enum(UserRole), default=UserRole.BASIC_USER, nullable=False)
     status = Column(Enum(UserStatus), default=UserStatus.PENDING_VERIFICATION, nullable=False)
     email_verified = Column(Boolean, default=False)
     email_verification_token = Column(String(255))

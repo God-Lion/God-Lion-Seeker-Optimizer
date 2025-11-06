@@ -1,0 +1,21 @@
+# Crontab Configuration for Backup System
+# Add these entries to system crontab
+# Edit with: sudo crontab -e
+
+# Daily Full Backup - 2:00 AM every day
+0 2 * * * /app/src/scripts/daily_backup.sh >> /var/log/backups/daily_backup.log 2>&1
+
+# Hourly Transaction Log Backup - Every hour
+0 * * * * /app/src/scripts/hourly_txlog_backup.sh >> /var/log/backups/txlog_backup.log 2>&1
+
+# Incremental Backup - Every 6 hours
+0 */6 * * * /app/src/scripts/incremental_backup.sh >> /var/log/backups/incremental_backup.log 2>&1
+
+# Monthly Restore Test - 1st day of month at 3:00 AM
+0 3 1 * * /app/src/scripts/monthly_restore_test.sh >> /var/log/backups/restore_test.log 2>&1
+
+# Weekly Backup Cleanup - Every Sunday at 4:00 AM
+0 4 * * 0 /usr/bin/python3 -c "import asyncio; from src.services.backup_service import BackupService; asyncio.run(BackupService().cleanup_old_backups())" >> /var/log/backups/cleanup.log 2>&1
+
+# Daily Backup Verification - Every day at 6:00 AM
+0 6 * * * /usr/bin/python3 -c "import asyncio; from src.services.backup_service import BackupService; service = BackupService(); backups = asyncio.run(service.list_backups()); [asyncio.run(service.verify_backup(b.backup_id)) for b in backups[:5] if not b.verification_timestamp]" >> /var/log/backups/verification.log 2>&1

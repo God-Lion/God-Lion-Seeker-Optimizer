@@ -1,5 +1,6 @@
 import type { StateCreator } from 'zustand'
 import type { AppStore } from '../index'
+import themeConfig from 'src/configs/themeConfig'
 
 export type Mode = 'light' | 'dark' | 'system'
 export type Skin = 'default' | 'bordered'
@@ -26,14 +27,14 @@ export interface SettingsSlice {
 }
 
 const defaultSettings: Settings = {
-  mode: 'dark',
-  skin: 'default',
-  semiDark: false,
-  layout: 'vertical',
-  navbarContentWidth: 'full',
-  contentWidth: 'boxed',
-  footerContentWidth: 'full',
-  primaryColor: '#7367F0',
+  mode: themeConfig.mode,
+  skin: themeConfig.skin,
+  semiDark: themeConfig.semiDark,
+  layout: themeConfig.layout,
+  navbarContentWidth: themeConfig.navbar.contentWidth,
+  contentWidth: themeConfig.contentWidth,
+  footerContentWidth: themeConfig.footer.contentWidth,
+  primaryColor: themeConfig.colors.primary.main,
 }
 
 export const createSettingsSlice: StateCreator<

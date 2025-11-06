@@ -9,10 +9,10 @@
 
 import React from 'react'
 import type { Mode, Skin, Layout, LayoutComponentWidth } from '../types'
-import { useSettings as useZustandSettings } from 'src/store'
-import themeConfig from 'src/configs/themeConfig'
-import primaryColorConfig from 'src/configs/primaryColorConfig'
-import { useObjectCookie } from 'src/hooks'
+import { useSettings as useZustandSettings } from '../../store'
+import themeConfig from '../../configs/themeConfig'
+import primaryColorConfig from '../../configs/primaryColorConfig'
+import { useObjectCookie } from '../../services/hooks'
 
 export type Settings = {
   mode?: Mode

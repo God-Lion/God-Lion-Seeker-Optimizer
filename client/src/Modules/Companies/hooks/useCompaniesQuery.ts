@@ -8,7 +8,7 @@ import {
   UseMutationOptions,
 } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
-import { QUERY_KEYS } from '../../../shared/api/config'
+import { QUERY_KEYS } from 'src/services/api'
 import { companiesService } from '../services/companies.service'
 import {
   Company,

@@ -8,7 +8,7 @@ import AdminRoute from 'src/components/guards/AdminRoute'
 const PublicRoutes = React.lazy(() => import('src/routes/routes'))
 const CommonRoutes = React.lazy(() => import('src/Modules/Common/routes/routes'))
 
-const AuthRoutes = React.lazy(() => import('src/Modules/Auth/routes/routes'))
+const AuthenticationRoutes = React.lazy(() => import('src/Modules/Auth/routes/routes'))
 
 const JobsRoutes = React.lazy(() => import('src/Modules/Jobs/routes/routes'))
 const ProfileAnalyzerRoutes = React.lazy(() => import('src/Modules/ProfileAnalyzer/routes/routes'))
@@ -20,10 +20,10 @@ const StatisticsRoutes = React.lazy(() => import('src/Modules/Statistics/routes/
 const CompaniesRoutes = React.lazy(() => import('src/Modules/Companies/routes/routes'))
 const JobAnalysisRoutes = React.lazy(() => import('src/Modules/JobAnalysis/routes/routes'))
 const ProfileManagementRoutes = React.lazy(() => import('src/Modules/ProfileManagement/routes/routes'))
-const AutomationRoutes = React.lazy(() => import('src/Modules/Automation/routes'))
+const AutomationRoutes = React.lazy(() => import('src/Modules/Automation/routes/routes'))
 
 // Admin Module (only loaded for admin users)
-const AdminRoutes = React.lazy(() => import('src/Modules/AdminManagement/routes/Admin'))
+const AdminRoutes = React.lazy(() => import('src/Modules/Admin/routes/routes'))
 const UserManagementRoutes = React.lazy(() => import('src/Modules/UserManagement/routes/routes'))
 
 // Error & Utility Modules
@@ -50,16 +50,6 @@ const SuspenseWrapper: React.FC<{ children: React.ReactNode }> = ({
   </React.Suspense>
 )
 
-/**
- * App Component
- * Main application routing with role-based access control
- * 
- * Route Structure:
- * - Public routes: Accessible to everyone (wrapped in GuestRoute to redirect authenticated users)
- * - Job search & Profile analyzer: Accessible to all but with different features
- * - Protected routes: Require authentication (wrapped in AuthRoute)
- * - Admin routes: Require admin role (wrapped in AdminRoute)
- */
 const App: React.FC = (): React.ReactElement => {
   return (
     <Routes>
@@ -78,7 +68,7 @@ const App: React.FC = (): React.ReactElement => {
       <Route path='auth/*' element={
         <GuestRoute element={
           <SuspenseWrapper>
-            <AuthRoutes />
+            <AuthenticationRoutes />
           </SuspenseWrapper>
         } />
       } />

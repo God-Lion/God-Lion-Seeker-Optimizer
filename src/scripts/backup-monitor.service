@@ -1,0 +1,19 @@
+[Unit]
+Description=God Lion Seeker Backup Monitoring Service
+After=network.target postgresql.service redis.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/app
+Environment="PYTHONPATH=/app"
+ExecStart=/usr/bin/python3 -m src.services.backup_monitor
+Restart=always
+RestartSec=30
+
+# Logging
+StandardOutput=append:/var/log/backups/monitor.log
+StandardError=append:/var/log/backups/monitor_error.log
+
+[Install]
+WantedBy=multi-user.target

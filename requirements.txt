@@ -39,6 +39,7 @@ email-validator  # Required for EmailStr validation
 sqlalchemy[asyncio]
 psycopg2-binary
 asyncpg
+pymysql  # MySQL driver for Alembic migrations
 alembic
 
 # Caching (Phase 2)

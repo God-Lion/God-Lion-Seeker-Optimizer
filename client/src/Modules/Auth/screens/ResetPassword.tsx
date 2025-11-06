@@ -28,7 +28,7 @@ import { useTheme } from '@mui/material/styles'
 import { Controller, useForm } from 'react-hook-form'
 import MAlert from 'src/components/Alert'
 import { useResetPassword, ResetPasswordRequest } from '../index'
-import { resetPasswordEmailHandle } from 'src/services/app'
+import { authService } from 'src/services/api/api.service'
 import { AxiosError, AxiosResponse } from 'axios'
 import { IUserReponseEmailResetPassword } from 'src/types'
 
@@ -78,7 +78,7 @@ export default function ResetPassword() {
       try {
         setLoading(true)
         const response: AxiosResponse<IUserReponseEmailResetPassword> =
-          await resetPasswordEmailHandle(email || '', signature ?? '')
+          await authService.verifyEmail(email || '', signature ?? '')
         if (response.status === 202) {
           setUserReponseEmailResetPassword(response.data)
           controlForm.setValue('token', response.data.token || '')

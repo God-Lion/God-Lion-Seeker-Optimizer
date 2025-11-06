@@ -1,6 +1,7 @@
 """Authentication and authorization dependencies for FastAPI"""
-from typing import Optional
-from fastapi import Depends, HTTPException, status
+from typing import Optional, List, Callable
+from functools import wraps
+from fastapi import Depends, HTTPException, status, Request
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -9,6 +10,8 @@ from datetime import datetime
 
 from src.config.database import get_db
 from src.models.user import User, UserRole, UserStatus
+from src.models.permission import PermissionType
+from src.auth.rbac_service import RBACService
 
 
 security = HTTPBearer()
@@ -127,3 +130,67 @@ async def optional_user(
     result = await db.execute(select(User).filter(User.id == user_id))
     user = result.scalar_one_or_none()
     return user
+
+
+def require_permission(*permissions: PermissionType):
+    """Decorator to require specific permissions"""
+    async def permission_checker(
+        current_user: User = Depends(get_current_active_user),
+        db: AsyncSession = Depends(get_db)
+    ) -> User:
+        has_perm = await RBACService.has_any_permission(current_user, list(permissions), db)
+        if not has_perm:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f"Required permissions: {[p.value for p in permissions]}"
+            )
+        return current_user
+    
+    return permission_checker
+
+
+def require_all_permissions(*permissions: PermissionType):
+    """Decorator to require all specified permissions"""
+    async def permission_checker(
+        current_user: User = Depends(get_current_active_user),
+        db: AsyncSession = Depends(get_db)
+    ) -> User:
+        has_all = await RBACService.has_all_permissions(current_user, list(permissions), db)
+        if not has_all:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f"Required all permissions: {[p.value for p in permissions]}"
+            )
+        return current_user
+    
+    return permission_checker
+
+
+def require_role(*roles: UserRole):
+    """Decorator to require specific roles"""
+    async def role_checker(
+        current_user: User = Depends(get_current_active_user)
+    ) -> User:
+        if current_user.role not in roles:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f"Required roles: {[r.value for r in roles]}"
+            )
+        return current_user
+    
+    return role_checker
+
+
+def require_role_hierarchy(minimum_role: UserRole):
+    """Decorator to require minimum role level (hierarchical)"""
+    async def role_checker(
+        current_user: User = Depends(get_current_active_user)
+    ) -> User:
+        if not RBACService.has_role_hierarchy(current_user, minimum_role):
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f"Required minimum role: {minimum_role.value}"
+            )
+        return current_user
+    
+    return role_checker

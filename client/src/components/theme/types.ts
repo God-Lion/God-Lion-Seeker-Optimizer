@@ -137,8 +137,8 @@ declare module '@mui/material/styles' {
   interface TypeBackground {
     default: string
     paper: string
-    defaultChannel: string
-    paperChannel: string
+    defaultChannel?: string
+    paperChannel?: string
   }
 
   // Palette
@@ -152,6 +152,10 @@ declare module '@mui/material/styles' {
       tableHeaderBg: string
       tooltipText: string
       trackBg: string
+      brandGold: string
+      brandBrown: string
+      brandSlate: string
+      brandCream: string
     }
   }
   interface PaletteOptions {
@@ -169,10 +173,14 @@ declare module '@mui/material/styles' {
       tableHeaderBg?: string
       tooltipText?: string
       trackBg?: string
+      brandGold?: string
+      brandBrown?: string
+      brandSlate?: string
+      brandCream?: string
     }
   }
   interface PalettePaperChannel {
-    paperChannel: string
+    paperChannel?: string
   }
   interface TypeBackground extends PalettePaperChannel {}
 

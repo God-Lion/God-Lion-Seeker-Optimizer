@@ -1,6 +1,6 @@
 // src/Modules/JobAnalysis/services/jobAnalysis.service.ts
 
-import { apiClient } from '../../../shared/api/api-client'
+import { apiClient } from 'src/services/api/api-client'
 import { AxiosResponse } from 'axios'
 import {
   JobAnalysis,

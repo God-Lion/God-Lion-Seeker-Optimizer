@@ -52,18 +52,15 @@ export const useAppStore = create<AppStore>()(
         name: 'god-lion-seeker-optimizer-storage',
         storage: createJSONStorage(() => localStorage),
         partialize: (state) => ({
-          // Only persist these parts of state
           auth: {
             user: state.user,
             isAuthenticated: state.isAuthenticated,
-            tokens: state.tokens,
           },
           preferences: state.preferences,
           settings: state.settings,
           theme: {
             mode: state.mode,
           },
-          // Don't persist guest data (uses sessionStorage separately)
         }),
       }
     ),
