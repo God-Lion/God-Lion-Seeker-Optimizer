@@ -1,342 +1,183 @@
-// src/Modules/JobsManagement/screens/JobsSearch.tsx
-
-import React from 'react'
+// src/Modules/Jobs/screens/JobsSearch.tsx
+import React, { useRef, useState } from 'react'
 import {
   Box,
   TextField,
   Button,
   Card,
-  CardContent,
-  Typography,
-  Chip,
   CircularProgress,
   Alert,
   Pagination,
-  IconButton,
-  Tooltip,
+  Typography,
+  Grid,
 } from '@mui/material'
-import Grid from '@mui/material/Grid'
 import { useTheme } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search'
-import DeleteIcon from '@mui/icons-material/Delete'
-import VisibilityIcon from '@mui/icons-material/Visibility'
-import OpenInNewIcon from '@mui/icons-material/OpenInNew'
-import RefreshIcon from '@mui/icons-material/Refresh'
-import { useJobsManagement } from '../hooks'
-import JobDetails from './JobDetails'
+import { useVirtualizer } from '@tanstack/react-virtual'
 
-const JobsSearch: React.FC = (): React.ReactElement => {
+import { useJobsManagement } from '../hooks/useJobsManagement'
+import { useJobsSlice } from '@/store/slices/jobsSlice'
+import { applyForJob } from '@/services/api/jobs.api'
+import FilterPanel from '../components/FilterPanel'
+import JobCard from '../components/JobCard'
+import JobDetails from './JobDetails' // Import the JobDetails component
+import { Job } from '@/types/job'
+
+const JobsSearch: React.FC = () => {
   const theme = useTheme()
   const navigate = useNavigate()
 
-  // Use the business logic hook
+  // Business logic hook
   const {
-    // State
     searchQuery,
-    location,
-    company,
+    filters,
     currentPage,
-    viewMode,
-
-    // Data
     jobs,
     totalJobs,
     totalPages,
     isLoading,
     error,
-
-    // Actions
     setSearchQuery,
-    setLocation,
-    setCompany,
+    setFilters,
     executeSearch,
     resetToList,
     setPage,
-    deleteJob,
     refresh,
-
-    // Computed
     isSearchMode,
   } = useJobsManagement(20)
 
-  // Local state for selected job dialog
-  const [selectedJobId, setSelectedJobId] = React.useState<number | null>(null)
+  // Zustand store for saved jobs
+  const { saveJob, unsaveJob, isJobSaved } = useJobsSlice()
 
-  /**
-   * Handle search form submission
-   */
+  // State for the JobDetails dialog
+  const [selectedJobId, setSelectedJobId] = useState<number | null>(null)
+
+  // Virtualizer for the jobs list
+  const parentRef = useRef<HTMLDivElement>(null)
+  const rowVirtualizer = useVirtualizer({
+    count: jobs.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 300,
+    overscan: 5,
+  })
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     executeSearch()
   }
 
-  /**
-   * Handle pagination change
-   */
-  const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
-    setPage(page)
-  }
-
-  /**
-   * Handle job deletion with confirmation
-   */
-  const handleDeleteJob = async (jobId: number) => {
-    if (window.confirm('Are you sure you want to delete this job?')) {
-      const success = await deleteJob(jobId)
-      if (!success) {
-        // Error is already handled in the hook
-        alert('Failed to delete job. Please try again.')
-      }
+  const handleApply = async (job: Job) => {
+    try {
+      // This is a simplified application process.
+      // In a real-world scenario, you would likely have a form
+      // to collect a resume, cover letter, etc.
+      const response = await applyForJob({
+        jobId: job.id,
+        // @ts-ignore
+        resume: new File([], 'resume.pdf'), // Placeholder for resume file
+      })
+      alert(`Successfully applied for ${job.title}`)
+    } catch (error) {
+      alert(`Failed to apply for ${job.title}`)
+      console.error(error)
     }
   }
 
-  /**
-   * Navigate to job details page
-   */
-  const handleViewJobDetails = (jobId: number) => {
-    navigate(`/jobs/${jobId}`)
+  const handleViewDetails = (jobId: number) => {
+    setSelectedJobId(jobId)
+  }
+
+  const handleCloseDetails = () => {
+    setSelectedJobId(null)
   }
 
   return (
     <Box>
       {/* Header */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Typography variant='h4' sx={{ fontWeight: 'bold' }}>
-          Jobs Management
-        </Typography>
-        <Box sx={{ display: 'flex', gap: 1 }}>
-          <Tooltip title="Refresh">
-            <IconButton onClick={refresh} color="primary">
-              <RefreshIcon />
-            </IconButton>
-          </Tooltip>
-          <Button
-            variant={viewMode === 'list' ? 'contained' : 'outlined'}
-            onClick={resetToList}
-            size='small'
-          >
-            All Jobs
-          </Button>
-          <Button
-            variant={viewMode === 'search' ? 'contained' : 'outlined'}
-            disabled={!searchQuery.trim()}
-            size='small'
-          >
-            Search Results
-          </Button>
-        </Box>
-      </Box>
+      <Typography variant='h4' sx={{ fontWeight: 'bold', mb: 3 }}>
+        Job Offers
+      </Typography>
 
-      {/* Search Form */}
-      <Card
-        sx={{
-          mb: 4,
-          p: 3,
-          backgroundColor: theme.palette.background.paper,
-          boxShadow: theme.shadows[2],
-        }}
-      >
+      {/* Search and Filter Form */}
+      <Card sx={{ mb: 4, p: 3, backgroundColor: theme.palette.background.paper }}>
         <form onSubmit={handleSearch}>
-          <Grid container spacing={2}>
-            {/* Job Title/Keyword Input */}
-            <Grid item xs={12} sm={4}>
+          <Grid container spacing={2} alignItems='center'>
+            <Grid item xs={12} sm={8}>
               <TextField
                 fullWidth
                 label='Job Title or Keyword'
-                placeholder='e.g., Software Engineer, Data Scientist'
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 variant='outlined'
                 size='small'
               />
             </Grid>
-
-            {/* Location Input */}
-            <Grid item xs={12} sm={3}>
-              <TextField
+            <Grid item xs={12} sm={4}>
+              <Button
                 fullWidth
-                label='Location'
-                placeholder='e.g., New York, Remote'
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                variant='outlined'
-                size='small'
-              />
-            </Grid>
-
-            {/* Company Input */}
-            <Grid item xs={12} sm={3}>
-              <TextField
-                fullWidth
-                label='Company'
-                placeholder='e.g., Google, Microsoft'
-                value={company}
-                onChange={(e) => setCompany(e.target.value)}
-                variant='outlined'
-                size='small'
-              />
-            </Grid>
-
-            {/* Action Buttons */}
-            <Grid item xs={12} sm={2}>
-              <Box sx={{ display: 'flex', gap: 1 }}>
-                <Button
-                  variant='contained'
-                  color='primary'
-                  type='submit'
-                  startIcon={<SearchIcon />}
-                  sx={{ height: '40px', flex: 1 }}
-                  disabled={!searchQuery.trim()}
-                >
-                  Search
-                </Button>
-                {isSearchMode && (
-                  <Button
-                    variant='outlined'
-                    onClick={resetToList}
-                    sx={{ height: '40px' }}
-                  >
-                    Reset
-                  </Button>
-                )}
-              </Box>
+                variant='contained'
+                color='primary'
+                type='submit'
+                startIcon={<SearchIcon />}
+                disabled={!searchQuery.trim()}
+              >
+                Search
+              </Button>
             </Grid>
           </Grid>
         </form>
+        <Box sx={{ mt: 3 }}>
+          <FilterPanel
+            filters={filters}
+            onFilterChange={setFilters}
+            onReset={resetToList}
+          />
+        </Box>
       </Card>
 
-      {/* Error Message */}
-      {error && (
-        <Alert severity='error' sx={{ mb: 3 }} onClose={refresh}>
-          {error}
-        </Alert>
-      )}
-
-      {/* Loading State */}
-      {isLoading && (
-        <Box sx={{ display: 'flex', justifyContent: 'center', py: 5 }}>
-          <CircularProgress />
-        </Box>
-      )}
+      {/* Error and Loading States */}
+      {error && <Alert severity='error' sx={{ mb: 3 }}>{error}</Alert>}
+      {isLoading && <Box sx={{ display: 'flex', justifyContent: 'center', py: 5 }}><CircularProgress /></Box>}
 
       {/* Results Summary */}
       {!isLoading && jobs.length > 0 && (
-        <Box sx={{ mb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant='body2' sx={{ color: theme.palette.text.secondary }}>
-            Showing {jobs.length} of {totalJobs} jobs
-          </Typography>
-          {isSearchMode && (
-            <Typography variant='body2' sx={{ color: theme.palette.text.secondary }}>
-              Search results for: "{searchQuery}"
-            </Typography>
-          )}
-        </Box>
+        <Typography variant='body2' sx={{ mb: 2, color: theme.palette.text.secondary }}>
+          Showing {jobs.length} of {totalJobs} jobs
+        </Typography>
       )}
 
       {/* Jobs List */}
-      {!isLoading && jobs.length > 0 && (
-        <Grid container spacing={3}>
-          {jobs.map((job) => (
-            <Grid item xs={12} key={job.id}>
-              <Card
-                sx={{
-                  transition: 'all 0.3s ease',
-                  '&:hover': {
-                    boxShadow: theme.shadows[8],
-                    transform: 'translateY(-2px)',
-                  },
+      <Box ref={parentRef} sx={{ height: '800px', overflow: 'auto' }}>
+        <Box sx={{ height: `${rowVirtualizer.getTotalSize()}px`, position: 'relative' }}>
+          {rowVirtualizer.getVirtualItems().map((virtualItem) => {
+            const job = jobs[virtualItem.index]
+            if (!job) return null
+            return (
+              <Box
+                key={virtualItem.key}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  transform: `translateY(${virtualItem.start}px)`,
+                  padding: '10px 0',
                 }}
               >
-                <CardContent>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                    <Box sx={{ flex: 1 }}>
-                      {/* Job Title */}
-                      <Typography variant='h6' sx={{ fontWeight: 'bold', mb: 1 }}>
-                        {job.title}
-                      </Typography>
-
-                      {/* Company Name */}
-                      <Typography
-                        variant='body2'
-                        sx={{ color: theme.palette.text.secondary, mb: 1 }}
-                      >
-                        {job.company_name}
-                      </Typography>
-
-                      {/* Location */}
-                      <Typography
-                        variant='body2'
-                        sx={{ color: theme.palette.text.secondary, mb: 2 }}
-                      >
-                        📍 {job.location}
-                      </Typography>
-
-                      {/* Job Description Preview */}
-                      <Box sx={{ mb: 2 }}>
-                        <Typography variant='body2' sx={{ mb: 1 }}>
-                          {job.description?.substring(0, 200)}
-                          {job.description && job.description.length > 200 && '...'}
-                        </Typography>
-                      </Box>
-
-                      {/* Job Metadata Chips */}
-                      <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                        {job.job_type && (
-                          <Chip label={job.job_type} size='small' />
-                        )}
-                        {job.experience_level && (
-                          <Chip label={job.experience_level} size='small' />
-                        )}
-                        {job.salary_range && (
-                          <Chip label={job.salary_range} size='small' color='success' />
-                        )}
-                        {job.posted_date && (
-                          <Chip 
-                            label={`Posted: ${new Date(job.posted_date).toLocaleDateString()}`} 
-                            size='small' 
-                            variant='outlined'
-                          />
-                        )}
-                      </Box>
-                    </Box>
-
-                    {/* Action Buttons */}
-                    <Box sx={{ display: 'flex', gap: 1, ml: 2 }}>
-                      <Tooltip title="View in Dialog">
-                        <IconButton
-                          size='small'
-                          onClick={() => setSelectedJobId(job.id)}
-                        >
-                          <VisibilityIcon />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip title="View Full Page">
-                        <IconButton
-                          size='small'
-                          color='primary'
-                          onClick={() => handleViewJobDetails(job.id)}
-                        >
-                          <OpenInNewIcon />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip title="Delete Job">
-                        <IconButton
-                          size='small'
-                          color='error'
-                          onClick={() => handleDeleteJob(job.id)}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </Box>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      )}
+                <JobCard
+                  job={job}
+                  onSave={saveJob}
+                  onUnsave={unsaveJob}
+                  onApply={handleApply}
+                  isSaved={isJobSaved(job.id)}
+                  onViewDetails={() => handleViewDetails(job.id)}
+                />
+              </Box>
+            )
+          })}
+        </Box>
+      </Box>
 
       {/* Pagination */}
       {!isLoading && totalPages > 1 && (
@@ -344,9 +185,8 @@ const JobsSearch: React.FC = (): React.ReactElement => {
           <Pagination
             count={totalPages}
             page={currentPage}
-            onChange={handlePageChange}
+            onChange={(_e, p) => setPage(p)}
             color='primary'
-            size='large'
           />
         </Box>
       )}
@@ -354,21 +194,9 @@ const JobsSearch: React.FC = (): React.ReactElement => {
       {/* No Results Message */}
       {!isLoading && jobs.length === 0 && (
         <Card sx={{ textAlign: 'center', p: 5 }}>
-          <Typography variant='h6' sx={{ color: theme.palette.text.secondary }}>
-            {isSearchMode 
-              ? 'No jobs found matching your search criteria.' 
-              : 'No jobs available. Start scraping to collect job data.'
-            }
+          <Typography variant='h6'>
+            {isSearchMode ? 'No jobs found.' : 'No jobs available.'}
           </Typography>
-          {isSearchMode && (
-            <Button
-              variant='outlined'
-              onClick={resetToList}
-              sx={{ mt: 2 }}
-            >
-              View All Jobs
-            </Button>
-          )}
         </Card>
       )}
 
@@ -376,7 +204,7 @@ const JobsSearch: React.FC = (): React.ReactElement => {
       <JobDetails
         jobId={selectedJobId}
         open={!!selectedJobId}
-        onClose={() => setSelectedJobId(null)}
+        onClose={handleCloseDetails}
       />
     </Box>
   )
