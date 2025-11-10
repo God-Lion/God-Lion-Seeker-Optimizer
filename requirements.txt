@@ -86,3 +86,6 @@ python-docx
 # MFA / 2FA
 pyotp
 qrcode[pil]
+
+qrcode
+pillow

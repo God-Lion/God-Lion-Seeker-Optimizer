@@ -1,15 +1,6 @@
-/**
- * =============================================================================
- * HOME MODULE EXPORTS
- * =============================================================================
- * Main entry point for the Home module
- */
-
-// Screens
-export { Home } from './screens'
-
-// Components
-export { Banner } from './components'
-
-// Routes
-export { default as HomeRoutes } from './routes/routes'
+// export { Home } from './screens'
+// export { Banner } from './components'
+// export { default as HomeRoutes } from './routes/routes'
+export * from './components'
+export * from './routes'
+export * from './screens'

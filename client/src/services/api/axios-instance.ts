@@ -107,6 +107,68 @@ const refreshManager = new TokenRefreshManager()
 
 const axiosInstance: AxiosInstance = axios.create(API_CONFIG)
 
+// Request interceptor - add auth token
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = secureTokenManager.getAccessToken()
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+  },
+  (error) => Promise.reject(error)
+)
+
+// Response interceptor - handle token refresh
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config
+
+    // If 401 and we haven't retried yet
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true
+
+      try {
+        const refreshToken = secureTokenManager.getRefreshToken()
+        
+        if (!refreshToken) {
+          throw new Error('No refresh token')
+        }
+
+        // Call refresh endpoint
+        const { data } = await axios.post(
+          `${API_CONFIG.baseURL}/api/auth/refresh`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${refreshToken}`,
+            },
+          }
+        )
+
+        // Update tokens
+        secureTokenManager.setTokens({
+          accessToken: data.token,
+          refreshToken: data.refresh_token,
+          expiresAt: Date.now() + data.expires_in * 1000,
+        })
+
+        // Retry original request with new token
+        originalRequest.headers.Authorization = `Bearer ${data.token}`
+        return axiosInstance(originalRequest)
+      } catch (refreshError) {
+        // Refresh failed, logout user
+        secureTokenManager.clearTokens()
+        window.location.href = '/auth/signin'
+        return Promise.reject(refreshError)
+      }
+    }
+
+    return Promise.reject(error)
+  }
+)
+
 axiosInstance.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
     const tokens = secureTokenManager.getTokens()
@@ -216,4 +278,6 @@ axiosInstance.interceptors.response.use(
   }
 )
 
+// Export both default and named export for compatibility
 export default axiosInstance
+export { axiosInstance }

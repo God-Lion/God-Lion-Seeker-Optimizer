@@ -9,7 +9,7 @@ import {
   Button,
   Tooltip,
 } from '@mui/material'
-import { Job } from '@/types/job'
+import { Job } from 'src/types/job'
 
 interface JobCardProps {
   job: Job

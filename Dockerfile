@@ -60,6 +60,10 @@ RUN playwright install chromium && \
 RUN mkdir -p /app/logs /app/data /app/nltk_data && \
     chown -R appuser:appuser /app /home/appuser
 
+# Download NLTK data as root before switching to appuser
+RUN python -c "import nltk; nltk.download('punkt', download_dir='/app/nltk_data'); nltk.download('punkt_tab', download_dir='/app/nltk_data'); nltk.download('stopwords', download_dir='/app/nltk_data')" && \
+    chown -R appuser:appuser /app/nltk_data
+
 # Switch to non-root user
 USER appuser
 
@@ -81,4 +85,4 @@ CMD ["gunicorn", "src.api.main:app", \
      "--log-level", "info", \
      "--timeout", "60", \
      "--graceful-timeout", "30", \
-     "--keepalive", "65"]
+     "--keep-alive", "5"]

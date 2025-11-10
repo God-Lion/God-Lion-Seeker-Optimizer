@@ -39,7 +39,7 @@ const DEFAULT_FORM_VALUES = {
   confirmPassword: "",
 };
 
-const SUPPORT_EMAIL = "support@example.com";
+// const SUPPORT_EMAIL = "support@example.com";
 
 interface SignUpFormData {
   fullName: string;

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import {
-  AppBar,
   Box,
   Button,
   Checkbox,
@@ -13,7 +12,6 @@ import {
   LinearProgress,
   Paper,
   TextField,
-  Toolbar,
   Typography,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
@@ -32,13 +30,6 @@ const SetNewPassword = () => {
       <Helmet>
         <title>Set New Password</title>
       </Helmet>
-      <AppBar position='static' color='transparent' elevation={0} sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Toolbar sx={{ maxWidth: '1280px', width: '100%', margin: '0 auto', px: { xs: 2, sm: 4 } }}>
-          <Typography variant='h6' component='div' sx={{ fontWeight: 'bold' }}>
-            Lion and Magnifying Glass
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <Container
         component='main'
         maxWidth='sm'

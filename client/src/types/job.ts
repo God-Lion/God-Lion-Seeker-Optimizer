@@ -23,6 +23,18 @@ export interface JobSearchParams {
   q?: string;
 }
 
+export interface JobSearch {
+  query?: string;
+  location?: string;
+  company?: string;
+  date_posted?: 'all' | 'past_24_hours' | 'past_week' | 'past_month';
+  skip?: number;
+  limit?: number;
+  job_type?: string;
+  experience_level?: string;
+  salary_range?: string;
+}
+
 export interface JobApplicationPayload {
   jobId: number;
   resume: File;

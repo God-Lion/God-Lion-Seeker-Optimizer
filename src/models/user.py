@@ -49,14 +49,24 @@ class User(Base, TimestampMixin):
     # SSO
     google_id = Column(String(255), unique=True, index=True)
     
-    # Session management
+    # Password Management
+    password_changed_at = Column(DateTime, nullable=True)  # Track last password change
+    
+    # MFA (Multi-Factor Authentication)
     mfa_secret = Column(String(255), nullable=True)
     mfa_enabled = Column(Boolean, default=False)
     mfa_recovery_codes = Column(JSON, nullable=True)
+    
+    # Session management
     last_login = Column(DateTime)
     last_activity = Column(DateTime)
     failed_login_attempts = Column(Integer, default=0)
     account_locked_until = Column(DateTime)
+    
+    # Account Deactivation
+    deactivated_at = Column(DateTime, nullable=True)  # Timestamp when account was deactivated
+    deactivation_reason = Column(String(500), nullable=True)  # Reason for deactivation
+    deactivation_feedback = Column(Text, nullable=True)  # Additional feedback from user
     
     # Preferences
     preferences = Column(JSON, default=dict)  # User settings and preferences
@@ -97,7 +107,28 @@ class User(Base, TimestampMixin):
             return False
         if self.account_locked_until and self.account_locked_until > datetime.utcnow():
             return False
+        # Check if account is deactivated
+        if self.deactivated_at is not None:
+            return False
         return True
+    
+    def is_deactivated(self):
+        """Check if account is deactivated"""
+        return self.deactivated_at is not None
+    
+    def deactivate_account(self, reason: str = None, feedback: str = None):
+        """Deactivate user account"""
+        self.deactivated_at = datetime.utcnow()
+        self.deactivation_reason = reason
+        self.deactivation_feedback = feedback
+        self.status = UserStatus.SUSPENDED
+    
+    def reactivate_account(self):
+        """Reactivate user account"""
+        self.deactivated_at = None
+        self.deactivation_reason = None
+        self.deactivation_feedback = None
+        self.status = UserStatus.ACTIVE
 
 
 class ResumeProfile(Base, TimestampMixin):

@@ -18,7 +18,7 @@ import {
 } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from 'src/store'
-import { useSignOut } from 'src/hooks'
+import { useSignOut } from 'src/Modules/Auth/hooks/useSignOut'
 
 
 export const UserMenu: React.FC = () => {

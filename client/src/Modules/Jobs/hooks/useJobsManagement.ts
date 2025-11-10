@@ -1,7 +1,7 @@
 // src/Modules/Jobs/hooks/useJobsManagement.ts
 
 import { useState, useCallback, useMemo } from 'react'
-import { JobSearchParams } from '@/types/job'
+import { JobSearchParams } from 'src/types/job'
 import { useJobs, useJobSearch, useDeleteJob } from './useJobsQuery'
 
 /**
@@ -130,10 +130,10 @@ export const useJobsManagement = (initialItemsPerPage: number = 20) => {
   /**
    * Change items per page
    */
-  const setItemsPerPage = useCallback((itemsPerPage: number) => {
+  const setItemsPerPage = useCallback((newItemsPerPage: number) => {
     setState((prev) => ({
       ...prev,
-      itemsPerPage,
+      itemsPerPage: newItemsPerPage,
       currentPage: 1,
     }))
   }, [])
@@ -219,8 +219,11 @@ export const useJobsManagement = (initialItemsPerPage: number = 20) => {
     executeSearch,
     resetToList,
     setPage,
+    setItemsPerPage,
+    toggleJobSelection,
     deleteJob,
     refresh,
+    clearFilters,
 
     // Computed
     isSearchMode: state.viewMode === 'search',

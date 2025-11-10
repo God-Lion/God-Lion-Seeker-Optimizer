@@ -25,7 +25,7 @@ const PublicLayout: React.FC<
       {/* Header Section - Dark background */}
       <Box
         sx={{
-          backgroundColor: '#e6dbdbff',
+          // backgroundColor: '#e6dbdbff',
           color: 'white',
           width: '100%',
           zIndex: 1000,

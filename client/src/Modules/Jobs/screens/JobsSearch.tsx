@@ -12,12 +12,12 @@ import {
   Grid,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search'
 import { useVirtualizer } from '@tanstack/react-virtual'
 
 import { useJobsManagement } from '../hooks/useJobsManagement'
-import { useJobsSlice } from '@/store/slices/jobsSlice'
+import { useJobs } from '@/store'
 import { applyForJob } from '@/services/api/jobs.api'
 import FilterPanel from '../components/FilterPanel'
 import JobCard from '../components/JobCard'
@@ -26,7 +26,7 @@ import { Job } from '@/types/job'
 
 const JobsSearch: React.FC = () => {
   const theme = useTheme()
-  const navigate = useNavigate()
+  // const navigate = useNavigate() // Commented out - will be used for future navigation
 
   // Business logic hook
   const {
@@ -43,12 +43,13 @@ const JobsSearch: React.FC = () => {
     executeSearch,
     resetToList,
     setPage,
-    refresh,
+    // refresh, // Commented out - available for manual refresh functionality
     isSearchMode,
   } = useJobsManagement(20)
 
   // Zustand store for saved jobs
-  const { saveJob, unsaveJob, isJobSaved } = useJobsSlice()
+  const { saveJob, unsaveJob, savedJobs } = useJobs()
+  const isJobSaved = (jobId: number) => savedJobs.some((job) => job.id === jobId)
 
   // State for the JobDetails dialog
   const [selectedJobId, setSelectedJobId] = useState<number | null>(null)
@@ -77,6 +78,7 @@ const JobsSearch: React.FC = () => {
         // @ts-ignore
         resume: new File([], 'resume.pdf'), // Placeholder for resume file
       })
+      console.log('Application response:', response) // Log the response
       alert(`Successfully applied for ${job.title}`)
     } catch (error) {
       alert(`Failed to apply for ${job.title}`)

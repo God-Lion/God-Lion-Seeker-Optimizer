@@ -7,3 +7,4 @@
 export { default as JobsSearch } from './JobsSearch'
 export { default as JobDetails } from './JobDetails'
 export { default as JobDetailsPage } from './JobDetailsPage'
+export { default as JobFinder } from './JobFinder'
