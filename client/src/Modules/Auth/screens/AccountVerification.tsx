@@ -6,12 +6,12 @@ import {
   Box,
   Button,
   Paper,
-  AppBar,
-  Toolbar,
+  // AppBar,
+  // Toolbar,
   Link as MuiLink,
-  LinearProgress,
+  // LinearProgress,
 } from '@mui/material';
-import { Search, Pets } from '@mui/icons-material';
+// import { Search, Pets } from '@mui/icons-material';
 import { Link as RouterLink } from 'react-router-dom';
 import OtpInput from 'react-otp-input';
 
@@ -21,18 +21,8 @@ const AccountVerification: React.FC = () => {
   return (
     <React.Fragment>
       <Helmet>
-        <title>JobTrackr - Account Verification</title>
+        <title>Account Verification</title>
       </Helmet>
-      <AppBar position='static' color='transparent' elevation={0} sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Toolbar sx={{ maxWidth: '1280px', width: '100%', margin: '0 auto', px: { xs: 2, sm: 4 } }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <Pets sx={{ fontSize: 40, color: '#8B4513' }} />
-            <Typography variant='h6' component='div' sx={{ fontWeight: 'bold' }}>
-              JobTrackr
-            </Typography>
-          </Box>
-        </Toolbar>
-      </AppBar>
       <Container
         component='main'
         maxWidth='xs'
@@ -58,12 +48,12 @@ const AccountVerification: React.FC = () => {
             gap: 4,
           }}
         >
-          <Box sx={{ width: '100%' }}>
+          {/* <Box sx={{ width: '100%' }}>
             <Typography variant='body2' color='text.secondary' sx={{ mb: 1 }}>
               Step 2 of 4
             </Typography>
             <LinearProgress variant='determinate' value={50} sx={{ height: 8, borderRadius: 4 }} />
-          </Box>
+          </Box> */}
           <Box sx={{ textAlign: 'center' }}>
             <Typography component='h1' variant='h4' sx={{ mb: 1, fontWeight: 'black' }}>
               Verify Your Account

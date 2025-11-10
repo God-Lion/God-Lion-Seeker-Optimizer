@@ -26,7 +26,7 @@ import {
 import { useSettings } from 'src/core/contexts/settingsContext'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from 'src/store/index'
-import { useSignOut } from 'src/services/hooks'
+import { useSignOut } from 'src/Modules/Auth/hooks/useSignOut'
 
 const BadgeContentSpan = styled('span')({
   width: 8,

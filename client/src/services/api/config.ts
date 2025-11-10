@@ -5,13 +5,14 @@ const getBaseURL = (): string => {
   const isDev = import.meta.env.DEV
   const isProd = import.meta.env.PROD
   
-  if (isDev && !envApiUrl) {
-    return ''
-  }
-  
+  // Always return a valid URL - never empty string
   if (!envApiUrl) {
-    console.warn('VITE_API_URL not configured')
-    return 'http://localhost:8000'
+    if (isDev) {
+      console.warn('VITE_API_URL not set, using default: http://localhost:8000')
+      return 'http://localhost:8000'
+    }
+    console.error('VITE_API_URL not configured for production')
+    throw new Error('VITE_API_URL must be configured in production')
   }
   
   if (isProd && !envApiUrl.startsWith('https://')) {
@@ -31,6 +32,7 @@ export const API_CONFIG = {
     Accept: 'application/json',
   },
 } as const
+
 
 export const ENDPOINTS = {
   // Health & Metrics
@@ -68,6 +70,12 @@ export const ENDPOINTS = {
       verify: '/api/auth/mfa/verify',
       disable: '/api/auth/mfa/disable',
     },
+    changePassword: '/api/user/change-password',
+    sessions: '/api/auth/sessions',
+    revokeSession: (sessionId: string) => `/api/auth/sessions/${sessionId}`,
+    revokeAllSessions: '/api/auth/sessions/revoke-all',
+    loginHistory: '/api/auth/login-history',
+    securityLogs: '/api/auth/security-logs',
   },
 
   // User
@@ -79,6 +87,8 @@ export const ENDPOINTS = {
     updateEmail: '/update/email',
     updatePhoto: (id: number) => `/photoProfile/${id}`,
     settings: '/settings',
+    deactivate: '/api/user/deactivate',
+    emailPreferences: '/api/user/email-preferences',
   },
 
   // Resume Profiles
@@ -208,7 +218,7 @@ export const ENDPOINTS = {
     preferences: '/api/notifications/preferences',
     updatePreferences: '/api/notifications/preferences',
     unreadCount: '/api/notifications/unread-count',
-    websocket: '/api/notifications/ws',
+    ws: '/ws/notifications',
   },
 
   // Server-Sent Events
@@ -309,6 +319,11 @@ export const QUERY_KEYS = {
     mfa: {
       status: ['auth', 'mfa', 'status'] as const,
     },
+    sessions: ['auth', 'sessions'] as const,
+    loginHistory: (limit: number) => ['auth', 'login-history', limit] as const,
+    securityLogs: (params: any) => ['auth', 'security-logs', params] as const,
+    linkedAccounts: ['auth', 'linked-accounts'] as const,
+    emailPreferences: ['auth', 'email-preferences'] as const,
   },
   
   translation: (code: string) => ['translation', code] as const,
@@ -358,13 +373,27 @@ export const QUERY_KEYS = {
     applicationById: (id: number) => ['jobs', 'applications', id] as const,
   },
 
+  // Applications
+  applications: {
+    all: ['applications'] as const,
+    list: (params: string) => ['applications', 'list', params] as const,
+    byId: (id: number) => ['applications', id] as const,
+    search: (query: string) => ['applications', 'search', query] as const,
+    statistics: ['applications', 'statistics'] as const,
+    timeline: (id: number) => ['applications', id, 'timeline'] as const,
+  },
+
   // Scraper
   scraper: {
     all: ['scraper'] as const,
+    list: (params: string) => ['scraper', 'list', params] as const,
+    byId: (id: number | string) => ['scraper', 'detail', id] as const,
     sessions: (params: string) => ['scraper', 'sessions', params] as const,
     session: (id: number | string) => ['scraper', 'session', id] as const,
+    search: (query: string) => ['scraper', 'search', query] as const,
     activeSessions: ['scraper', 'active'] as const,
     history: (limit: number) => ['scraper', 'history', limit] as const,
+    statistics: ['scraper', 'statistics'] as const,
   },
 
   // Companies
@@ -414,8 +443,9 @@ export const QUERY_KEYS = {
     all: ['automation'] as const,
     config: ['automation', 'config'] as const,
     status: ['automation', 'status'] as const,
-    history: (params: string) => ['automation', 'history', params] as const,
+    history: (params?: string) => params ? ['automation', 'history', params] as const : ['automation', 'history'] as const,
     stats: ['automation', 'stats'] as const,
+    logs: (params: string) => ['automation', 'logs', params] as const,
   },
 
   // Notifications

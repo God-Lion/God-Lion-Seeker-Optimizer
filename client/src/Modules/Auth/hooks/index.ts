@@ -18,3 +18,4 @@ export {
   useUpdateEmail,
   useUpdatePhoto,
 } from './useAuthQuery'
+export * from './useSignOut'

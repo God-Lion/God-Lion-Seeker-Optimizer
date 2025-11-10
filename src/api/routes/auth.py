@@ -282,82 +282,91 @@ async def login(
     - Checks account status and lockout
     - Returns access and refresh tokens
     """
-    # Find user
-    result = await db.execute(select(User).filter(User.email == request.email))
-    user = result.scalar_one_or_none()
-    
-    if not user or not verify_password(request.password, user.hashed_password):
-        # Log failed login attempt
-        if user:
-            user.failed_login_attempts += 1
-            
-            # Lock account after max attempts
-            if user.failed_login_attempts >= settings.max_login_attempts:
-                user.account_locked_until = datetime.utcnow() + timedelta(
-                    minutes=settings.account_lockout_duration_minutes
-                )
-                await db.commit()
+    try:
+        # Find user
+        result = await db.execute(select(User).filter(User.email == request.email))
+        user = result.scalar_one_or_none()
+        
+        if not user or not verify_password(request.password, user.hashed_password):
+            # Log failed login attempt
+            if user:
+                user.failed_login_attempts += 1
                 
+                # Lock account after max attempts
+                if user.failed_login_attempts >= settings.max_login_attempts:
+                    user.account_locked_until = datetime.utcnow() + timedelta(
+                        minutes=settings.account_lockout_duration_minutes
+                    )
+                    await db.commit()
+                    
+                    raise HTTPException(
+                        status_code=status.HTTP_403_FORBIDDEN,
+                        detail=f"Account locked due to too many failed login attempts. Try again in {settings.account_lockout_duration_minutes} minutes."
+                    )
+                
+                await db.commit()
+            
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Incorrect email or password"
+            )
+        
+        # Check if account can login
+        if not user.can_login():
+            if user.account_locked_until and user.account_locked_until > datetime.utcnow():
                 raise HTTPException(
                     status_code=status.HTTP_403_FORBIDDEN,
-                    detail=f"Account locked due to too many failed login attempts. Try again in {settings.account_lockout_duration_minutes} minutes."
+                    detail="Account is temporarily locked. Please try again later."
                 )
-            
-            await db.commit()
+            elif not user.email_verified:
+                raise HTTPException(
+                    status_code=status.HTTP_403_FORBIDDEN,
+                    detail="Please verify your email before logging in"
+                )
+            else:
+                raise HTTPException(
+                    status_code=status.HTTP_403_FORBIDDEN,
+                    detail="Account is not active"
+                )
         
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect email or password"
-        )
-    
-    # Check if account can login
-    if not user.can_login():
-        if user.account_locked_until and user.account_locked_until > datetime.utcnow():
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail="Account is temporarily locked. Please try again later."
-            )
-        elif not user.email_verified:
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail="Please verify your email before logging in"
-            )
-        else:
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail="Account is not active"
-            )
-    
-    # Reset failed login attempts
-    user.failed_login_attempts = 0
-    user.last_login = datetime.utcnow()
-    user.last_activity = datetime.utcnow()
-    await db.commit()
+        # Reset failed login attempts
+        user.failed_login_attempts = 0
+        user.last_login = datetime.utcnow()
+        user.last_activity = datetime.utcnow()
+        await db.commit()
 
-    # If MFA is enabled, return a response indicating that MFA is required
-    if user.mfa_enabled:
-        return {"mfa_required": True}
-    
-    # Create tokens
-    access_token = create_access_token(user.id)
-    refresh_token = create_refresh_token(user.id)
-    
-    # Prepare user data
-    user_data = {
-        "id": user.id,
-        "email": user.email,
-        "first_name": user.first_name,
-        "last_name": user.last_name,
-        "role": user.role.value,
-        "avatar": user.avatar
-    }
-    
-    return TokenResponse(
-        token=access_token,
-        refresh_token=refresh_token,
-        user=user_data,
-        expires_in=settings.jwt_access_token_expire_minutes * 60
-    )
+        # If MFA is enabled, return a response indicating that MFA is required
+        if user.mfa_enabled:
+            return {"mfa_required": True}
+        
+        # Create tokens
+        access_token = create_access_token(user.id)
+        refresh_token = create_refresh_token(user.id)
+        
+        # Prepare user data
+        user_data = {
+            "id": user.id,
+            "email": user.email,
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "role": user.role.value,
+            "avatar": user.avatar
+        }
+        
+        return TokenResponse(
+            token=access_token,
+            refresh_token=refresh_token,
+            user=user_data,
+            expires_in=settings.jwt_access_token_expire_minutes * 60
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Login error: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="An error occurred during login. Please try again."
+        )
 
 
 @router.post("/track-failed-login")

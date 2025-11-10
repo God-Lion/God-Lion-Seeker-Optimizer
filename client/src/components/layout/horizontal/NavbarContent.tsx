@@ -10,9 +10,9 @@ import ModeDropdown from 'src/components/layout/shared/ModeDropdown'
 import ShortcutsDropdown from 'src/components/layout/shared/ShortcutsDropdown'
 import NotificationsDropdown from 'src/components/layout/shared/NotificationsDropdown'
 import UserDropdown from 'src/components/layout/shared/UserDropdown'
-import { RoleIndicator } from 'src/components/common'
 import { useHorizontalNav } from 'src/menu/contexts/horizontalNavContext'
 import { horizontalLayoutClasses } from 'src/layouts/utils/layoutClasses'
+import { RoleIndicator } from 'src/Modules/Auth/components/RoleIndicator'
 
 const shortcuts: Array<ShortcutsType> = [
   {

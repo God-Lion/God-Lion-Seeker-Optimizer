@@ -10,13 +10,13 @@ import Header from 'src/components/layout/horizontal/Header'
 import Navbar from 'src/components/layout/vertical/Navbar'
 import VerticalFooter from 'src/components/layout/vertical/Footer'
 import HorizontalFooter from 'src/components/layout/horizontal/Footer'
-import { Navbar as PublicNavbar, Footer as PublicFooter } from 'src/components'
 // import Customizer from 'src/core/components/customizer'
 import ScrollToTop from 'src/core/components/scroll-to-top'
 import Button from '@mui/material/Button'
 import { ArrowUpward } from '@mui/icons-material'
 import type { IMenu } from 'src/components/layout/types'
-
+import { Navbar as PublicNavbar, GuestNavbar, Footer as PublicFooter } from 'src/components'
+import { useGuest } from 'src/store'
 // eslint-disable-next-line no-unused-vars
 import {
   // getDictionary,
@@ -43,6 +43,15 @@ const defaultMenu: IMenu[] = [
   },
 ]
 
+const NavBartWrapper  = () => {
+  const { isGuest } = useGuest()
+
+  if (!isGuest) return <GuestNavbar />
+
+  return <PublicNavbar />
+}
+
+
 const Layout: React.FC<ChildrenType> = ({
   children, // params,
   //& { params: { lang: Locale } }
@@ -59,12 +68,14 @@ const Layout: React.FC<ChildrenType> = ({
   // const menu = updateMenu()
   const menu = defaultMenu
 
+
+
   return (
     <React.Fragment>
       <LayoutWrapper
         systemMode={systemMode}
         publicLayout={
-          <PublicLayout header={<PublicNavbar />} footer={<PublicFooter />}>
+          <PublicLayout header={<NavBartWrapper /> } footer={<PublicFooter />}>
             {children}
           </PublicLayout>
         }

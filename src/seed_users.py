@@ -6,8 +6,9 @@ import sys
 from pathlib import Path
 from datetime import datetime, timezone
 
-# Add src to path
-sys.path.insert(0, str(Path(__file__).parent))
+# Add project root to path
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
 
 from sqlalchemy.orm import Session
 import bcrypt
@@ -47,7 +48,7 @@ def create_users(db: Session):
             first_name="Regular",
             last_name="User",
             hashed_password=hash_password("password123"),
-            role=UserRole.USER,
+            role=UserRole.BASIC_USER,
             status=UserStatus.ACTIVE,
             email_verified=True,
             last_login=now,
@@ -57,7 +58,7 @@ def create_users(db: Session):
         print("✅ Created regular user:")
         print(f"   Email: user@example.com")
         print(f"   Password: password123")
-        print(f"   Role: USER")
+        print(f"   Role: BASIC_USER")
     
     if existing_admin:
         print("⚠️  Admin user already exists: admin@example.com")

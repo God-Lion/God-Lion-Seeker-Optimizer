@@ -1,4 +1,4 @@
-// src/Modules/Auth/types/api.types.ts
+// src/Modules/Auth/types/api.types.ts - ENHANCED VERSION
 
 /**
  * API Types for Auth Module
@@ -23,10 +23,11 @@ export interface User {
   last_activity?: string
   created_at?: string
   updated_at?: string
+  mfa_enabled?: boolean
 }
 
 // ============================================================================
-// Request Types
+// Request Types - EXISTING
 // ============================================================================
 
 export interface LoginRequest {
@@ -74,7 +75,51 @@ export interface UpdatePhotoRequest {
 }
 
 // ============================================================================
-// Response Types
+// Request Types - NEW
+// ============================================================================
+
+// Change Password
+export interface ChangePasswordRequest {
+  current_password: string
+  new_password: string
+  confirm_password: string
+}
+
+// MFA (Multi-Factor Authentication)
+export interface MfaSetupRequest {
+  method: 'totp' | 'sms' | 'email'
+}
+
+export interface MfaVerifyRequest {
+  code: string
+  remember_device?: boolean
+}
+
+// Account Deactivation
+export interface DeactivateAccountRequest {
+  password: string
+  reason?: string
+  feedback?: string
+}
+
+export interface ReactivateAccountRequest {
+  email: string
+  password: string
+}
+
+// OAuth
+export interface OAuthLoginRequest {
+  provider: 'google' | 'facebook'
+  code: string
+}
+
+export interface LinkOAuthRequest {
+  provider: 'google' | 'facebook'
+  code: string
+}
+
+// ============================================================================
+// Response Types - EXISTING
 // ============================================================================
 
 export interface TokenResponse {
@@ -118,7 +163,81 @@ export interface UpdateResponse {
 }
 
 // ============================================================================
-// Mutation Variables Types (for React Query)
+// Response Types - NEW
+// ============================================================================
+
+// MFA
+export interface MfaSetupResponse {
+  secret?: string
+  qr_code_url?: string
+  backup_codes: string[]
+  method: string
+}
+
+export interface MfaVerifyResponse {
+  token: string
+  refresh_token: string
+  user: User
+  expires_in: number
+}
+
+export interface MfaStatusResponse {
+  enabled: boolean
+  method?: 'totp' | 'sms' | 'email'
+  backup_codes_remaining?: number
+}
+
+// Session Management
+export interface UserSession {
+  id: string
+  device_name: string
+  device_type: 'mobile' | 'tablet' | 'desktop'
+  browser: string
+  ip_address: string
+  location?: string
+  last_activity: string
+  current: boolean
+  created_at: string
+}
+
+export interface SessionsResponse {
+  sessions: UserSession[]
+  current_session_id: string
+}
+
+// Login History
+export interface LoginAttempt {
+  id: string
+  timestamp: string
+  status: 'success' | 'failed' | 'blocked'
+  ip_address: string
+  location?: string
+  device: string
+  browser: string
+  reason?: string
+}
+
+export interface LoginHistoryResponse {
+  attempts: LoginAttempt[]
+  total: number
+}
+
+// OAuth
+export interface LinkedAccountsResponse {
+  accounts: Array<{
+    provider: 'google' | 'facebook'
+    linked_at: string
+    email?: string
+  }>
+}
+
+// Email Preferences
+export interface EmailPreferencesResponse {
+  preferences: Record<string, boolean>
+}
+
+// ============================================================================
+// Mutation Variables Types (for React Query) - EXISTING
 // ============================================================================
 
 export interface LoginMutationVars {

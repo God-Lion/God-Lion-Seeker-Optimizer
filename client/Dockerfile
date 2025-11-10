@@ -1,7 +1,7 @@
 # Multi-stage Dockerfile for React Client
 
 # Stage 1: Build stage
-FROM node:20-alpine as builder
+FROM node:20-alpine AS builder
 
 # Set working directory
 WORKDIR /app
@@ -21,7 +21,8 @@ RUN npm run build
 # Stage 2: Production stage with Nginx
 FROM nginx:alpine
 
-# Copy custom nginx configuration
+# Copy custom nginx configurations
+COPY nginx-main.conf /etc/nginx/nginx.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy built files from builder stage
@@ -34,9 +35,7 @@ EXPOSE 80
 HEALTHCHECK --interval=30s --timeout=10s --start-period=20s --retries=3 \
     CMD wget --quiet --tries=1 --spider http://localhost/ || exit 1
 
-# Add nginx configuration for better performance
-RUN echo 'worker_processes auto;' > /etc/nginx/nginx.conf.d/performance.conf && \
-    echo 'worker_rlimit_nofile 65535;' >> /etc/nginx/nginx.conf.d/performance.conf
+# Nginx configuration is now handled via nginx-main.conf
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]

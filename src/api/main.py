@@ -12,9 +12,9 @@ import sys
 from contextlib import asynccontextmanager
 from typing import Any
 
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 import structlog
 
 from src.api.routes import (
@@ -58,14 +58,40 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# CORS Configuration
+# CORS Configuration - MUST be added BEFORE routes
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Configure appropriately for production
+    allow_origins=[
+        "http://localhost:5173",  # Vite default
+        "http://localhost:3000",  # React default
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:5000",
+        "http://127.0.0.1:8000",
+    ],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_headers=["Content-Type", "Authorization", "Accept", "Origin", "X-Requested-With"],
+    expose_headers=["Content-Type", "Authorization"],
+    max_age=3600
 )
+
+
+# Global OPTIONS handler for all routes
+@app.options("/{full_path:path}")
+async def options_handler(request: Request, full_path: str):
+    """Handle all OPTIONS requests for CORS preflight."""
+    origin = request.headers.get("origin", "http://localhost:5173")
+    return Response(
+        status_code=200,
+        headers={
+            "Access-Control-Allow-Origin": origin,
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept, Origin, X-Requested-With",
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Max-Age": "3600",
+        },
+    )
 
 
 # Exception Handlers

@@ -17,10 +17,10 @@ export interface Job {
   location: string
   job_type: string
   experience_level: string
-  salary_range?: string
+  salary_range: string | null
   description: string
   requirements?: string
-  posted_date?: string
+  posted_date: string | null
   job_url: string
   external_id?: string
   scraped_at?: string

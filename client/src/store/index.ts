@@ -67,6 +67,8 @@ export const useAppStore = create<AppStore>()(
     {
       name: 'God Lion Seeker Optimizer Store',
       enabled: process.env.NODE_ENV === 'development',
+      anonymousActionType: 'zustand/action',
+      serialize: { options: true },
     }
   )
 )

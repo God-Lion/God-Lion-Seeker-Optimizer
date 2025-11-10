@@ -38,15 +38,19 @@ if (import.meta.env.PROD) {
   console.error = () => {}
   
   // Detect DevTools (better method)
-  const devtools = /./
-  devtools.toString = function() {
-    this.opened = true
+  const devtools: any = { opened: false }
+  const detectDevTools = /./
+  detectDevTools.toString = function(): string {
+    devtools.opened = true
+    return ''
   }
   
   setInterval(() => {
-    if ((devtools as any).opened) {
+    console.log('%c', detectDevTools)
+    if (devtools.opened) {
       // Alert or log security event
       window.location.href = '/security-warning'
+      devtools.opened = false
     }
   }, 1000)
 }

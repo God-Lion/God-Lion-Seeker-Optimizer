@@ -48,6 +48,8 @@ const LayoutWrapper = ({
           display: 'flex',
           flexDirection: 'column',
           flex: '1 1 auto',
+          // backgroundColor: 'transparent',
+          backgroundColor: '#F05',
         }}
         data-skin={settings.skin}
       >

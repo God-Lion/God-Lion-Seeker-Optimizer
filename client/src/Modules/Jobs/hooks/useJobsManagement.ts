@@ -1,7 +1,7 @@
-// src/Modules/JobsManagement/hooks/useJobsManagement.ts
+// src/Modules/Jobs/hooks/useJobsManagement.ts
 
 import { useState, useCallback, useMemo } from 'react'
-import { JobSearchParams } from '../types'
+import { JobSearchParams } from 'src/types/job'
 import { useJobs, useJobSearch, useDeleteJob } from './useJobsQuery'
 
 /**
@@ -11,6 +11,7 @@ interface JobsManagementState {
   searchQuery: string
   location: string
   company: string
+  date_posted: JobSearchParams['date_posted']
   currentPage: number
   itemsPerPage: number
   selectedJobs: number[]
@@ -26,6 +27,7 @@ export const useJobsManagement = (initialItemsPerPage: number = 20) => {
     searchQuery: '',
     location: '',
     company: '',
+    date_posted: 'all',
     currentPage: 1,
     itemsPerPage: initialItemsPerPage,
     selectedJobs: [],
@@ -39,8 +41,15 @@ export const useJobsManagement = (initialItemsPerPage: number = 20) => {
       limit: state.itemsPerPage,
       company: state.company || undefined,
       location: state.location || undefined,
+      date_posted: state.date_posted,
     }),
-    [state.currentPage, state.itemsPerPage, state.company, state.location]
+    [
+      state.currentPage,
+      state.itemsPerPage,
+      state.company,
+      state.location,
+      state.date_posted,
+    ],
   )
 
   // Fetch jobs based on view mode
@@ -56,7 +65,7 @@ export const useJobsManagement = (initialItemsPerPage: number = 20) => {
     },
     {
       enabled: state.viewMode === 'search' && !!state.searchQuery.trim(),
-    }
+    },
   )
 
   // Delete mutation
@@ -80,17 +89,10 @@ export const useJobsManagement = (initialItemsPerPage: number = 20) => {
   }, [])
 
   /**
-   * Update location filter
+   * Update multiple filters at once
    */
-  const setLocation = useCallback((location: string) => {
-    setState((prev) => ({ ...prev, location, currentPage: 1 }))
-  }, [])
-
-  /**
-   * Update company filter
-   */
-  const setCompany = useCallback((company: string) => {
-    setState((prev) => ({ ...prev, company, currentPage: 1 }))
+  const setFilters = useCallback((filters: Partial<JobSearchParams>) => {
+    setState((prev) => ({ ...prev, ...filters, currentPage: 1 }))
   }, [])
 
   /**
@@ -128,10 +130,10 @@ export const useJobsManagement = (initialItemsPerPage: number = 20) => {
   /**
    * Change items per page
    */
-  const setItemsPerPage = useCallback((itemsPerPage: number) => {
+  const setItemsPerPage = useCallback((newItemsPerPage: number) => {
     setState((prev) => ({
       ...prev,
-      itemsPerPage,
+      itemsPerPage: newItemsPerPage,
       currentPage: 1,
     }))
   }, [])
@@ -146,24 +148,6 @@ export const useJobsManagement = (initialItemsPerPage: number = 20) => {
         ? prev.selectedJobs.filter((id) => id !== jobId)
         : [...prev.selectedJobs, jobId],
     }))
-  }, [])
-
-  /**
-   * Select all jobs on current page
-   */
-  const selectAllJobs = useCallback(() => {
-    const currentJobIds = jobs.map((job) => job.id)
-    setState((prev) => ({
-      ...prev,
-      selectedJobs: [...new Set([...prev.selectedJobs, ...currentJobIds])],
-    }))
-  }, [jobs])
-
-  /**
-   * Deselect all jobs
-   */
-  const deselectAllJobs = useCallback(() => {
-    setState((prev) => ({ ...prev, selectedJobs: [] }))
   }, [])
 
   /**
@@ -184,7 +168,7 @@ export const useJobsManagement = (initialItemsPerPage: number = 20) => {
         return false
       }
     },
-    [deleteMutation]
+    [deleteMutation],
   )
 
   /**
@@ -202,6 +186,7 @@ export const useJobsManagement = (initialItemsPerPage: number = 20) => {
       ...prev,
       location: '',
       company: '',
+      date_posted: 'all',
       searchQuery: '',
       currentPage: 1,
       viewMode: 'list',
@@ -211,8 +196,11 @@ export const useJobsManagement = (initialItemsPerPage: number = 20) => {
   return {
     // State
     searchQuery: state.searchQuery,
-    location: state.location,
-    company: state.company,
+    filters: {
+      location: state.location,
+      company: state.company,
+      date_posted: state.date_posted,
+    },
     currentPage: state.currentPage,
     itemsPerPage: state.itemsPerPage,
     selectedJobs: state.selectedJobs,
@@ -227,23 +215,17 @@ export const useJobsManagement = (initialItemsPerPage: number = 20) => {
 
     // Actions
     setSearchQuery,
-    setLocation,
-    setCompany,
+    setFilters,
     executeSearch,
     resetToList,
     setPage,
     setItemsPerPage,
     toggleJobSelection,
-    selectAllJobs,
-    deselectAllJobs,
     deleteJob,
     refresh,
     clearFilters,
 
     // Computed
-    hasFilters: !!(state.location || state.company),
     isSearchMode: state.viewMode === 'search',
-    hasSelectedJobs: state.selectedJobs.length > 0,
-    selectedJobsCount: state.selectedJobs.length,
   }
 }

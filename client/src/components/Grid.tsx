@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid as MuiGrid } from '@mui/material'
 import type { GridProps } from '@mui/material/Grid'
 
 // Suppress the deprecation warning for GridLegacy
@@ -11,7 +12,7 @@ console.warn = (...args) => {
 }
 
 const Grid: React.FC<GridProps> = (props) => {
-  return <Grid {...props} />
+  return <MuiGrid {...props} />
 }
 
 export default Grid

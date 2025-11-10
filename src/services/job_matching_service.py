@@ -23,11 +23,22 @@ logger = structlog.get_logger(__name__)
 # Download required NLTK data
 try:
     nltk.data.find('tokenizers/punkt')
+except LookupError:
+    logger.info("downloading_nltk_punkt")
+    try:
+        nltk.download('punkt', quiet=True)
+        nltk.download('punkt_tab', quiet=True)
+    except Exception as e:
+        logger.error("failed_to_download_punkt", error=str(e))
+
+try:
     nltk.data.find('corpora/stopwords')
 except LookupError:
-    logger.info("downloading_nltk_data")
-    nltk.download('punkt', quiet=True)
-    nltk.download('stopwords', quiet=True)
+    logger.info("downloading_nltk_stopwords")
+    try:
+        nltk.download('stopwords', quiet=True)
+    except Exception as e:
+        logger.error("failed_to_download_stopwords", error=str(e))
 
 
 @dataclass

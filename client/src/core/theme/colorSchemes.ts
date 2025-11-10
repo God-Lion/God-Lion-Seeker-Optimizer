@@ -24,7 +24,7 @@ type ColorSchemes = {
   dark: ColorScheme
 }
 
-const colorSchemes = (skin: Skin): ColorSchemes => {
+const colorSchemes = (_skin: Skin): ColorSchemes => {
   return {
     light: {
       palette: {

@@ -29,7 +29,7 @@ const ThemeProvider: React.FC<
   }
 
   const theme = React.useMemo(() => {
-    const coreThemeConfig = defaultCoreTheme(settings, currentMode, direction)
+    const coreThemeConfig = defaultCoreTheme(settings, currentMode, direction) as any
     
     const modeScheme = coreThemeConfig.colorSchemes?.[currentMode]?.palette || {}
     

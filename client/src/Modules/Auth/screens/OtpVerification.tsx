@@ -6,8 +6,6 @@ import {
   Box,
   Button,
   Paper,
-  AppBar,
-  Toolbar,
   Link as MuiLink,
 } from '@mui/material';
 import { Lock } from '@mui/icons-material';
@@ -22,13 +20,6 @@ const OtpVerification: React.FC = () => {
       <Helmet>
         <title>OTP Verification</title>
       </Helmet>
-      <AppBar position='static' color='transparent' elevation={0} sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Toolbar sx={{ maxWidth: '1280px', width: '100%', margin: '0 auto', px: { xs: 2, sm: 4 } }}>
-          <Typography variant='h6' component='div' sx={{ fontWeight: 'bold' }}>
-            Lion & Magnifying Glass
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <Container
         component='main'
         maxWidth='xs'
