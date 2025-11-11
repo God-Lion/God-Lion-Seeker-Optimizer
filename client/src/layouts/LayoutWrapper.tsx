@@ -5,6 +5,7 @@ import Box from '@mui/material/Box'
 import { useLocation } from 'react-router-dom'
 
 const noLayoutArray = [
+  `auth`,
   `auth/signin`,
   `auth/signup`,
   `auth/signin2`,

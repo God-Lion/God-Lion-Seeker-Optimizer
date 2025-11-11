@@ -2,8 +2,15 @@
 
 # dependencies
 /node_modules
+/venv
 /.pnp
 .pnp.js
+.idea
+api.log
+client.log
+
+.env
+.env.development
 
 # testing
 /coverage
