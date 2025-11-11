@@ -48,7 +48,7 @@ export function MfaSetup() {
     })
   }
   
-  if (mfaStatus?.enabled) {
+  if (mfaStatus?.data.enabled) {
     return (
       <Alert severity="success">
         Two-factor authentication is enabled
