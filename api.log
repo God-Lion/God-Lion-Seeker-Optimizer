@@ -1,0 +1,76 @@
+2025-11-10 23:56:40 [info     ] initializing_resume_parser     model=en_core_web_md
+2025-11-10 23:56:43 [info     ] spacy_model_loaded             model=en_core_web_md
+2025-11-10 23:56:43 [debug    ] profile_added                  role_id=software_engineer title='Software Engineer'
+2025-11-10 23:56:43 [debug    ] profile_added                  role_id=it_auditor title='IT Auditor'
+2025-11-10 23:56:43 [debug    ] profile_added                  role_id=security_analyst title='Security Analyst'
+2025-11-10 23:56:43 [debug    ] profile_added                  role_id=data_engineer title='Data Engineer'
+2025-11-10 23:56:43 [debug    ] profile_added                  role_id=devops_engineer title='DevOps Engineer'
+2025-11-10 23:56:43 [debug    ] profile_added                  role_id=full_stack_developer title='Full Stack Developer'
+2025-11-10 23:56:43 [debug    ] profile_added                  role_id=cloud_architect title='Cloud Architect'
+2025-11-10 23:56:43 [debug    ] profile_added                  role_id=data_scientist title='Data Scientist'
+2025-11-10 23:56:43 [debug    ] profile_added                  role_id=product_manager title='Product Manager'
+2025-11-10 23:56:43 [debug    ] profile_added                  role_id=site_reliability_engineer title='Site Reliability Engineer (SRE)'
+2025-11-10 23:56:43 [info     ] role_database_initialized      profile_count=10
+2025-11-10 23:56:43 [warning  ] sentence_transformers_not_installed
+2025-11-10 23:56:43 [info     ] career_recommendation_service_initialized use_embeddings=False
+2025-11-10 23:56:43 [info     ] sse_service_initialized        config=SSEConfig(heartbeat_interval=30, poll_interval=2.0, max_reconnect_attempts=10, reconnect_delay=1.0, connection_timeout=1.0, cache_control='no-cache', connection='keep-alive', x_accel_buffering='no')
+2025-11-10 23:56:44 [info     ] Starting God Lion Seeker Optimizer API
+2025-11-10 23:56:44 [warning  ] Failed to initialize database - continuing without DB error='(pymysql.err.OperationalError) (2003, "Can\'t connect to MySQL server on \'localhost\'")\n(Background on this error at: https://sqlalche.me/e/20/e3q8)'
+2025-11-10 23:57:26 [info     ] Shutting down God Lion Seeker Optimizer API
+2025-11-10 23:57:30 [info     ] initializing_resume_parser     model=en_core_web_md
+2025-11-10 23:57:33 [info     ] spacy_model_loaded             model=en_core_web_md
+2025-11-10 23:57:33 [debug    ] profile_added                  role_id=software_engineer title='Software Engineer'
+2025-11-10 23:57:33 [debug    ] profile_added                  role_id=it_auditor title='IT Auditor'
+2025-11-10 23:57:33 [debug    ] profile_added                  role_id=security_analyst title='Security Analyst'
+2025-11-10 23:57:33 [debug    ] profile_added                  role_id=data_engineer title='Data Engineer'
+2025-11-10 23:57:33 [debug    ] profile_added                  role_id=devops_engineer title='DevOps Engineer'
+2025-11-10 23:57:33 [debug    ] profile_added                  role_id=full_stack_developer title='Full Stack Developer'
+2025-11-10 23:57:33 [debug    ] profile_added                  role_id=cloud_architect title='Cloud Architect'
+2025-11-10 23:57:33 [debug    ] profile_added                  role_id=data_scientist title='Data Scientist'
+2025-11-10 23:57:33 [debug    ] profile_added                  role_id=product_manager title='Product Manager'
+2025-11-10 23:57:33 [debug    ] profile_added                  role_id=site_reliability_engineer title='Site Reliability Engineer (SRE)'
+2025-11-10 23:57:33 [info     ] role_database_initialized      profile_count=10
+2025-11-10 23:57:33 [warning  ] sentence_transformers_not_installed
+2025-11-10 23:57:33 [info     ] career_recommendation_service_initialized use_embeddings=False
+2025-11-10 23:57:33 [info     ] sse_service_initialized        config=SSEConfig(heartbeat_interval=30, poll_interval=2.0, max_reconnect_attempts=10, reconnect_delay=1.0, connection_timeout=1.0, cache_control='no-cache', connection='keep-alive', x_accel_buffering='no')
+2025-11-10 23:57:33 [info     ] Starting God Lion Seeker Optimizer API
+2025-11-10 23:57:33 [warning  ] Failed to initialize database - continuing without DB error='(pymysql.err.OperationalError) (2003, "Can\'t connect to MySQL server on \'localhost\'")\n(Background on this error at: https://sqlalche.me/e/20/e3q8)'
+2025-11-10 23:58:32 [info     ] Shutting down God Lion Seeker Optimizer API
+2025-11-10 23:58:36 [info     ] initializing_resume_parser     model=en_core_web_md
+2025-11-10 23:58:38 [info     ] spacy_model_loaded             model=en_core_web_md
+2025-11-10 23:58:38 [debug    ] profile_added                  role_id=software_engineer title='Software Engineer'
+2025-11-10 23:58:38 [debug    ] profile_added                  role_id=it_auditor title='IT Auditor'
+2025-11-10 23:58:38 [debug    ] profile_added                  role_id=security_analyst title='Security Analyst'
+2025-11-10 23:58:38 [debug    ] profile_added                  role_id=data_engineer title='Data Engineer'
+2025-11-10 23:58:38 [debug    ] profile_added                  role_id=devops_engineer title='DevOps Engineer'
+2025-11-10 23:58:38 [debug    ] profile_added                  role_id=full_stack_developer title='Full Stack Developer'
+2025-11-10 23:58:38 [debug    ] profile_added                  role_id=cloud_architect title='Cloud Architect'
+2025-11-10 23:58:38 [debug    ] profile_added                  role_id=data_scientist title='Data Scientist'
+2025-11-10 23:58:38 [debug    ] profile_added                  role_id=product_manager title='Product Manager'
+2025-11-10 23:58:38 [debug    ] profile_added                  role_id=site_reliability_engineer title='Site Reliability Engineer (SRE)'
+2025-11-10 23:58:38 [info     ] role_database_initialized      profile_count=10
+2025-11-10 23:58:38 [warning  ] sentence_transformers_not_installed
+2025-11-10 23:58:38 [info     ] career_recommendation_service_initialized use_embeddings=False
+2025-11-10 23:58:39 [info     ] sse_service_initialized        config=SSEConfig(heartbeat_interval=30, poll_interval=2.0, max_reconnect_attempts=10, reconnect_delay=1.0, connection_timeout=1.0, cache_control='no-cache', connection='keep-alive', x_accel_buffering='no')
+2025-11-10 23:58:39 [info     ] Starting God Lion Seeker Optimizer API
+2025-11-10 23:58:39 [warning  ] Failed to initialize database - continuing without DB error='(pymysql.err.OperationalError) (2003, "Can\'t connect to MySQL server on \'localhost\'")\n(Background on this error at: https://sqlalche.me/e/20/e3q8)'
+2025-11-10 23:58:41 [info     ] Shutting down God Lion Seeker Optimizer API
+2025-11-10 23:58:45 [info     ] initializing_resume_parser     model=en_core_web_md
+2025-11-10 23:58:47 [info     ] spacy_model_loaded             model=en_core_web_md
+2025-11-10 23:58:47 [debug    ] profile_added                  role_id=software_engineer title='Software Engineer'
+2025-11-10 23:58:47 [debug    ] profile_added                  role_id=it_auditor title='IT Auditor'
+2025-11-10 23:58:47 [debug    ] profile_added                  role_id=security_analyst title='Security Analyst'
+2025-11-10 23:58:47 [debug    ] profile_added                  role_id=data_engineer title='Data Engineer'
+2025-11-10 23:58:47 [debug    ] profile_added                  role_id=devops_engineer title='DevOps Engineer'
+2025-11-10 23:58:47 [debug    ] profile_added                  role_id=full_stack_developer title='Full Stack Developer'
+2025-11-10 23:58:47 [debug    ] profile_added                  role_id=cloud_architect title='Cloud Architect'
+2025-11-10 23:58:47 [debug    ] profile_added                  role_id=data_scientist title='Data Scientist'
+2025-11-10 23:58:47 [debug    ] profile_added                  role_id=product_manager title='Product Manager'
+2025-11-10 23:58:47 [debug    ] profile_added                  role_id=site_reliability_engineer title='Site Reliability Engineer (SRE)'
+2025-11-10 23:58:47 [info     ] role_database_initialized      profile_count=10
+2025-11-10 23:58:47 [warning  ] sentence_transformers_not_installed
+2025-11-10 23:58:47 [info     ] career_recommendation_service_initialized use_embeddings=False
+2025-11-10 23:58:47 [info     ] sse_service_initialized        config=SSEConfig(heartbeat_interval=30, poll_interval=2.0, max_reconnect_attempts=10, reconnect_delay=1.0, connection_timeout=1.0, cache_control='no-cache', connection='keep-alive', x_accel_buffering='no')
+2025-11-10 23:58:48 [info     ] Starting God Lion Seeker Optimizer API
+2025-11-10 23:58:48 [warning  ] Failed to initialize database - continuing without DB error='(pymysql.err.OperationalError) (2003, "Can\'t connect to MySQL server on \'localhost\'")\n(Background on this error at: https://sqlalche.me/e/20/e3q8)'
+2025-11-10 23:58:55 [info     ] Shutting down God Lion Seeker Optimizer API

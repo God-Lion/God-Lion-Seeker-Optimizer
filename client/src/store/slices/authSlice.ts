@@ -3,7 +3,7 @@ import axios from 'axios'
 import { IAuth, ILogin } from 'src/types'
 import { IResponse } from 'src/types'
 import axiosInstance from 'src/services/api/axios-instance'
-import { API_CONFIG } from 'src/services/api/config'
+import { API_CONFIG, ENDPOINTS } from 'src/services/api/config'
 import { secureTokenManager, TokenData as AuthTokens } from 'src/services/secureTokenManager'
 import { AppStore } from 'src/store'
 
@@ -49,7 +49,7 @@ export const createAuthSlice: StateCreator<
 
     try {
       const response = await axios.post<IResponse>(
-        `${API_CONFIG.baseURL}/signin`,
+        ENDPOINTS.auth.login,
         credentials,
         { withCredentials: true }
       )
@@ -110,7 +110,7 @@ export const createAuthSlice: StateCreator<
 
     try {
       // Use axiosInstance which has token refresh interceptors
-      const response = await axiosInstance.get<IAuth>('/api/auth')
+      const response = await axiosInstance.get<IAuth>(ENDPOINTS.auth.refresh) 
 
       if (response.status === 200 && response.data) {
         set((state) => {

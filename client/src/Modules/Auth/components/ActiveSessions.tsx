@@ -46,14 +46,14 @@ export function ActiveSessions() {
             color="error"
             size="small"
             onClick={handleRevokeAll}
-            disabled={!data?.sessions || data.sessions.length <= 1}
+            disabled={!data?.data.sessions || data.data.sessions.length <= 1}
           >
             End All Other Sessions
           </Button>
         </Box>
         
         <List>
-          {data?.sessions.map((session) => (
+          {data?.data.sessions.map((session: any) => (
             <ListItem
               key={session.id}
               secondaryAction={

@@ -16,7 +16,7 @@ import Button from '@mui/material/Button'
 import { ArrowUpward } from '@mui/icons-material'
 import type { IMenu } from 'src/components/layout/types'
 import { Navbar as PublicNavbar, GuestNavbar, Footer as PublicFooter } from 'src/components'
-import { useGuest } from 'src/store'
+import { useAuth } from 'src/store'
 // eslint-disable-next-line no-unused-vars
 import {
   // getDictionary,
@@ -44,9 +44,11 @@ const defaultMenu: IMenu[] = [
 ]
 
 const NavBartWrapper  = () => {
-  const { isGuest } = useGuest()
+  const { isAuthenticated } = useAuth()
 
-  if (!isGuest) return <GuestNavbar />
+  console.log('isAuthenticated ', isAuthenticated);
+
+  if (!isAuthenticated) return <GuestNavbar />
 
   return <PublicNavbar />
 }

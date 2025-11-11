@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom'
 import { Backdrop, CircularProgress } from '@mui/material'
 import GuestRoute from 'src/middlewares/GuestRoute'
-// import AuthRoute from 'src/middlewares/AuthRoute'
+import AuthRoute from 'src/middlewares/AuthRoute'
 // import AdminRoute from 'src/middlewares/AdminRoute'
 
 
@@ -23,13 +23,13 @@ const AuthenticationRoutes = React.lazy(() => import('src/Modules/Auth/routes/ro
 // const AutomationRoutes = React.lazy(() => import('src/Modules/Automation/routes/routes'))
 
 
-// const CommonRoutes = React.lazy(() => import('src/Modules/Common/routes/routes'))
+const CommonRoutes = React.lazy(() => import('src/Modules/Common/routes/routes'))
 // const JobsRoutes = React.lazy(() => import('src/Modules/Jobs/routes/routes'))
 
 
 // Protected Modules (only loaded for authenticated users)
 // const CompaniesRoutes = React.lazy(() => import('src/Modules/Companies/routes/routes'))
-// const DashboardRoutes = React.lazy(() => import('src/Modules/Dashboard/routes/routes'))
+const DashboardRoutes = React.lazy(() => import('src/Modules/Dashboard/routes/routes'))
 // const JobAnalysisRoutes = React.lazy(() => import('src/Modules/JobAnalysis/routes/routes'))
 // const NotificationsRoutes = React.lazy(() => import('src/Modules/Notifications/routes/routes'))
 // const ProfileManagementRoutes = React.lazy(() => import('src/Modules/ProfileManagement/routes/routes'))
@@ -80,11 +80,11 @@ const App: React.FC = (): React.ReactElement => {
       } />
 
       {/* Common routes - feature comparison, etc. */}
-      {/* <Route path='/*' element={
+      <Route path='/*' element={
         <SuspenseWrapper>
           <CommonRoutes />
         </SuspenseWrapper>
-      } /> */}
+      } />
       
       <Route path='auth/*' element={
         <GuestRoute element={
@@ -125,13 +125,13 @@ const App: React.FC = (): React.ReactElement => {
         } />
       } /> */}
 
-      {/* <Route path='dashboard/*' element={
+      <Route path='dashboard/*' element={
         <AuthRoute element={
           <SuspenseWrapper>
             <DashboardRoutes />
           </SuspenseWrapper>
         } />
-      } /> */}
+      } />
       
       {/* <Route path='job-analysis/*' element={
         <AuthRoute element={

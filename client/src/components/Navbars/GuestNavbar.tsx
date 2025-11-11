@@ -49,7 +49,7 @@ const GuestNavbar = () => {
     { name: 'Features', path: '/features' },
     { name: 'Pricing', path: '/pricing' },
     { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contactUs' },
+    { name: 'Contact', path: '/contact' },
   ]
 
   const handleNavigate = (path: string) => {
